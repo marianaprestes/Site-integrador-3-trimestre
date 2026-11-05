@@ -1,1 +1,558 @@
+/**
+ * SOL + ÁGUA - Projeto Integrador CEP
+ * Arquivo de Estilos (style.css)
+ * Design: Moderno, Tecnológico, Acessível (Roxo, Preto, Branco, Amarelo Solar)
+ */
 
+/* =========================================
+   1. VARIÁVEIS E TEMA
+   ========================================= */
+:root {
+    /* Paleta de Cores Principal */
+    --bg-dark: #0f0518;          /* Preto com tom roxo muito escuro (Fundo) */
+    --bg-card: #1a0b2e;          /* Roxo escuro (Cards e Painéis) */
+    --primary: #8b5cf6;          /* Roxo claro vibrante (Destaques) */
+    --primary-hover: #7c3aed;    /* Roxo para hover */
+    --accent: #fbbf24;           /* Amarelo solar (Alertas e detalhes) */
+    --text-light: #f3e8ff;       /* Branco com tom roxo muito claro (Texto) */
+    --text-dark: #111111;        /* Preto puro (para modos de contraste) */
+    
+    /* Efeitos e Bordas */
+    --glass: rgba(139, 92, 246, 0.1);
+    --border: rgba(139, 92, 246, 0.3);
+    
+    /* Tipografia */
+    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-title: 'Space Grotesk', 'Inter', sans-serif;
+    
+    /* Transições */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modo Alto Contraste (Ativado via JS) */
+body.high-contrast {
+    --bg-dark: #000000;
+    --bg-card: #000000;
+    --primary: #ffff00;
+    --primary-hover: #cccc00;
+    --text-light: #ffffff;
+    --border: #ffffff;
+    --glass: rgba(255, 255, 255, 0.15);
+    --accent: #00ffff;
+}
+
+/* Modo Fonte Grande (Ativado via JS) */
+body.large-font {
+    font-size: 120%;
+}
+
+/* =========================================
+   2. RESET E BASE
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: var(--transition);
+}
+
+/* =========================================
+   3. TIPOGRAFIA
+   ========================================= */
+h1, h2, h3, h4 {
+    font-family: var(--font-title);
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+h1 { 
+    font-size: 2.8rem; 
+    background: linear-gradient(to right, #ffffff, var(--primary)); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    background-clip: text;
+}
+
+h2 { 
+    font-size: 2rem; 
+    border-bottom: 2px solid var(--primary); 
+    padding-bottom: 0.5rem; 
+    margin-top: 2rem; 
+    margin-bottom: 1.5rem;
+}
+
+h3 { 
+    font-size: 1.4rem; 
+    color: var(--primary); 
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a { 
+    color: var(--primary); 
+    text-decoration: none; 
+    transition: var(--transition); 
+}
+
+a:hover { 
+    color: var(--accent); 
+    text-decoration: underline; 
+}
+
+/* =========================================
+   4. NAVEGAÇÃO (HEADER)
+   ========================================= */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(15, 5, 24, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-title);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo span { 
+    color: var(--accent); 
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+nav a:hover, nav a.active {
+    background: var(--primary);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.menu-toggle { 
+    display: none; 
+    background: none; 
+    border: none; 
+    color: var(--text-light); 
+    font-size: 1.8rem; 
+    cursor: pointer; 
+    padding: 0.5rem;
+}
+
+/* =========================================
+   5. LAYOUT PRINCIPAL
+   ========================================= */
+main {
+    margin-top: 90px; /* Compensar header fixo */
+    padding: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: calc(100vh - 90px);
+}
+
+/* Seções (Single Page Application) */
+section {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Grids Responsivos */
+.grid-2 { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 2rem; 
+}
+
+.grid-3 { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 1.5rem; 
+}
+
+/* =========================================
+   6. COMPONENTES
+   ========================================= */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+}
+
+.card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.image-placeholder {
+    background: linear-gradient(135deg, var(--bg-dark), var(--bg-card));
+    border: 2px dashed var(--primary);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--primary);
+    font-style: italic;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+}
+
+.formula {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.2rem;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-family: 'Times New Roman', serif;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    letter-spacing: 1px;
+}
+
+/* Botões */
+button.btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+    font-family: var(--font-main);
+}
+
+button.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(139, 92, 246, 0.4);
+}
+
+button.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* =========================================
+   7. ELEMENTOS INTERATIVOS (SIMULADORES)
+   ========================================= */
+.simulator-box {
+    background: var(--glass);
+    border: 1px solid var(--primary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.control-group { 
+    margin-bottom: 1.2rem; 
+}
+
+.control-group label { 
+    display: block; 
+    margin-bottom: 0.5rem; 
+    font-weight: 600; 
+    color: var(--text-light);
+}
+
+/* Estilização do Slider (Range) */
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--primary);
+    cursor: pointer;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--bg-dark);
+    outline: none;
+}
+
+input[type="number"], select {
+    width: 100%;
+    padding: 0.6rem;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    outline: none;
+}
+
+input[type="number"]:focus, select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--glass);
+}
+
+.result-display {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.2rem;
+    border-radius: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-top: 1rem;
+    border-left: 4px solid var(--primary);
+    line-height: 1.5;
+}
+
+/* =========================================
+   8. QUIZ
+   ========================================= */
+.quiz-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 1rem;
+    margin: 0.6rem 0;
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.quiz-option:hover:not(:disabled) { 
+    background: var(--glass); 
+    border-color: var(--primary); 
+    transform: translateX(5px);
+}
+
+.quiz-option.correct { 
+    background: rgba(34, 197, 94, 0.15); 
+    border-color: #22c55e; 
+    color: #86efac;
+}
+
+.quiz-option.incorrect { 
+    background: rgba(239, 68, 68, 0.15); 
+    border-color: #ef4444; 
+    color: #fca5a5;
+}
+
+.quiz-option:disabled {
+    cursor: default;
+    opacity: 0.8;
+}
+
+/* =========================================
+   9. ACESSIBILIDADE
+   ========================================= */
+.a11y-btn {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    background: var(--primary);
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1001;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: var(--transition);
+}
+
+.a11y-btn:hover {
+    background: var(--primary-hover);
+    transform: scale(1.1);
+}
+
+.a11y-panel {
+    position: fixed;
+    right: 20px;
+    top: 160px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    width: 260px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.a11y-panel.open { 
+    display: block; 
+}
+
+.a11y-panel h4 {
+    margin-bottom: 1rem; 
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+}
+
+.a11y-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+    font-size: 0.95rem;
+}
+
+/* Toggle Switch Customizado */
+.toggle-switch {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: #444;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid #666;
+}
+
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #ffffff;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: var(--transition);
+}
+
+.toggle-switch.active { 
+    background: var(--primary); 
+    border-color: var(--primary);
+}
+
+.toggle-switch.active::after { 
+    left: 22px; 
+}
+
+/* Foco visível para navegação por teclado */
+*:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* =========================================
+   10. RESPONSIVIDADE (MOBILE)
+   ========================================= */
+@media (max-width: 900px) {
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.7rem; }
+    
+    .menu-toggle { 
+        display: block; 
+    }
+    
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--bg-card);
+        padding: 1rem;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+    
+    nav ul.show { 
+        display: flex; 
+    }
+    
+    nav a {
+        padding: 0.8rem;
+        border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+    }
+
+    /* Ajuste do botão de acessibilidade no mobile para não cobrir conteúdo */
+    .a11y-btn { 
+        top: auto; 
+        bottom: 20px; 
+        right: 20px; 
+        width: 55px;
+        height: 55px;
+    }
+    
+    .a11y-panel { 
+        bottom: 85px; 
+        top: auto; 
+        right: 20px;
+        width: calc(100% - 40px);
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 1rem;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+    
+    h1 { font-size: 1.8rem; }
+    
+    .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
