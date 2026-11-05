@@ -1,39 +1,28 @@
 /**
  * SOL + ÁGUA - Projeto Integrador CEP
  * Arquivo de Scripts (script.js)
+ * Site de página única com scroll contínuo
  */
 
 // ==========================================
-// 1. NAVEGAÇÃO E UI
+// 1. MENU MOBILE
 // ==========================================
-
-function showSection(sectionId) {
-    document.querySelectorAll('main section').forEach(sec => {
-        sec.classList.remove('active');
-    });
-    
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add('active');
-    }
-    
-    document.querySelectorAll('nav a').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(sectionId)) {
-            link.classList.add('active');
-        }
-    });
-
-    const navMenu = document.getElementById('mainNav');
-    if (navMenu) navMenu.classList.remove('show');
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
 
 function toggleMenu() {
     const navMenu = document.getElementById('mainNav');
     if (navMenu) navMenu.classList.toggle('show');
 }
+
+// Fecha o menu mobile ao clicar em um link
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            const navMenu = document.getElementById('mainNav');
+            if (navMenu) navMenu.classList.remove('show');
+        });
+    });
+});
+
 
 // ==========================================
 // 2. ACESSIBILIDADE
@@ -52,15 +41,12 @@ function toggleClass(className) {
 }
 
 function toggleAnimation() {
-    if (document.body.style.getPropertyValue('--transition') === 'none') {
-        document.body.style.setProperty('--transition', 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)');
-    } else {
-        document.body.style.setProperty('--transition', 'none');
-    }
+    document.body.classList.toggle('reduce-motion');
     if (event && event.target) {
         event.target.classList.toggle('active');
     }
 }
+
 
 // ==========================================
 // 3. CURIOSIDADE INTERATIVA
@@ -73,12 +59,13 @@ function checkCuriosity(isWrong) {
     resultDiv.style.display = 'block';
     if (isWrong) {
         resultDiv.innerHTML = "❌ <strong>Incorreto.</strong> Aumentar a intensidade (mantendo a frequência) apenas aumenta a <em>quantidade</em> de fótons, não a energia individual de cada um.";
-        resultDiv.style.borderLeftColor = "#ef4444";
+        resultDiv.style.borderLeftColor = "var(--error)";
     } else {
         resultDiv.innerHTML = "✅ <strong>Correto!</strong> A energia individual do fóton depende apenas da frequência (E = h·f). Mais intensidade significa mais fótons, mas cada um tem a mesma energia.";
-        resultDiv.style.borderLeftColor = "#22c55e";
+        resultDiv.style.borderLeftColor = "var(--success)";
     }
 }
+
 
 // ==========================================
 // 4. ESPECTRO ELETROMAGNÉTICO
@@ -143,12 +130,13 @@ function showSpectrumInfo(region) {
     const info = data[region];
     infoDiv.innerHTML = `
         <strong>${info.name}</strong><br>
-        Frequência: ${info.freq}<br>
-        Comprimento de onda: ${info.wavelength}<br>
-        Características: ${info.characteristics}<br>
-        Aplicações: ${info.applications}
+        <strong>Frequência:</strong> ${info.freq}<br>
+        <strong>Comprimento de onda:</strong> ${info.wavelength}<br>
+        <strong>Características:</strong> ${info.characteristics}<br>
+        <strong>Aplicações:</strong> ${info.applications}
     `;
 }
+
 
 // ==========================================
 // 5. SIMULADOR: ENERGIA DOS FÓTONS
@@ -174,6 +162,7 @@ function updatePhotonEnergy() {
     if (evResult) energyResult.innerText = energyEv.toFixed(2);
 }
 
+
 // ==========================================
 // 6. SIMULADOR: EFEITO FOTOELÉTRICO
 // ==========================================
@@ -197,7 +186,7 @@ function updatePhotoelectric() {
 
     if (photonEnergy < workFunction) {
         resultDiv.innerHTML = `
-            <span style="color: #ef4444; font-size: 2rem;">⛔</span>
+            <span style="color: var(--error); font-size: 1.5rem;">⛔</span>
             <strong>Sem Emissão de Elétrons</strong>
             <p>A energia do fóton (${photonEnergy.toFixed(1)} eV) é menor que a função trabalho do material (${workFunction} eV).</p>
             <p style="font-size: 0.9rem; margin-top: 0.5rem;">Mesmo aumentando a intensidade, não haverá emissão.</p>
@@ -206,7 +195,7 @@ function updatePhotoelectric() {
         const kineticEnergy = photonEnergy - workFunction;
         const electronCount = Math.floor(intensity / 10);
         resultDiv.innerHTML = `
-            <span style="color: #22c55e; font-size: 2rem;">⚡</span>
+            <span style="color: var(--success); font-size: 1.5rem;">⚡</span>
             <strong>Elétrons Emitidos!</strong>
             <p>Energia Cinética Máxima (E<sub>c</sub>): <strong>${kineticEnergy.toFixed(2)} eV</strong></p>
             <p>Quantidade de elétrons emitidos: <strong>~${electronCount}</strong> (proporcional à intensidade)</p>
@@ -214,6 +203,7 @@ function updatePhotoelectric() {
         `;
     }
 }
+
 
 // ==========================================
 // 7. SIMULADOR: FREQUÊNCIA DE CORTE
@@ -232,30 +222,28 @@ function updateCutoffSimulator() {
     
     if (photonDisplay) photonDisplay.innerText = photonEnergy.toFixed(1);
 
-    // Calcular frequência de corte
     const h = 6.626e-34;
-    const phi = workFunction * 1.602e-19; // Converter eV para Joules
+    const phi = workFunction * 1.602e-19;
     const cutoffFreq = phi / h;
 
     if (photonEnergy < workFunction) {
         resultDiv.innerHTML = `
-            <span style="color: #ef4444;">⛔</span>
-            <strong>Energia insuficiente!</strong>
+            <span style="color: var(--error);">⛔</span> <strong>Energia insuficiente!</strong>
             <p>Frequência de corte: ${cutoffFreq.toExponential(2)} Hz</p>
-            <p>Energia do fóton (${photonEnergy.toFixed(1)} eV) < Função trabalho (${workFunction} eV)</p>
+            <p>Energia do fóton (${photonEnergy.toFixed(1)} eV) &lt; Função trabalho (${workFunction} eV)</p>
             <p>Nenhuma emissão de elétrons ocorrerá.</p>
         `;
     } else {
         const kineticEnergy = photonEnergy - workFunction;
         resultDiv.innerHTML = `
-            <span style="color: #22c55e;">⚡</span>
-            <strong>Emissão ocorrendo!</strong>
+            <span style="color: var(--success);">⚡</span> <strong>Emissão ocorrendo!</strong>
             <p>Frequência de corte: ${cutoffFreq.toExponential(2)} Hz</p>
-            <p>Energia do fóton (${photonEnergy.toFixed(1)} eV) > Função trabalho (${workFunction} eV)</p>
+            <p>Energia do fóton (${photonEnergy.toFixed(1)} eV) &gt; Função trabalho (${workFunction} eV)</p>
             <p>Energia cinética dos elétrons: <strong>${kineticEnergy.toFixed(2)} eV</strong></p>
         `;
     }
 }
+
 
 // ==========================================
 // 8. SIMULADOR: PAINEL SOLAR
@@ -278,11 +266,10 @@ function updateSolarPanel() {
     if (areaDisplay) areaDisplay.innerText = area.toFixed(1);
     if (effDisplay) effDisplay.innerText = efficiency;
 
-    // Cálculo simplificado
-    const solarPower = intensity * area; // W
-    const tempFactor = 1 - (temp - 25) * 0.004; // Perda de 0.4% por grau acima de 25°C
+    const solarPower = intensity * area;
+    const tempFactor = 1 - (temp - 25) * 0.004;
     const electricalPower = solarPower * (efficiency / 100) * tempFactor;
-    const voltage = 30 + (intensity / 1000) * 10; // Estimativa simplificada
+    const voltage = 30 + (intensity / 1000) * 10;
     const current = electricalPower / voltage;
 
     resultDiv.innerHTML = `
@@ -290,12 +277,13 @@ function updateSolarPanel() {
         <hr style="border-color: var(--border); margin: 0.5rem 0;">
         <p>Potência Solar Recebida: <strong>${solarPower.toFixed(0)} W</strong></p>
         <p>Fator de Temperatura: <strong>${(tempFactor * 100).toFixed(1)}%</strong></p>
-        <p style="font-size: 1.2rem; color: var(--accent); margin-top: 0.5rem;">Potência Elétrica: <strong>${electricalPower.toFixed(1)} W</strong></p>
+        <p style="font-size: 1.1rem; color: var(--accent); margin-top: 0.5rem; font-weight: 700;">Potência Elétrica: <strong>${electricalPower.toFixed(1)} W</strong></p>
         <p>Tensão estimada: ${voltage.toFixed(1)} V</p>
         <p>Corrente estimada: ${current.toFixed(2)} A</p>
-        <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #aaa;">*Simulação simplificada</p>
+        <p style="font-size: 0.85rem; margin-top: 0.5rem; color: var(--text-muted);">*Simulação simplificada</p>
     `;
 }
+
 
 // ==========================================
 // 9. SIMULADOR: AQUECIMENTO DA PISCINA
@@ -313,7 +301,7 @@ function calculatePoolHeat() {
     if (!resultDiv) return;
 
     if (tFinal <= tInit) {
-        resultDiv.innerHTML = "<span style='color: #ef4444;'>⚠️ A temperatura desejada deve ser maior que a inicial.</span>";
+        resultDiv.innerHTML = "<span style='color: var(--error);'>⚠️ A temperatura desejada deve ser maior que a inicial.</span>";
         return;
     }
 
@@ -324,9 +312,8 @@ function calculatePoolHeat() {
     const qJoules = m * c * deltaT;
     const qKwh = qJoules / 3600000;
 
-    // Fator de perdas
-    let lossFactor = 1.3; // 30% de perdas padrão
-    if (hasCover) lossFactor = 1.1; // 10% com capa
+    let lossFactor = 1.3;
+    if (hasCover) lossFactor = 1.1;
 
     const qWithLoss = qKwh * lossFactor;
 
@@ -350,11 +337,12 @@ function calculatePoolHeat() {
         <p>Variação de Temperatura (ΔT): <strong>${deltaT} °C</strong></p>
         <p>Energia Ideal (Q): <strong>${qKwh.toFixed(1)} kWh</strong></p>
         <p>Energia com Perdas: <strong>${qWithLoss.toFixed(1)} kWh</strong></p>
-        <p style="font-size: 1.2rem; color: var(--accent); margin-top: 0.5rem;">Tempo estimado: ${timeEstimate}</p>
+        <p style="font-size: 1.1rem; color: var(--accent); margin-top: 0.5rem; font-weight: 700;">Tempo estimado: ${timeEstimate}</p>
         <p>${costEstimate}</p>
-        <p style="font-size: 0.85rem; margin-top: 1rem; color: #aaa;">*Estimativa simplificada</p>
+        <p style="font-size: 0.85rem; margin-top: 1rem; color: var(--text-muted);">*Estimativa simplificada</p>
     `;
 }
+
 
 // ==========================================
 // 10. SIMULADOR: AUTOMAÇÃO
@@ -372,13 +360,14 @@ function checkAutomation() {
     const targetTemp = 28;
 
     if (!hasFlow) {
-        resultDiv.innerHTML = `<span style="color: #ef4444;">🚫 ALERTA DE SEGURANÇA: Sem fluxo de água! Aquecimento BLOQUEADO para evitar danos ao equipamento.</span>`;
+        resultDiv.innerHTML = `<span style="color: var(--error);">🚫 ALERTA DE SEGURANÇA: Sem fluxo de água! Aquecimento BLOQUEADO para evitar danos ao equipamento.</span>`;
     } else if (temp < targetTemp) {
-        resultDiv.innerHTML = `<span style="color: #22c55e;">✅ Sistema ATIVO: Temperatura (${temp}°C) abaixo do alvo (${targetTemp}°C). Bomba de aquecimento LIGADA.</span>`;
+        resultDiv.innerHTML = `<span style="color: var(--success);">✅ Sistema ATIVO: Temperatura (${temp}°C) abaixo do alvo (${targetTemp}°C). Bomba de aquecimento LIGADA.</span>`;
     } else {
         resultDiv.innerHTML = `<span style="color: var(--accent);">⏸️ Sistema EM ESPERA: Temperatura ideal atingida (${temp}°C). Aquecimento DESLIGADO.</span>`;
     }
 }
+
 
 // ==========================================
 // 11. CALCULADORA DE ECONOMIA
@@ -401,10 +390,11 @@ function calculateSavings() {
         <hr style="border-color: var(--border); margin: 0.5rem 0;">
         <p>Energia Solar Mensal: <strong>${solarEnergy.toFixed(0)} kWh</strong></p>
         <p>Economia Mensal: <strong>R$ ${monthlySavings.toFixed(2)}</strong></p>
-        <p style="font-size: 1.3rem; color: var(--accent); margin-top: 0.5rem;">Economia Anual: <strong>R$ ${annualSavings.toFixed(2)}</strong></p>
-        <p style="font-size: 0.85rem; margin-top: 1rem; color: #aaa;">*Estimativa simplificada. Não considera custos de instalação.</p>
+        <p style="font-size: 1.2rem; color: var(--accent); margin-top: 0.5rem; font-weight: 700;">Economia Anual: <strong>R$ ${annualSavings.toFixed(2)}</strong></p>
+        <p style="font-size: 0.85rem; margin-top: 1rem; color: var(--text-muted);">*Estimativa simplificada. Não considera custos de instalação.</p>
     `;
 }
+
 
 // ==========================================
 // 12. GLOSSÁRIO
@@ -423,6 +413,7 @@ function searchGlossary() {
         }
     });
 }
+
 
 // ==========================================
 // 13. QUIZ
@@ -518,7 +509,99 @@ const quizData = [
         options: ["Aumentar a potência do aquecedor", "Manter o aquecimento ligado", "Bloquear o aquecimento e emitir um alerta", "Desligar todos os sensores"],
         correct: 2,
         feedback: "Exato! Sem fluxo, o aquecimento deve ser bloqueado para evitar superaquecimento e danos."
-    },
-    {
-        question: "Qual cientista apresentou, em 1905, a explicação quântica do efeito fotoelétrico?",
-        options: ["Isaac Newton", "Albert Einstein",
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function loadQuestion() {
+    const q = quizData[currentQuestion];
+    const questionText = document.getElementById('questionText');
+    const optionsDiv = document.getElementById('optionsContainer');
+    const feedbackText = document.getElementById('feedbackText');
+    const nextBtn = document.getElementById('nextBtn');
+
+    if (!questionText || !optionsDiv) return;
+
+    questionText.innerText = `Pergunta ${currentQuestion + 1} de ${quizData.length}: ${q.question}`;
+    optionsDiv.innerHTML = '';
+    if (feedbackText) feedbackText.innerText = '';
+    if (nextBtn) nextBtn.style.display = 'none';
+
+    q.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, btn);
+        optionsDiv.appendChild(btn);
+    });
+}
+
+function checkAnswer(selectedIndex, btnElement) {
+    const q = quizData[currentQuestion];
+    const options = document.querySelectorAll('.quiz-option');
+    const feedbackText = document.getElementById('feedbackText');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    options.forEach(opt => opt.disabled = true);
+
+    if (selectedIndex === q.correct) {
+        btnElement.classList.add('correct');
+        if (feedbackText) {
+            feedbackText.innerHTML = `<span style="color: var(--success);">✅ ${q.feedback}</span>`;
+            feedbackText.style.background = '#d1fae5';
+        }
+        score++;
+    } else {
+        btnElement.classList.add('incorrect');
+        if (options[q.correct]) options[q.correct].classList.add('correct');
+        if (feedbackText) {
+            feedbackText.innerHTML = `<span style="color: var(--error);">❌ Incorreto. ${q.feedback}</span>`;
+            feedbackText.style.background = '#fee2e2';
+        }
+    }
+    
+    if (nextBtn) nextBtn.style.display = 'inline-block';
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+        loadQuestion();
+    } else {
+        const quizContainer = document.getElementById('quizContainer');
+        const quizResult = document.getElementById('quizResult');
+        const finalScore = document.getElementById('finalScore');
+
+        if (quizContainer) quizContainer.style.display = 'none';
+        if (quizResult) quizResult.style.display = 'block';
+        if (finalScore) finalScore.innerText = `${score} de ${quizData.length}`;
+    }
+}
+
+function restartQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    const quizContainer = document.getElementById('quizContainer');
+    const quizResult = document.getElementById('quizResult');
+    
+    if (quizContainer) quizContainer.style.display = 'block';
+    if (quizResult) quizResult.style.display = 'none';
+    
+    loadQuestion();
+}
+
+
+// ==========================================
+// 14. INICIALIZAÇÃO
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    updatePhotonEnergy();
+    updatePhotoelectric();
+    updateCutoffSimulator();
+    updateSolarPanel();
+    checkAutomation();
+    loadQuestion();
+});
