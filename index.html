@@ -1,1 +1,939 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sol + Água: Projeto Integrador sobre Efeito Fotoelétrico, Energia Solar e Aquecimento de Piscinas.">
+    <title>Sol + Água | Projeto Integrador CEP</title>
+    
+    <!-- Fonte Moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
+    <style>
+        /* =========================================
+           VARIÁVEIS E TEMA (Roxo, Preto, Branco)
+           ========================================= */
+        :root {
+            --bg-dark: #0f0518; /* Preto com tom roxo muito escuro */
+            --bg-card: #1a0b2e; /* Roxo escuro */
+            --primary: #8b5cf6; /* Roxo claro vibrante */
+            --primary-hover: #7c3aed;
+            --accent: #fbbf24; /* Amarelo solar (detalhe sutil) */
+            --text-light: #f3e8ff; /* Branco com tom roxo muito claro */
+            --text-dark: #111111;
+            --glass: rgba(139, 92, 246, 0.1);
+            --border: rgba(139, 92, 246, 0.3);
+            --font-main: 'Inter', sans-serif;
+            --font-title: 'Space Grotesk', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Modo Alto Contraste (Acessibilidade) */
+        body.high-contrast {
+            --bg-dark: #000000;
+            --bg-card: #000000;
+            --primary: #ffff00;
+            --primary-hover: #cccc00;
+            --text-light: #ffffff;
+            --border: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Modo Fonte Grande (Acessibilidade) */
+        body.large-font {
+            font-size: 120%;
+        }
+
+        /* =========================================
+           RESET E BASE
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-title);
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2.5rem; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 2rem; border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; margin-top: 2rem; }
+        h3 { font-size: 1.5rem; color: var(--primary); }
+
+        a { color: var(--primary); text-decoration: none; transition: var(--transition); }
+        a:hover { color: var(--accent); text-decoration: underline; }
+
+        /* =========================================
+           NAVEGAÇÃO
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 5, 24, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        /* =========================================
+           LAYOUT PRINCIPAL
+           ========================================= */
+        main {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 100vh;
+        }
+
+        section {
+            display: none; /* Controlado por JS */
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-card));
+            border: 2px dashed var(--primary);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--primary);
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        /* =========================================
+           COMPONENTES INTERATIVOS
+           ========================================= */
+        .simulator-box {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .control-group { margin-bottom: 1rem; }
+        .control-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .result-display {
+            background: var(--bg-dark);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-top: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        button.btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        button.btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Quiz Styles */
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quiz-option:hover { background: var(--glass); border-color: var(--primary); }
+        .quiz-option.correct { background: rgba(34, 197, 94, 0.2); border-color: #22c55e; }
+        .quiz-option.incorrect { background: rgba(239, 68, 68, 0.2); border-color: #ef4444; }
+
+        /* =========================================
+           ACESSIBILIDADE
+           ========================================= */
+        .a11y-panel {
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            z-index: 999;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 250px;
+        }
+
+        .a11y-panel.open { display: block; }
+
+        .a11y-btn {
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .a11y-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background: #444;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: var(--transition);
+        }
+
+        .toggle-switch.active { background: var(--primary); }
+        .toggle-switch.active::after { left: 22px; }
+
+        /* =========================================
+           RESPONSIVIDADE
+           ========================================= */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-card);
+                padding: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+            nav ul.show { display: flex; }
+            h1 { font-size: 1.8rem; }
+            .a11y-btn { top: auto; bottom: 20px; right: 20px; }
+            .a11y-panel { bottom: 80px; top: auto; }
+        }
+
+        /* Fórmulas */
+        .formula {
+            background: var(--bg-dark);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-family: 'Times New Roman', serif;
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botão de Acessibilidade -->
+    <button class="a11y-btn" onclick="toggleA11yPanel()" aria-label="Abrir painel de acessibilidade">♿</button>
+    
+    <!-- Painel de Acessibilidade -->
+    <div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Opções de acessibilidade">
+        <h4 style="margin-bottom: 1rem; text-align: center;">Acessibilidade</h4>
+        <div class="a11y-option">
+            <span>Fonte Grande</span>
+            <div class="toggle-switch" onclick="toggleClass('large-font')" role="button" tabindex="0" aria-label="Ativar fonte grande"></div>
+        </div>
+        <div class="a11y-option">
+            <span>Alto Contraste</span>
+            <div class="toggle-switch" onclick="toggleClass('high-contrast')" role="button" tabindex="0" aria-label="Ativar alto contraste"></div>
+        </div>
+        <div class="a11y-option">
+            <span>Reduzir Animações</span>
+            <div class="toggle-switch" onclick="toggleAnimation()" role="button" tabindex="0" aria-label="Reduzir animações"></div>
+        </div>
+    </div>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">☀️ Sol <span>+</span> 💧 Água</div>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">☰</button>
+        <nav>
+            <ul id="mainNav">
+                <li><a href="#" onclick="showSection('home')" class="active">Início</a></li>
+                <li><a href="#" onclick="showSection('energia')">Energia Solar</a></li>
+                <li><a href="#" onclick="showSection('fotons')">Física dos Fótons</a></li>
+                <li><a href="#" onclick="showSection('fotoeletrico')">Efeito Fotoelétrico</a></li>
+                <li><a href="#" onclick="showSection('celulas')">Células Fotovoltaicas</a></li>
+                <li><a href="#" onclick="showSection('piscina')">Piscina Aquecida</a></li>
+                <li><a href="#" onclick="showSection('robotica')">Robótica</a></li>
+                <li><a href="#" onclick="showSection('laboratorio')">Lab. Virtual</a></li>
+                <li><a href="#" onclick="showSection('quiz')">Quiz</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 1. PÁGINA INICIAL -->
+        <section id="home" class="active">
+            <div class="card" style="text-align: center; padding: 3rem 1rem;">
+                <h1>Da luz do Sol à água aquecida</h1>
+                <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem auto; color: #d8b4fe;">
+                    Descubra a ciência por trás dessa transformação. Uma plataforma educacional interativa sobre Física Quântica, Energia Solar Fotovoltaica e Automação.
+                </p>
+                <button class="btn-primary" onclick="showSection('energia')">Começar a Jornada</button>
+            </div>
+
+            <div class="image-placeholder">
+                [Imagem: Painel solar recebendo luz do Sol, com uma piscina azul ao lado, representando a união entre energia solar e aquecimento de água.]
+            </div>
+
+            <h2>Os Três Pilares do Projeto</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>⚛️ Física</h3>
+                    <p>Fótons, energia luminosa e o fascinante efeito fotoelétrico que explica como a luz interage com a matéria.</p>
+                </div>
+                <div class="card">
+                    <h3>💻 Programação e Robótica</h3>
+                    <p>Sensores, circuitos Arduino/ESP32 e automação para monitorar e controlar sistemas em tempo real.</p>
+                </div>
+                <div class="card">
+                    <h3>🏊 Aplicação Prática</h3>
+                    <p>Geração de energia limpa e o dimensionamento inteligente para o aquecimento de piscinas.</p>
+                </div>
+            </div>
+
+            <div class="simulator-box">
+                <h3>🤔 Curiosidade Interativa</h3>
+                <p><strong>Se aumentarmos a intensidade da luz, os fótons ficam mais energéticos?</strong></p>
+                <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn-primary" onclick="checkCuriosity(true)">Sim, ficam mais energéticos</button>
+                    <button class="btn-primary" onclick="checkCuriosity(false)">Não, aumenta a quantidade de fótons</button>
+                </div>
+                <div id="curiosity-result" class="result-display" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- 2. ENERGIA SOLAR -->
+        <section id="energia">
+            <h2>De onde vem a energia que utilizamos?</h2>
+            <div class="card">
+                <h3>O Sol como fonte de energia</h3>
+                <p>O Sol libera energia por meio de fusão nuclear, emitindo radiação eletromagnética que viaja pelo espaço até a Terra. Essa radiação não precisa de meio material para se propagar.</p>
+                <div class="image-placeholder">[Imagem ilustrativa do Sol emitindo radiação em direção à Terra]</div>
+            </div>
+            
+            <div class="card">
+                <h3>Radiação Eletromagnética</h3>
+                <p>A luz visível é apenas uma pequena parte do espectro. As ondas são caracterizadas por:</p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li><strong>Frequência (f):</strong> Oscilações por segundo (Hz).</li>
+                    <li><strong>Comprimento de onda (λ):</strong> Distância entre duas cristas.</li>
+                    <li><strong>Velocidade (c):</strong> No vácuo, c ≈ 3 × 10⁸ m/s.</li>
+                </ul>
+                <div class="formula">c = λ · f</div>
+            </div>
+        </section>
+
+        <!-- 3. FÍSICA DOS FÓTONS -->
+        <section id="fotons">
+            <h2>A luz é formada por partículas?</h2>
+            <div class="card">
+                <h3>O que são fótons?</h3>
+                <p>Na Física Quântica, a luz apresenta dualidade onda-partícula. O <strong>fóton</strong> é o quantum (pacote elementar) de energia da radiação eletromagnética. Não possui massa de repouso e viaja à velocidade da luz.</p>
+                
+                <h3>Energia dos Fótons</h3>
+                <div class="formula">E = h · f</div>
+                <p>Onde <strong>h</strong> é a Constante de Planck: <em>6,626 × 10⁻³⁴ J·s</em>.</p>
+            </div>
+
+            <div class="simulator-box">
+                <h3>🔬 Simulador: Energia dos Fótons</h3>
+                <div class="control-group">
+                    <label for="freqSlider">Frequência da Luz (×10¹⁴ Hz): <span id="freqValue">5.0</span></label>
+                    <input type="range" id="freqSlider" min="4" max="8" step="0.1" value="5.0" oninput="updatePhotonEnergy()">
+                </div>
+                <div class="result-display">
+                    Energia do Fóton (E): <span id="energyResult">3.31 × 10⁻¹⁹</span> J<br>
+                    <small>(Equivalente a aprox. <span id="evResult">2.07</span> eV)</small>
+                </div>
+                <div class="image-placeholder" style="margin-top: 1rem; padding: 1rem;">
+                    [Animação: Onda mudando de vermelha (baixa freq) para violeta (alta freq) conforme o slider]
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. EFEITO FOTOELÉTRICO -->
+        <section id="fotoeletrico">
+            <h2>Como a luz consegue liberar elétrons?</h2>
+            <div class="card">
+                <h3>A Descoberta</h3>
+                <p>Observado por Heinrich Hertz e explicado por <strong>Albert Einstein em 1905</strong> (Prêmio Nobel de 1921). O efeito fotoelétrico externo ocorre quando fótons incidem sobre um material e fornecem energia suficiente para ejetar elétrons de sua superfície.</p>
+                
+                <h3>A Equação de Einstein</h3>
+                <div class="formula">E<sub>c</sub> = h·f - φ</div>
+                <p>Onde <strong>E<sub>c</sub></strong> é a energia cinética máxima do elétron e <strong>φ (phi)</strong> é a <em>função trabalho</em> (energia mínima para arrancar o elétron do material).</p>
+            </div>
+
+            <div class="simulator-box">
+                <h3>🔬 Laboratório Virtual: Efeito Fotoelétrico</h3>
+                <div class="grid-2">
+                    <div>
+                        <div class="control-group">
+                            <label>Material (Função Trabalho φ):</label>
+                            <select id="materialSelect" onchange="updatePhotoelectric()" style="width: 100%; padding: 0.5rem; background: var(--bg-dark); color: white; border: 1px solid var(--primary); border-radius: 4px;">
+                                <option value="2.28">Sódio (2.28 eV)</option>
+                                <option value="4.08">Alumínio (4.08 eV)</option>
+                                <option value="4.70">Cobre (4.70 eV)</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Energia do Fóton Incidente (eV): <span id="photonEvDisplay">3.0</span></label>
+                            <input type="range" id="photonEvSlider" min="1" max="6" step="0.1" value="3.0" oninput="updatePhotoelectric()">
+                        </div>
+                    </div>
+                    <div class="result-display" id="photoelectricResult" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                        <!-- Resultado via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CÉLULAS FOTOVOLTAICAS -->
+        <section id="celulas">
+            <h2>Como a luz se transforma em eletricidade?</h2>
+            <div class="card">
+                <p>As células fotovoltaicas utilizam materiais semicondutores (como o <strong>Silício</strong>). Diferente do efeito fotoelétrico externo (que ejeta o elétron para fora), na célula solar o fóton promove o elétron da <em>banda de valência</em> para a <em>banda de condução</em>, criando um par elétron-lacuna.</p>
+                <div class="image-placeholder">[Imagem: Corte transversal de uma célula de silício mostrando a junção p-n, fótons chegando e elétrons fluindo para o circuito]</div>
+                
+                <h3>Componentes do Sistema</h3>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li><strong>Módulos/Painéis:</strong> Conjunto de células.</li>
+                    <li><strong>Inversor:</strong> Converte Corrente Contínua (CC) em Alternada (CA).</li>
+                    <li><strong>Baterias (opcional):</strong> Armazenamento de energia.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 7. PISCINA AQUECIDA -->
+        <section id="piscina">
+            <h2>Energia Solar e Piscina Aquecida</h2>
+            <div class="card">
+                <h3>Como funciona?</h3>
+                <p>A energia fotovoltaica pode alimentar uma <strong>bomba de calor</strong> ou uma resistência elétrica. A bomba de calor é altamente eficiente, pois não "cria" calor, ela <em>transfere</em> calor do ambiente para a água, utilizando a eletricidade apenas para mover o fluido refrigerante.</p>
+                
+                <h3>Física do Aquecimento</h3>
+                <div class="formula">Q = m · c · ΔT</div>
+                <p>Onde <strong>Q</strong> é o calor necessário, <strong>m</strong> é a massa da água, <strong>c</strong> é o calor específico da água (4.186 J/kg·°C) e <strong>ΔT</strong> é a variação de temperatura.</p>
+            </div>
+
+            <div class="simulator-box">
+                <h3>🔬 Simulador: Aquecimento da Piscina</h3>
+                <div class="grid-2">
+                    <div>
+                        <div class="control-group">
+                            <label>Volume da Piscina (Litros):</label>
+                            <input type="number" id="poolVolume" value="10000" style="width: 100%; padding: 0.5rem; background: var(--bg-dark); color: white; border: 1px solid var(--primary); border-radius: 4px;">
+                        </div>
+                        <div class="control-group">
+                            <label>Temperatura Inicial (°C):</label>
+                            <input type="number" id="tempInit" value="20" style="width: 100%; padding: 0.5rem; background: var(--bg-dark); color: white; border: 1px solid var(--primary); border-radius: 4px;">
+                        </div>
+                        <div class="control-group">
+                            <label>Temperatura Desejada (°C):</label>
+                            <input type="number" id="tempFinal" value="28" style="width: 100%; padding: 0.5rem; background: var(--bg-dark); color: white; border: 1px solid var(--primary); border-radius: 4px;">
+                        </div>
+                        <button class="btn-primary" onclick="calculatePoolHeat()" style="width: 100%;">Calcular Energia Necessária</button>
+                    </div>
+                    <div class="result-display" id="poolResult" style="display: flex; flex-direction: column; justify-content: center;">
+                        Clique em "Calcular" para ver o resultado.
+                    </div>
+                </div>
+                <p style="font-size: 0.8rem; margin-top: 1rem; color: #aaa;">*Cálculo ideal. Não considera perdas térmicas por evaporação, convecção e radiação. O uso de capa térmica é altamente recomendado para reduzir essas perdas.</p>
+            </div>
+        </section>
+
+        <!-- 8. ROBÓTICA E SENSORES -->
+        <section id="robotica">
+            <h2>Robótica e Sensores</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Sensores do Projeto</h3>
+                    <ul style="margin-left: 1.5rem; line-height: 2;">
+                        <li><strong>DS18B20:</strong> Sensor de temperatura à prova d'água.</li>
+                        <li><strong>LDR:</strong> Sensor de luminosidade (resistência varia com a luz).</li>
+                        <li><strong>Sensor de Fluxo:</strong> Detecta a circulação da água (segurança).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Microcontroladores</h3>
+                    <p><strong>Arduino / ESP32:</strong> O "cérebro" do sistema. Lê os dados dos sensores, processa a lógica (ex: "Se temp < 28°C E fluxo == OK, ligar aquecedor") e atua nos relés.</p>
+                    <div class="image-placeholder">[Imagem: Esquema de ligação do Arduino com sensor DS18B20 e relé]</div>
+                </div>
+            </div>
+            
+            <div class="simulator-box">
+                <h3>💻 Lógica de Automação (Simulação)</h3>
+                <div class="control-group">
+                    <label>Temperatura Atual da Água: <span id="simTemp">24</span>°C</label>
+                    <input type="range" min="15" max="35" value="24" oninput="document.getElementById('simTemp').innerText = this.value; checkAutomation();">
+                </div>
+                <div class="control-group">
+                    <label>
+                        <input type="checkbox" id="simFlow" checked onchange="checkAutomation()"> Fluxo de Água Detectado?
+                    </label>
+                </div>
+                <div class="result-display" id="automationResult" style="text-align: center; font-size: 1.2rem;">
+                    Status do Sistema: <span style="color: var(--accent);">Aguardando dados...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. LABORATÓRIO VIRTUAL -->
+        <section id="laboratorio">
+            <h2>Laboratório Virtual</h2>
+            <div class="card">
+                <h3>Experimentos Disponíveis</h3>
+                <div class="grid-3">
+                    <div class="card" style="border: 1px solid var(--primary);">
+                        <h4>1. Sombreamento</h4>
+                        <p>Observe como cobrir uma parte do painel reduz drasticamente a corrente total devido à associação em série das células.</p>
+                    </div>
+                    <div class="card" style="border: 1px solid var(--primary);">
+                        <h4>2. Inclinação</h4>
+                        <p>Ajuste o ângulo do painel em relação ao "Sol" e veja a curva de potência atingir o máximo no ângulo de incidência perpendicular.</p>
+                    </div>
+                    <div class="card" style="border: 1px solid var(--primary);">
+                        <h4>3. Capa Térmica</h4>
+                        <p>Simule a perda de calor ao longo da noite com e sem a capa térmica, observando a redução da evaporação.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. QUIZ -->
+        <section id="quiz">
+            <h2>Teste seus Conhecimentos!</h2>
+            <div class="card" id="quizContainer">
+                <h3 id="questionText">Carregando pergunta...</h3>
+                <div id="optionsContainer"></div>
+                <p id="feedbackText" style="margin-top: 1rem; font-weight: bold;"></p>
+                <button class="btn-primary" id="nextBtn" onclick="nextQuestion()" style="display: none; margin-top: 1rem;">Próxima Pergunta</button>
+            </div>
+            <div class="card" id="quizResult" style="display: none; text-align: center;">
+                <h3>Quiz Finalizado!</h3>
+                <p style="font-size: 1.5rem; margin: 1rem 0;">Sua pontuação: <span id="finalScore" style="color: var(--accent);"></span></p>
+                <button class="btn-primary" onclick="restartQuiz()">Refazer Quiz</button>
+            </div>
+        </section>
+
+        <!-- 15. ACESSIBILIDADE E 16. REFERÊNCIAS -->
+        <section id="referencias">
+            <h2>Referências Científicas</h2>
+            <div class="card">
+                <ul style="line-height: 2;">
+                    <li><strong>Física:</strong> OpenStax University Physics, Vol 3. (Efeito Fotoelétrico)</li>
+                    <li><strong>Nobel Prize:</strong> The Nobel Prize in Physics 1921 (Albert Einstein)</li>
+                    <li><strong>Energia Solar:</strong> U.S. Department of Energy - Solar Photovoltaic Cell Basics</li>
+                    <li><strong>Robótica:</strong> Documentação Oficial Arduino e Espressif (ESP32)</li>
+                    <li><strong>Acessibilidade:</strong> W3C - WCAG 2.2 e VLibras (Governo Federal)</li>
+                </ul>
+            </div>
+            <div class="card" style="text-align: center; background: linear-gradient(to right, var(--bg-card), var(--primary));">
+                <h3>Da luz à eletricidade: a ciência por trás da tecnologia.</h3>
+                <p>O conhecimento científico construindo um futuro mais eficiente, acessível e sustentável.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- VLibras Widget -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ==========================================
+        // NAVEGAÇÃO
+        // ==========================================
+        function showSection(sectionId) {
+            // Esconde todas as seções
+            document.querySelectorAll('main section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            // Mostra a seção alvo
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Atualiza menu ativo
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('onclick').includes(sectionId)) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Fecha menu mobile se estiver aberto
+            document.getElementById('mainNav').classList.remove('show');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMenu() {
+            document.getElementById('mainNav').classList.toggle('show');
+        }
+
+        // ==========================================
+        // ACESSIBILIDADE
+        // ==========================================
+        function toggleA11yPanel() {
+            document.getElementById('a11yPanel').classList.toggle('open');
+        }
+
+        function toggleClass(className) {
+            document.body.classList.toggle(className);
+            // Atualiza visual do toggle (simplificado)
+            event.target.classList.toggle('active');
+        }
+
+        function toggleAnimation() {
+            document.body.style.setProperty('--transition', 'none');
+            event.target.classList.toggle('active');
+        }
+
+        // ==========================================
+        // INTERATIVIDADE: CURIOSIDADE
+        // ==========================================
+        function checkCuriosity(isWrong) {
+            const resultDiv = document.getElementById('curiosity-result');
+            resultDiv.style.display = 'block';
+            if (isWrong) {
+                resultDiv.innerHTML = "❌ <strong>Incorreto.</strong> Aumentar a intensidade (mantendo a frequência) apenas aumenta a <em>quantidade</em> de fótons, não a energia individual de cada um.";
+                resultDiv.style.borderLeftColor = "#ef4444";
+            } else {
+                resultDiv.innerHTML = "✅ <strong>Correto!</strong> A energia individual do fóton depende apenas da frequência (E = h·f). Mais intensidade significa mais fótons, mas cada um tem a mesma energia.";
+                resultDiv.style.borderLeftColor = "#22c55e";
+            }
+        }
+
+        // ==========================================
+        // SIMULADOR 1: ENERGIA DO FÓTON
+        // ==========================================
+        function updatePhotonEnergy() {
+            const freq = parseFloat(document.getElementById('freqSlider').value);
+            document.getElementById('freqValue').innerText = freq.toFixed(1);
+            
+            // E = h * f
+            // h = 6.626e-34 J.s
+            // f = freq * 1e14 Hz
+            const h = 6.626e-34;
+            const f = freq * 1e14;
+            const energyJ = h * f;
+            const energyEv = energyJ / 1.602e-19; // Convertendo para eV
+
+            document.getElementById('energyResult').innerText = energyJ.toExponential(2);
+            document.getElementById('evResult').innerText = energyEv.toFixed(2);
+        }
+
+        // ==========================================
+        // SIMULADOR 2: EFEITO FOTOELÉTRICO
+        // ==========================================
+        function updatePhotoelectric() {
+            const workFunction = parseFloat(document.getElementById('materialSelect').value);
+            const photonEnergy = parseFloat(document.getElementById('photonEvSlider').value);
+            document.getElementById('photonEvDisplay').innerText = photonEnergy.toFixed(1);
+
+            const resultDiv = document.getElementById('photoelectricResult');
+            
+            if (photonEnergy < workFunction) {
+                resultDiv.innerHTML = `
+                    <span style="color: #ef4444; font-size: 2rem;">⛔</span>
+                    <strong>Sem Emissão de Elétrons</strong>
+                    <p>A energia do fóton (${photonEnergy.toFixed(1)} eV) é menor que a função trabalho do material (${workFunction} eV).</p>
+                `;
+            } else {
+                const kineticEnergy = photonEnergy - workFunction;
+                resultDiv.innerHTML = `
+                    <span style="color: #22c55e; font-size: 2rem;">⚡</span>
+                    <strong>Elétrons Emitidos!</strong>
+                    <p>Energia Cinética Máxima (E<sub>c</sub>): <strong>${kineticEnergy.toFixed(2)} eV</strong></p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">(E<sub>c</sub> = ${photonEnergy.toFixed(1)} - ${workFunction})</p>
+                `;
+            }
+        }
+
+        // ==========================================
+        // SIMULADOR 3: AQUECIMENTO DA PISCINA
+        // ==========================================
+        function calculatePoolHeat() {
+            const volume = parseFloat(document.getElementById('poolVolume').value);
+            const tInit = parseFloat(document.getElementById('tempInit').value);
+            const tFinal = parseFloat(document.getElementById('tempFinal').value);
+            
+            if (tFinal <= tInit) {
+                document.getElementById('poolResult').innerHTML = "<span style='color: #ef4444;'>A temperatura desejada deve ser maior que a inicial.</span>";
+                return;
+            }
+
+            // m (kg) = volume (L) * 1 kg/L
+            const m = volume;
+            const c = 4186; // J/kg°C
+            const deltaT = tFinal - tInit;
+            
+            const qJoules = m * c * deltaT;
+            const qKwh = qJoules / 3600000; // 1 kWh = 3.6e6 J
+
+            document.getElementById('poolResult').innerHTML = `
+                <strong>Resultados Estimados:</strong>
+                <hr style="border-color: var(--border); margin: 0.5rem 0;">
+                <p>Variação de Temperatura (ΔT): <strong>${deltaT} °C</strong></p>
+                <p>Energia Térmica (Q): <strong>${qJoules.toExponential(2)} J</strong></p>
+                <p style="font-size: 1.3rem; color: var(--accent); margin-top: 0.5rem;">Equivalente a: <strong>${qKwh.toFixed(1)} kWh</strong></p>
+                <p style="font-size: 0.8rem; margin-top: 1rem;">*Valor ideal sem perdas térmicas.</p>
+            `;
+        }
+
+        // ==========================================
+        // SIMULADOR 4: AUTOMAÇÃO (ROBÓTICA)
+        // ==========================================
+        function checkAutomation() {
+            const temp = parseInt(document.getElementById('simTemp').innerText);
+            const hasFlow = document.getElementById('simFlow').checked;
+            const targetTemp = 28;
+            const resultDiv = document.getElementById('automationResult');
+
+            if (!hasFlow) {
+                resultDiv.innerHTML = `<span style="color: #ef4444;">🚫 ALERTA DE SEGURANÇA: Sem fluxo de água! Aquecimento BLOQUEADO para evitar superaquecimento/danos.</span>`;
+            } else if (temp < targetTemp) {
+                resultDiv.innerHTML = `<span style="color: #22c55e;">✅ Sistema ATIVO: Temperatura abaixo do alvo. Bomba de aquecimento LIGADA.</span>`;
+            } else {
+                resultDiv.innerHTML = `<span style="color: var(--accent);">⏸️ Sistema EM ESPERA: Temperatura ideal atingida. Aquecimento DESLIGADO.</span>`;
+            }
+        }
+
+        // ==========================================
+        // QUIZ INTERATIVO
+        // ==========================================
+        const quizData = [
+            {
+                question: "O que determina a energia individual de um fóton?",
+                options: ["A intensidade da luz", "A frequência da radiação", "A velocidade da luz", "A temperatura do ambiente"],
+                correct: 1,
+                feedback: "Correto! Pela equação E = h·f, a energia é diretamente proporcional à frequência."
+            },
+            {
+                question: "No efeito fotoelétrico, o que acontece se a frequência da luz estiver abaixo da frequência de corte?",
+                options: ["Os elétrons são emitidos lentamente", "Nenhum elétron é emitido, não importa a intensidade", "O material esquenta e derrete", "A função trabalho diminui"],
+                correct: 1,
+                feedback: "Exato! Se a energia do fóton (h·f) for menor que a função trabalho (φ), a emissão é impossível."
+            },
+            {
+                question: "Qual é a principal função do inversor em um sistema fotovoltaico?",
+                options: ["Aquecer a água diretamente", "Armazenar energia em baterias", "Converter corrente contínua (CC) em alternada (CA)", "Medir a temperatura do painel"],
+                correct: 2,
+                feedback: "Isso mesmo! A maioria das redes elétricas e aparelhos residenciais opera em corrente alternada."
+            },
+            {
+                question: "Por que a capa térmica é importante para piscinas aquecidas?",
+                options: ["Ela aquece a água ativamente", "Ela reduz drasticamente as perdas de calor por evaporação", "Ela gera eletricidade", "Ela filtra a água"],
+                correct: 1,
+                feedback: "Correto! A evaporação é a maior causa de perda de calor em piscinas, e a capa age como um isolante."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const q = quizData[currentQuestion];
+            document.getElementById('questionText').innerText = `Pergunta ${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('optionsContainer');
+            optionsDiv.innerHTML = '';
+            document.getElementById('feedbackText').innerText = '';
+            document.getElementById('nextBtn').style.display = 'none';
+
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(index, btn);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIndex, btnElement) {
+            const q = quizData[currentQuestion];
+            const options = document.querySelectorAll('.quiz-option');
+            
+            // Desabilita todos os botões
+            options.forEach(opt => opt.disabled = true);
+
+            if (selectedIndex === q.correct) {
+                btnElement.classList.add('correct');
+                document.getElementById('feedbackText').innerHTML = `<span style="color: #22c55e;">✅ ${q.feedback}</span>`;
+                score++;
+            } else {
+                btnElement.classList.add('incorrect');
+                options[q.correct].classList.add('correct');
+                document.getElementById('feedbackText').innerHTML = `<span style="color: #ef4444;">❌ Incorreto. ${q.feedback}</span>`;
+            }
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                document.getElementById('quizContainer').style.display = 'none';
+                document.getElementById('quizResult').style.display = 'block';
+                document.getElementById('finalScore').innerText = `${score} de ${quizData.length}`;
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('quizContainer').style.display = 'block';
+            document.getElementById('quizResult').style.display = 'none';
+            loadQuestion();
+        }
+
+        // Inicialização
+        window.onload = function() {
+            updatePhotonEnergy();
+            updatePhotoelectric();
+            checkAutomation();
+            loadQuestion();
+        };
+    </script>
+</body>
+</html>
