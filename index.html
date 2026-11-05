@@ -6,7 +6,7 @@
     <meta name="description" content="Sol + Água: Projeto Integrador CEP - Efeito Fotoelétrico, Energia Solar e Aquecimento de Piscinas">
     <title>Sol + Água | Projeto Integrador CEP</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -34,27 +34,27 @@
         </div>
     </div>
 
-    <!-- Cabeçalho com Navegação -->
+    <!-- Cabeçalho com Navegação por Âncoras -->
     <header>
         <div class="logo">☀️ Sol <span>+</span> 💧 Água</div>
         <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">☰</button>
         <nav>
             <ul id="mainNav">
-                <li><a href="#" onclick="showSection('home')" class="active">Início</a></li>
-                <li><a href="#" onclick="showSection('energia')">Energia Solar</a></li>
-                <li><a href="#" onclick="showSection('fotons')">Física dos Fótons</a></li>
-                <li><a href="#" onclick="showSection('fotoeletrico')">Efeito Fotoelétrico</a></li>
-                <li><a href="#" onclick="showSection('frequencia')">Frequência de Corte</a></li>
-                <li><a href="#" onclick="showSection('celulas')">Células Fotovoltaicas</a></li>
-                <li><a href="#" onclick="showSection('piscina')">Piscina Aquecida</a></li>
-                <li><a href="#" onclick="showSection('robotica')">Robótica</a></li>
-                <li><a href="#" onclick="showSection('laboratorio')">Lab. Virtual</a></li>
-                <li><a href="#" onclick="showSection('experimento')">Experimento</a></li>
-                <li><a href="#" onclick="showSection('sustentabilidade')">Sustentabilidade</a></li>
-                <li><a href="#" onclick="showSection('videos')">Vídeos</a></li>
-                <li><a href="#" onclick="showSection('glossario')">Glossário</a></li>
-                <li><a href="#" onclick="showSection('quiz')">Quiz</a></li>
-                <li><a href="#" onclick="showSection('referencias')">Referências</a></li>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#energia">Energia Solar</a></li>
+                <li><a href="#fotons">Física dos Fótons</a></li>
+                <li><a href="#fotoeletrico">Efeito Fotoelétrico</a></li>
+                <li><a href="#frequencia">Frequência de Corte</a></li>
+                <li><a href="#celulas">Células Fotovoltaicas</a></li>
+                <li><a href="#piscina">Piscina Aquecida</a></li>
+                <li><a href="#robotica">Robótica</a></li>
+                <li><a href="#laboratorio">Lab. Virtual</a></li>
+                <li><a href="#experimento">Experimento</a></li>
+                <li><a href="#sustentabilidade">Sustentabilidade</a></li>
+                <li><a href="#videos">Vídeos</a></li>
+                <li><a href="#glossario">Glossário</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+                <li><a href="#referencias">Referências</a></li>
             </ul>
         </nav>
     </header>
@@ -63,15 +63,14 @@
         <!-- ==========================================
              1. PÁGINA INICIAL
              ========================================== -->
-        <section id="home" class="active">
-            <div class="hero-card">
+        <section id="home" class="hero-section">
+            <div class="hero-content">
                 <h1>Da luz do Sol à água aquecida</h1>
                 <p class="slogan">Descubra a ciência por trás dessa transformação</p>
-                <p style="font-size: 1.1rem; max-width: 800px; margin: 1.5rem auto;">
+                <p class="hero-text">
                     Uma plataforma educacional interativa sobre Física Quântica, Energia Solar Fotovoltaica e Automação. 
                     Aprenda como os fótons, os painéis solares e os sensores eletrônicos trabalham juntos para aquecer uma piscina!
                 </p>
-                <button class="btn-primary" onclick="showSection('energia')">Começar a Jornada</button>
             </div>
 
             <div class="image-placeholder">
@@ -83,24 +82,24 @@
                 <div class="card">
                     <h3>⚛️ Física</h3>
                     <p>Fótons, energia luminosa e o fascinante efeito fotoelétrico que explica como a luz interage com a matéria.</p>
-                    <div class="image-placeholder" style="padding: 1rem; font-size: 0.85rem;">[Imagem de fótons e ondas luminosas]</div>
+                    <div class="image-placeholder small">[Imagem de fótons e ondas luminosas]</div>
                 </div>
                 <div class="card">
                     <h3>💻 Programação e Robótica</h3>
                     <p>Sensores, circuitos Arduino/ESP32 e automação para monitorar e controlar sistemas em tempo real.</p>
-                    <div class="image-placeholder" style="padding: 1rem; font-size: 0.85rem;">[Imagem de uma placa Arduino conectada a sensores]</div>
+                    <div class="image-placeholder small">[Imagem de uma placa Arduino conectada a sensores]</div>
                 </div>
                 <div class="card">
                     <h3>🏊 Aplicação Prática</h3>
                     <p>Geração de energia limpa e o dimensionamento inteligente para o aquecimento de piscinas.</p>
-                    <div class="image-placeholder" style="padding: 1rem; font-size: 0.85rem;">[Imagem de uma piscina com sistema de aquecimento solar]</div>
+                    <div class="image-placeholder small">[Imagem de uma piscina com sistema de aquecimento solar]</div>
                 </div>
             </div>
 
             <div class="simulator-box">
                 <h3>🤔 Curiosidade Interativa</h3>
                 <p><strong>"Se aumentarmos a intensidade da luz, os fótons ficam mais energéticos?"</strong></p>
-                <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div class="button-group">
                     <button class="btn-primary" onclick="checkCuriosity(true)">Sim, ficam mais energéticos</button>
                     <button class="btn-primary" onclick="checkCuriosity(false)">Não, aumenta a quantidade de fótons</button>
                 </div>
@@ -232,7 +231,7 @@
                     Energia do Fóton (E): <span id="energyResult">3.31 × 10⁻¹⁹</span> J<br>
                     <small>(Equivalente a aprox. <span id="evResult">2.07</span> eV)</small>
                 </div>
-                <p style="margin-top: 1rem; font-size: 0.9rem; color: #aaa;">
+                <p class="note">
                     <strong>Observação:</strong> Aumentar a intensidade da luz (mantendo a frequência) aumenta a quantidade de fótons, mas não a energia individual de cada um.
                 </p>
             </div>
@@ -589,7 +588,7 @@
                         Clique em "Calcular" para ver o resultado.
                     </div>
                 </div>
-                <p style="font-size: 0.85rem; margin-top: 1rem; color: #aaa;">*Cálculo ideal. Não considera perdas térmicas completas. O uso de capa térmica é altamente recomendado.</p>
+                <p class="note">*Cálculo ideal. Não considera perdas térmicas completas. O uso de capa térmica é altamente recomendado.</p>
             </div>
 
             <div class="card">
@@ -701,8 +700,8 @@
             <div class="card">
                 <h3>Programação</h3>
                 <p>Exemplo de código Arduino para leitura do sensor de temperatura:</p>
-                <pre class="code-block"><code>#include <OneWire.h>
-#include <DallasTemperature.h>
+                <pre class="code-block"><code>#include &lt;OneWire.h&gt;
+#include &lt;DallasTemperature.h&gt;
 
 #define PINO_SENSOR 2
 
@@ -724,7 +723,7 @@ void loop() {
   Serial.print("Temperatura: ");
   Serial.println(temperaturaAtual);
   
-  if (temperaturaAtual < temperaturaDesejada) {
+  if (temperaturaAtual &lt; temperaturaDesejada) {
     Serial.println("Ligar aquecimento");
   } else {
     Serial.println("Desligar aquecimento");
@@ -897,7 +896,7 @@ void loop() {
                         Clique em "Calcular" para ver o resultado.
                     </div>
                 </div>
-                <p style="font-size: 0.85rem; margin-top: 1rem; color: #aaa;">*Estimativa simplificada. Não considera custos de instalação, financiamento, regras de compensação e condições específicas do imóvel.</p>
+                <p class="note">*Estimativa simplificada. Não considera custos de instalação, financiamento, regras de compensação e condições específicas do imóvel.</p>
             </div>
 
             <div class="card">
@@ -971,7 +970,7 @@ void loop() {
             <h2>Dicionário da ciência</h2>
             
             <div class="card">
-                <input type="text" id="glossarySearch" placeholder="Buscar termo..." oninput="searchGlossary()" style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; background: var(--bg-dark); color: var(--text-light); border: 1px solid var(--border); border-radius: 6px;">
+                <input type="text" id="glossarySearch" placeholder="Buscar termo..." oninput="searchGlossary()">
                 
                 <div id="glossaryContent">
                     <div class="glossary-item">
@@ -1067,12 +1066,12 @@ void loop() {
             <div class="card" id="quizContainer">
                 <h3 id="questionText">Carregando pergunta...</h3>
                 <div id="optionsContainer"></div>
-                <p id="feedbackText" style="margin-top: 1rem; font-weight: bold;"></p>
+                <p id="feedbackText" class="feedback"></p>
                 <button class="btn-primary" id="nextBtn" onclick="nextQuestion()" style="display: none; margin-top: 1rem;">Próxima Pergunta</button>
             </div>
             <div class="card" id="quizResult" style="display: none; text-align: center;">
                 <h3>Quiz Finalizado!</h3>
-                <p style="font-size: 1.5rem; margin: 1rem 0;">Sua pontuação: <span id="finalScore" style="color: var(--accent);"></span></p>
+                <p class="score">Sua pontuação: <span id="finalScore"></span></p>
                 <button class="btn-primary" onclick="restartQuiz()">Refazer Quiz</button>
             </div>
         </section>
@@ -1125,7 +1124,7 @@ void loop() {
                 </ul>
             </div>
 
-            <div class="card" style="text-align: center; background: linear-gradient(135deg, var(--bg-card), var(--primary));">
+            <div class="card conclusion">
                 <h3>Da luz à eletricidade: a ciência por trás da tecnologia</h3>
                 <p>Ao longo deste projeto, conhecemos diferentes maneiras de compreender e aproveitar a energia proveniente do Sol.</p>
                 <p>A integração entre Física, Programação e Robótica demonstra como diferentes áreas do conhecimento podem trabalhar juntas para resolver problemas reais.</p>
@@ -1134,6 +1133,10 @@ void loop() {
         </section>
 
     </main>
+
+    <footer>
+        <p>© 2026 Sol + Água — Projeto Integrador CEP | Física Quântica, Energia Solar e Automação</p>
+    </footer>
 
     <!-- VLibras Widget -->
     <div vw class="enabled">
