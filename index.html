@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sol + Água: Projeto Integrador sobre Efeito Fotoelétrico, Energia Solar e Aquecimento de Piscinas.">
+    <meta name="description" content="Sol + Água: Projeto Integrador CEP - Efeito Fotoelétrico, Energia Solar e Aquecimento de Piscinas">
     <title>Sol + Água | Projeto Integrador CEP</title>
-    
-    <!-- Fonte Moderna -->
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -18,22 +15,26 @@
     
     <!-- Painel de Acessibilidade -->
     <div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Opções de acessibilidade">
-        <h4 style="margin-bottom: 1rem; text-align: center;">Acessibilidade</h4>
+        <h4>Acessibilidade</h4>
         <div class="a11y-option">
             <span>Fonte Grande</span>
-            <div class="toggle-switch" onclick="toggleClass('large-font')" role="button" tabindex="0" aria-label="Ativar fonte grande"></div>
+            <div class="toggle-switch" onclick="toggleClass('large-font')" role="button" tabindex="0"></div>
         </div>
         <div class="a11y-option">
             <span>Alto Contraste</span>
-            <div class="toggle-switch" onclick="toggleClass('high-contrast')" role="button" tabindex="0" aria-label="Ativar alto contraste"></div>
+            <div class="toggle-switch" onclick="toggleClass('high-contrast')" role="button" tabindex="0"></div>
         </div>
         <div class="a11y-option">
             <span>Reduzir Animações</span>
-            <div class="toggle-switch" onclick="toggleAnimation()" role="button" tabindex="0" aria-label="Reduzir animações"></div>
+            <div class="toggle-switch" onclick="toggleAnimation()" role="button" tabindex="0"></div>
+        </div>
+        <div class="a11y-option">
+            <span>Fonte Dislexia</span>
+            <div class="toggle-switch" onclick="toggleClass('dyslexia-font')" role="button" tabindex="0"></div>
         </div>
     </div>
 
-    <!-- Cabeçalho -->
+    <!-- Cabeçalho com Navegação -->
     <header>
         <div class="logo">☀️ Sol <span>+</span> 💧 Água</div>
         <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">☰</button>
@@ -43,28 +44,38 @@
                 <li><a href="#" onclick="showSection('energia')">Energia Solar</a></li>
                 <li><a href="#" onclick="showSection('fotons')">Física dos Fótons</a></li>
                 <li><a href="#" onclick="showSection('fotoeletrico')">Efeito Fotoelétrico</a></li>
+                <li><a href="#" onclick="showSection('frequencia')">Frequência de Corte</a></li>
                 <li><a href="#" onclick="showSection('celulas')">Células Fotovoltaicas</a></li>
                 <li><a href="#" onclick="showSection('piscina')">Piscina Aquecida</a></li>
                 <li><a href="#" onclick="showSection('robotica')">Robótica</a></li>
                 <li><a href="#" onclick="showSection('laboratorio')">Lab. Virtual</a></li>
+                <li><a href="#" onclick="showSection('experimento')">Experimento</a></li>
+                <li><a href="#" onclick="showSection('sustentabilidade')">Sustentabilidade</a></li>
+                <li><a href="#" onclick="showSection('videos')">Vídeos</a></li>
+                <li><a href="#" onclick="showSection('glossario')">Glossário</a></li>
                 <li><a href="#" onclick="showSection('quiz')">Quiz</a></li>
+                <li><a href="#" onclick="showSection('referencias')">Referências</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <!-- 1. PÁGINA INICIAL -->
+        <!-- ==========================================
+             1. PÁGINA INICIAL
+             ========================================== -->
         <section id="home" class="active">
-            <div class="card" style="text-align: center; padding: 3rem 1rem;">
+            <div class="hero-card">
                 <h1>Da luz do Sol à água aquecida</h1>
-                <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem auto; color: #d8b4fe;">
-                    Descubra a ciência por trás dessa transformação. Uma plataforma educacional interativa sobre Física Quântica, Energia Solar Fotovoltaica e Automação.
+                <p class="slogan">Descubra a ciência por trás dessa transformação</p>
+                <p style="font-size: 1.1rem; max-width: 800px; margin: 1.5rem auto;">
+                    Uma plataforma educacional interativa sobre Física Quântica, Energia Solar Fotovoltaica e Automação. 
+                    Aprenda como os fótons, os painéis solares e os sensores eletrônicos trabalham juntos para aquecer uma piscina!
                 </p>
                 <button class="btn-primary" onclick="showSection('energia')">Começar a Jornada</button>
             </div>
 
             <div class="image-placeholder">
-                [Imagem: Painel solar recebendo luz do Sol, com uma piscina azul ao lado, representando a união entre energia solar e aquecimento de água.]
+                [Imagem: Painel solar recebendo luz do Sol, com uma piscina azul ao lado, representando a união entre energia solar e aquecimento de água]
             </div>
 
             <h2>Os Três Pilares do Projeto</h2>
@@ -72,20 +83,23 @@
                 <div class="card">
                     <h3>⚛️ Física</h3>
                     <p>Fótons, energia luminosa e o fascinante efeito fotoelétrico que explica como a luz interage com a matéria.</p>
+                    <div class="image-placeholder" style="padding: 1rem; font-size: 0.85rem;">[Imagem de fótons e ondas luminosas]</div>
                 </div>
                 <div class="card">
                     <h3>💻 Programação e Robótica</h3>
                     <p>Sensores, circuitos Arduino/ESP32 e automação para monitorar e controlar sistemas em tempo real.</p>
+                    <div class="image-placeholder" style="padding: 1rem; font-size: 0.85rem;">[Imagem de uma placa Arduino conectada a sensores]</div>
                 </div>
                 <div class="card">
                     <h3>🏊 Aplicação Prática</h3>
                     <p>Geração de energia limpa e o dimensionamento inteligente para o aquecimento de piscinas.</p>
+                    <div class="image-placeholder" style="padding: 1rem; font-size: 0.85rem;">[Imagem de uma piscina com sistema de aquecimento solar]</div>
                 </div>
             </div>
 
             <div class="simulator-box">
                 <h3>🤔 Curiosidade Interativa</h3>
-                <p><strong>Se aumentarmos a intensidade da luz, os fótons ficam mais energéticos?</strong></p>
+                <p><strong>"Se aumentarmos a intensidade da luz, os fótons ficam mais energéticos?"</strong></p>
                 <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
                     <button class="btn-primary" onclick="checkCuriosity(true)">Sim, ficam mais energéticos</button>
                     <button class="btn-primary" onclick="checkCuriosity(false)">Não, aumenta a quantidade de fótons</button>
@@ -94,37 +108,118 @@
             </div>
         </section>
 
-        <!-- 2. ENERGIA SOLAR -->
+        <!-- ==========================================
+             2. ENERGIA SOLAR
+             ========================================== -->
         <section id="energia">
             <h2>De onde vem a energia que utilizamos?</h2>
-            <div class="card">
-                <h3>O Sol como fonte de energia</h3>
-                <p>O Sol libera energia por meio de fusão nuclear, emitindo radiação eletromagnética que viaja pelo espaço até a Terra. Essa radiação não precisa de meio material para se propagar.</p>
-                <div class="image-placeholder">[Imagem ilustrativa do Sol emitindo radiação em direção à Terra]</div>
-            </div>
             
             <div class="card">
+                <h3>O Sol como fonte de energia</h3>
+                <p>O Sol libera energia por meio de processos que ocorrem em seu interior, principalmente a <strong>fusão nuclear</strong>. Essa energia é emitida para o espaço na forma de <strong>radiação eletromagnética</strong>.</p>
+                <p>A radiação eletromagnética é formada por campos elétricos e magnéticos que oscilam e se propagam pelo espaço. Ela não precisa de um meio material para se deslocar, por isso consegue atravessar o espaço entre o Sol e a Terra.</p>
+                <p>A luz visível é apenas uma pequena parte de todo o espectro eletromagnético. Também fazem parte dele as ondas de rádio, as micro-ondas, o infravermelho, o ultravioleta, os raios X e os raios gama.</p>
+                <div class="image-placeholder">[Imagem ilustrativa do Sol emitindo radiação em direção à Terra]</div>
+            </div>
+
+            <div class="card">
                 <h3>Radiação Eletromagnética</h3>
-                <p>A luz visível é apenas uma pequena parte do espectro. As ondas são caracterizadas por:</p>
-                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                    <li><strong>Frequência (f):</strong> Oscilações por segundo (Hz).</li>
-                    <li><strong>Comprimento de onda (λ):</strong> Distância entre duas cristas.</li>
-                    <li><strong>Velocidade (c):</strong> No vácuo, c ≈ 3 × 10⁸ m/s.</li>
+                <p>As ondas eletromagnéticas são caracterizadas por:</p>
+                <ul>
+                    <li><strong>Frequência (f):</strong> Quantidade de oscilações por segundo, medida em Hertz (Hz).</li>
+                    <li><strong>Comprimento de onda (λ):</strong> Distância entre dois pontos equivalentes consecutivos de uma onda.</li>
+                    <li><strong>Velocidade de propagação (c):</strong> No vácuo, c ≈ 3 × 10⁸ m/s.</li>
+                    <li><strong>Energia:</strong> Relacionada à frequência da radiação.</li>
                 </ul>
                 <div class="formula">c = λ · f</div>
+                <p>Isso significa que, no vácuo, quanto maior a frequência de uma onda eletromagnética, menor será seu comprimento de onda.</p>
+                <div class="image-placeholder">[Imagem de um espectro eletromagnético completo, identificando raios gama, raios X, ultravioleta, luz visível, infravermelho, micro-ondas e ondas de rádio]</div>
+            </div>
+
+            <div class="simulator-box">
+                <h3>📊 Gráfico Interativo: Espectro Eletromagnético</h3>
+                <p>Selecione uma região do espectro para ver suas características:</p>
+                <div class="spectrum-selector">
+                    <button class="spectrum-btn" onclick="showSpectrumInfo('radio')">Rádio</button>
+                    <button class="spectrum-btn" onclick="showSpectrumInfo('micro')">Micro-ondas</button>
+                    <button class="spectrum-btn" onclick="showSpectrumInfo('infrared')">Infravermelho</button>
+                    <button class="spectrum-btn" onclick="showSpectrumInfo('visible')">Visível</button>
+                    <button class="spectrum-btn" onclick="showSpectrumInfo('uv')">Ultravioleta</button>
+                    <button class="spectrum-btn" onclick="showSpectrumInfo('xray')">Raios X</button>
+                    <button class="spectrum-btn" onclick="showSpectrumInfo('gamma')">Raios Gama</button>
+                </div>
+                <div id="spectrum-info" class="result-display">Clique em uma região acima para ver informações.</div>
+            </div>
+
+            <div class="card">
+                <h3>Formas de aproveitamento da energia solar</h3>
+                <div class="grid-2">
+                    <div>
+                        <h4>Energia Solar Fotovoltaica</h4>
+                        <p>Transforma diretamente parte da energia da radiação solar em energia elétrica. Utiliza células construídas com materiais semicondutores, principalmente o silício.</p>
+                    </div>
+                    <div>
+                        <h4>Energia Solar Térmica</h4>
+                        <p>Aproveita a radiação solar para aquecer um material ou fluido. Em sistemas de aquecimento de água, coletores absorvem a energia solar e transferem o calor para a água.</p>
+                    </div>
+                </div>
+                <div class="image-placeholder">[Imagem comparativa de um painel fotovoltaico e de um coletor solar térmico]</div>
             </div>
         </section>
 
-        <!-- 3. FÍSICA DOS FÓTONS -->
+        <!-- ==========================================
+             3. FÍSICA DOS FÓTONS
+             ========================================== -->
         <section id="fotons">
             <h2>A luz é formada por partículas?</h2>
+            
             <div class="card">
                 <h3>O que são fótons?</h3>
-                <p>Na Física Quântica, a luz apresenta dualidade onda-partícula. O <strong>fóton</strong> é o quantum (pacote elementar) de energia da radiação eletromagnética. Não possui massa de repouso e viaja à velocidade da luz.</p>
-                
+                <p>Durante muito tempo, os cientistas estudaram a luz tentando compreender sua verdadeira natureza. Alguns experimentos mostravam comportamentos semelhantes aos de ondas, enquanto outros indicavam características próprias de partículas.</p>
+                <p>Com o desenvolvimento da Física Quântica, surgiu a compreensão de que a luz apresenta uma <strong>dualidade onda-partícula</strong>: dependendo do fenômeno observado, ela pode apresentar características ondulatórias e corpusculares.</p>
+                <p>O <strong>fóton</strong> é o quantum, ou pacote elementar, de energia associado à radiação eletromagnética. Ele não possui massa de repouso e, no vácuo, propaga-se à velocidade da luz.</p>
+                <div class="image-placeholder">[Imagem ilustrativa de fótons representados como partículas luminosas se propagando]</div>
+            </div>
+
+            <div class="card">
                 <h3>Energia dos Fótons</h3>
+                <p>Cada fóton transporta uma quantidade de energia que depende de sua frequência:</p>
                 <div class="formula">E = h · f</div>
-                <p>Onde <strong>h</strong> é a Constante de Planck: <em>6,626 × 10⁻³⁴ J·s</em>.</p>
+                <p>Onde:</p>
+                <ul>
+                    <li><strong>E:</strong> Energia do fóton (em Joules)</li>
+                    <li><strong>h:</strong> Constante de Planck = 6,626 × 10⁻³⁴ J·s</li>
+                    <li><strong>f:</strong> Frequência da radiação (em Hz)</li>
+                </ul>
+                <p>A equação demonstra que a energia de um fóton é <strong>diretamente proporcional</strong> à frequência da radiação. Se a frequência dobrar, a energia de cada fóton também dobrará.</p>
+            </div>
+
+            <div class="card">
+                <h3>Frequência e comprimento de onda</h3>
+                <div class="formula">c = λ · f</div>
+                <p>Onde:</p>
+                <ul>
+                    <li><strong>c:</strong> Velocidade da luz no vácuo (≈ 3 × 10⁸ m/s)</li>
+                    <li><strong>λ:</strong> Comprimento de onda (em metros)</li>
+                    <li><strong>f:</strong> Frequência (em Hz)</li>
+                </ul>
+                <p>Quanto maior a frequência, maior a energia do fóton e menor o comprimento de onda.</p>
+            </div>
+
+            <div class="card">
+                <h3>Comparação visual</h3>
+                <div class="grid-2">
+                    <div>
+                        <h4>Luz Vermelha</h4>
+                        <p>Comprimento de onda maior, frequência menor, energia menor.</p>
+                        <div class="image-placeholder">[Imagem de uma onda de luz vermelha]</div>
+                    </div>
+                    <div>
+                        <h4>Luz Violeta</h4>
+                        <p>Comprimento de onda menor, frequência maior, energia maior.</p>
+                        <div class="image-placeholder">[Imagem de uma onda de luz violeta]</div>
+                    </div>
+                </div>
             </div>
 
             <div class="simulator-box">
@@ -137,22 +232,74 @@
                     Energia do Fóton (E): <span id="energyResult">3.31 × 10⁻¹⁹</span> J<br>
                     <small>(Equivalente a aprox. <span id="evResult">2.07</span> eV)</small>
                 </div>
-                <div class="image-placeholder" style="margin-top: 1rem; padding: 1rem;">
-                    [Animação: Onda mudando de vermelha (baixa freq) para violeta (alta freq) conforme o slider]
-                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #aaa;">
+                    <strong>Observação:</strong> Aumentar a intensidade da luz (mantendo a frequência) aumenta a quantidade de fótons, mas não a energia individual de cada um.
+                </p>
             </div>
         </section>
 
-        <!-- 4. EFEITO FOTOELÉTRICO -->
+        <!-- ==========================================
+             4. EFEITO FOTOELÉTRICO
+             ========================================== -->
         <section id="fotoeletrico">
             <h2>Como a luz consegue liberar elétrons?</h2>
+            
             <div class="card">
-                <h3>A Descoberta</h3>
-                <p>Observado por Heinrich Hertz e explicado por <strong>Albert Einstein em 1905</strong> (Prêmio Nobel de 1921). O efeito fotoelétrico externo ocorre quando fótons incidem sobre um material e fornecem energia suficiente para ejetar elétrons de sua superfície.</p>
-                
-                <h3>A Equação de Einstein</h3>
+                <h3>História e descoberta</h3>
+                <p>No final do século XIX, o físico <strong>Heinrich Hertz</strong> realizou experimentos relacionados às ondas eletromagnéticas e observou que a incidência de luz ultravioleta podia facilitar a ocorrência de descargas elétricas entre eletrodos.</p>
+                <p>Posteriormente, <strong>Albert Einstein</strong> apresentou, em 1905, uma explicação baseada na ideia de que a luz é formada por pacotes individuais de energia: os fótons.</p>
+                <p>Einstein explicou que cada fóton transfere sua energia a um elétron. Se essa energia for suficiente para retirar o elétron do material, ele será emitido.</p>
+                <p>Em reconhecimento à explicação teórica do efeito fotoelétrico, Einstein recebeu o <strong>Prêmio Nobel de Física de 1921</strong>.</p>
+                <div class="image-placeholder">[Imagem histórica de Albert Einstein]</div>
+            </div>
+
+            <div class="card">
+                <h3>O que é o efeito fotoelétrico?</h3>
+                <p>O efeito fotoelétrico externo ocorre quando a luz incide sobre a superfície de determinado material e provoca a emissão de elétrons.</p>
+                <p>Quando a luz atinge uma superfície metálica, seus fótons podem transferir energia para os elétrons presentes no material. Se a energia recebida for suficiente para vencer a atração que mantém o elétron preso à superfície, ele poderá ser emitido.</p>
+                <p>Conceitos importantes:</p>
+                <ul>
+                    <li><strong>Fótons incidentes:</strong> Partículas de luz que atingem o material.</li>
+                    <li><strong>Superfície metálica:</strong> Material que recebe a luz.</li>
+                    <li><strong>Elétrons:</strong> Partículas que podem ser ejetadas.</li>
+                    <li><strong>Energia de ligação:</strong> Energia que mantém o elétron preso ao material.</li>
+                    <li><strong>Função trabalho (φ):</strong> Energia mínima necessária para retirar um elétron.</li>
+                    <li><strong>Energia cinética:</strong> Energia do elétron após ser emitido.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Funcionamento do fenômeno</h3>
+                <ol>
+                    <li>Fótons se aproximam da superfície metálica.</li>
+                    <li>A luz atinge o material.</li>
+                    <li>Os fótons transferem energia aos elétrons.</li>
+                    <li>Os elétrons são emitidos quando recebem energia suficiente.</li>
+                </ol>
+                <div class="image-placeholder">[Imagem ilustrativa do efeito fotoelétrico, mostrando uma fonte de luz, uma superfície metálica e elétrons sendo liberados]</div>
+            </div>
+
+            <div class="card">
+                <h3>Equação de Einstein</h3>
                 <div class="formula">E<sub>c</sub> = h·f - φ</div>
-                <p>Onde <strong>E<sub>c</sub></strong> é a energia cinética máxima do elétron e <strong>φ (phi)</strong> é a <em>função trabalho</em> (energia mínima para arrancar o elétron do material).</p>
+                <p>Onde:</p>
+                <ul>
+                    <li><strong>E<sub>c</sub>:</strong> Energia cinética máxima do elétron emitido.</li>
+                    <li><strong>h:</strong> Constante de Planck (6,626 × 10⁻³⁴ J·s).</li>
+                    <li><strong>f:</strong> Frequência da luz incidente.</li>
+                    <li><strong>φ:</strong> Função trabalho do material.</li>
+                </ul>
+                <p>A equação mostra que a energia do fóton precisa ser suficiente para superar a função trabalho. O que sobrar será convertido em energia cinética do elétron.</p>
+            </div>
+
+            <div class="card">
+                <h3>Intensidade x frequência</h3>
+                <ul>
+                    <li>Aumentar a frequência aumenta a energia individual dos fótons.</li>
+                    <li>Aumentar a intensidade, mantendo a frequência constante, aumenta o número de fótons incidentes.</li>
+                    <li>Se a frequência estiver abaixo da frequência de corte, não ocorrerá emissão fotoelétrica.</li>
+                </ul>
+                <div class="image-placeholder">[Imagem comparativa de uma luz de baixa frequência e uma de alta frequência incidindo sobre uma superfície metálica]</div>
             </div>
 
             <div class="simulator-box">
@@ -161,50 +308,246 @@
                     <div>
                         <div class="control-group">
                             <label>Material (Função Trabalho φ):</label>
-                            <select id="materialSelect" onchange="updatePhotoelectric()" style="width: 100%; padding: 0.5rem; background: var(--bg-dark); color: white; border: 1px solid var(--primary); border-radius: 4px;">
+                            <select id="materialSelect" onchange="updatePhotoelectric()">
                                 <option value="2.28">Sódio (2.28 eV)</option>
                                 <option value="4.08">Alumínio (4.08 eV)</option>
+                                <option value="4.31">Zinco (4.31 eV)</option>
                                 <option value="4.70">Cobre (4.70 eV)</option>
+                                <option value="4.73">Prata (4.73 eV)</option>
+                                <option value="6.35">Platina (6.35 eV)</option>
                             </select>
                         </div>
                         <div class="control-group">
                             <label>Energia do Fóton Incidente (eV): <span id="photonEvDisplay">3.0</span></label>
-                            <input type="range" id="photonEvSlider" min="1" max="6" step="0.1" value="3.0" oninput="updatePhotoelectric()">
+                            <input type="range" id="photonEvSlider" min="1" max="7" step="0.1" value="3.0" oninput="updatePhotoelectric()">
+                        </div>
+                        <div class="control-group">
+                            <label>Intensidade da Luz: <span id="intensityDisplay">50</span>%</label>
+                            <input type="range" id="intensitySlider" min="10" max="100" step="10" value="50" oninput="updatePhotoelectric()">
                         </div>
                     </div>
-                    <div class="result-display" id="photoelectricResult" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                        <!-- Resultado via JS -->
+                    <div class="result-display" id="photoelectricResult">
+                        Ajuste os parâmetros para ver o resultado.
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. CÉLULAS FOTOVOLTAICAS -->
-        <section id="celulas">
-            <h2>Como a luz se transforma em eletricidade?</h2>
+        <!-- ==========================================
+             5. FREQUÊNCIA DE CORTE
+             ========================================== -->
+        <section id="frequencia">
+            <h2>Existe um limite para a energia da luz?</h2>
+            
             <div class="card">
-                <p>As células fotovoltaicas utilizam materiais semicondutores (como o <strong>Silício</strong>). Diferente do efeito fotoelétrico externo (que ejeta o elétron para fora), na célula solar o fóton promove o elétron da <em>banda de valência</em> para a <em>banda de condução</em>, criando um par elétron-lacuna.</p>
-                <div class="image-placeholder">[Imagem: Corte transversal de uma célula de silício mostrando a junção p-n, fótons chegando e elétrons fluindo para o circuito]</div>
-                
-                <h3>Componentes do Sistema</h3>
-                <ul style="margin-left: 2rem; margin-top: 1rem;">
-                    <li><strong>Módulos/Painéis:</strong> Conjunto de células.</li>
-                    <li><strong>Inversor:</strong> Converte Corrente Contínua (CC) em Alternada (CA).</li>
-                    <li><strong>Baterias (opcional):</strong> Armazenamento de energia.</li>
+                <h3>O que é frequência de corte?</h3>
+                <p>A frequência de corte, também chamada de frequência limiar, é a menor frequência que a luz precisa apresentar para provocar a emissão de elétrons de determinado material pelo efeito fotoelétrico externo.</p>
+                <p>Cada material possui uma função trabalho própria. Por isso, a frequência mínima necessária para retirar elétrons também varia.</p>
+                <p>Se a frequência da luz estiver abaixo desse limite, os fótons não terão energia suficiente para liberar os elétrons. Mesmo que a intensidade da luz seja aumentada, a emissão não acontecerá.</p>
+                <div class="formula">f<sub>c</sub> = φ / h</div>
+                <p>Onde:</p>
+                <ul>
+                    <li><strong>f<sub>c</sub>:</strong> Frequência de corte.</li>
+                    <li><strong>φ:</strong> Função trabalho do material.</li>
+                    <li><strong>h:</strong> Constante de Planck.</li>
                 </ul>
+            </div>
+
+            <div class="card">
+                <h3>Comparação entre materiais</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Material</th>
+                            <th>Função trabalho (φ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sódio</td><td>2,46 eV</td></tr>
+                        <tr><td>Alumínio</td><td>4,08 eV</td></tr>
+                        <tr><td>Zinco</td><td>4,31 eV</td></tr>
+                        <tr><td>Cobre</td><td>4,70 eV</td></tr>
+                        <tr><td>Prata</td><td>4,73 eV</td></tr>
+                        <tr><td>Platina</td><td>6,35 eV</td></tr>
+                    </tbody>
+                </table>
+                <p>Materiais com maior função trabalho precisam receber fótons de maior energia para que ocorra a emissão de elétrons.</p>
+                <div class="image-placeholder">[Imagem comparativa de três superfícies metálicas recebendo luz com diferentes frequências]</div>
+            </div>
+
+            <div class="simulator-box">
+                <h3>🔬 Simulador: Encontre a frequência de corte</h3>
+                <div class="control-group">
+                    <label>Material:</label>
+                    <select id="cutoffMaterial" onchange="updateCutoffSimulator()">
+                        <option value="2.46">Sódio (2.46 eV)</option>
+                        <option value="4.08">Alumínio (4.08 eV)</option>
+                        <option value="4.70">Cobre (4.70 eV)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Energia do Fóton (eV): <span id="cutoffPhotonDisplay">3.0</span></label>
+                    <input type="range" id="cutoffPhotonSlider" min="1" max="7" step="0.1" value="3.0" oninput="updateCutoffSimulator()">
+                </div>
+                <div id="cutoffResult" class="result-display">Ajuste os parâmetros.</div>
+            </div>
+
+            <div class="card">
+                <h3>Relação com células fotovoltaicas</h3>
+                <p>A frequência de corte do efeito fotoelétrico externo não deve ser confundida com o <strong>band gap</strong> dos semicondutores.</p>
+                <p>Nas células fotovoltaicas, uma grandeza importante é a <strong>energia de banda proibida</strong> (band gap). Ela representa a diferença de energia entre a banda de valência e a banda de condução do semicondutor.</p>
+                <div class="image-placeholder">[Imagem de um diagrama de bandas de energia de um semicondutor, identificando banda de valência, band gap e banda de condução]</div>
             </div>
         </section>
 
-        <!-- 7. PISCINA AQUECIDA -->
-        <section id="piscina">
-            <h2>Energia Solar e Piscina Aquecida</h2>
+        <!-- ==========================================
+             6. CÉLULAS FOTOVOLTAICAS
+             ========================================== -->
+        <section id="celulas">
+            <h2>Como a luz se transforma em eletricidade?</h2>
+            
             <div class="card">
-                <h3>Como funciona?</h3>
-                <p>A energia fotovoltaica pode alimentar uma <strong>bomba de calor</strong> ou uma resistência elétrica. A bomba de calor é altamente eficiente, pois não "cria" calor, ela <em>transfere</em> calor do ambiente para a água, utilizando a eletricidade apenas para mover o fluido refrigerante.</p>
-                
+                <h3>O que é uma célula fotovoltaica?</h3>
+                <p>A célula fotovoltaica é um dispositivo que utiliza materiais semicondutores, principalmente <strong>silício</strong>, para converter energia luminosa em energia elétrica.</p>
+                <p>Um <strong>semicondutor</strong> é um material que apresenta capacidade de conduzir eletricidade em determinadas condições. Sua condutividade pode ser influenciada por fatores como temperatura, iluminação e estrutura do material.</p>
+                <p>Quando a luz solar atinge uma célula fotovoltaica, parte dos fótons pode ser absorvida pelo semicondutor. Se a energia do fóton for suficiente para superar a energia de banda proibida do material, um elétron poderá passar para a banda de condução, deixando uma lacuna na banda de valência.</p>
+                <div class="image-placeholder">[Imagem de uma célula fotovoltaica de silício, mostrando suas camadas internas]</div>
+            </div>
+
+            <div class="card">
+                <h3>O que é a junção p-n?</h3>
+                <p>Uma célula solar de silício geralmente possui uma estrutura formada por duas regiões:</p>
+                <ul>
+                    <li><strong>Região tipo p:</strong> Possui maior concentração de lacunas como portadores majoritários.</li>
+                    <li><strong>Região tipo n:</strong> Possui maior concentração de elétrons como portadores majoritários.</li>
+                </ul>
+                <p>Quando essas regiões são unidas, forma-se uma <strong>junção p-n</strong>. Nela, ocorre a formação de uma região de depleção e de um campo elétrico interno, que contribui para separar os elétrons e as lacunas gerados pela absorção da luz.</p>
+            </div>
+
+            <div class="card">
+                <h3>Como acontece a conversão?</h3>
+                <ol>
+                    <li><strong>Absorção da luz:</strong> Os fótons atingem o semicondutor e parte deles é absorvida.</li>
+                    <li><strong>Formação de pares elétron-lacuna:</strong> A energia absorvida permite que elétrons passem para estados de maior energia.</li>
+                    <li><strong>Separação das cargas:</strong> O campo elétrico interno da junção p-n favorece a separação dos portadores de carga.</li>
+                    <li><strong>Circulação de corrente:</strong> Quando a célula é conectada a um circuito externo, os elétrons podem circular, fornecendo energia elétrica.</li>
+                    <li><strong>Utilização da energia:</strong> A eletricidade produzida pode alimentar equipamentos, ser armazenada em baterias ou convertida para utilização na rede elétrica.</li>
+                </ol>
+                <div class="image-placeholder">[Imagem ilustrativa de uma célula fotovoltaica em funcionamento]</div>
+            </div>
+
+            <div class="card">
+                <h3>Componentes de um sistema fotovoltaico</h3>
+                <ul>
+                    <li><strong>Células fotovoltaicas:</strong> Realizam a conversão da luz em energia elétrica.</li>
+                    <li><strong>Módulos ou painéis:</strong> Agrupam várias células para aumentar a potência produzida.</li>
+                    <li><strong>Inversores:</strong> Convertem corrente contínua (CC) em corrente alternada (CA).</li>
+                    <li><strong>Controladores de carga:</strong> Regulam o carregamento das baterias.</li>
+                    <li><strong>Baterias:</strong> Armazenam energia elétrica para utilização posterior.</li>
+                    <li><strong>Medidores e conexões elétricas.</strong>
+                </ul>
+                <div class="image-placeholder">[Imagem de um sistema fotovoltaico completo]</div>
+            </div>
+
+            <div class="simulator-box">
+                <h3>🔬 Simulador: Painel Solar Virtual</h3>
+                <div class="grid-2">
+                    <div>
+                        <div class="control-group">
+                            <label>Intensidade Luminosa (W/m²): <span id="solarIntensityDisplay">800</span></label>
+                            <input type="range" id="solarIntensity" min="0" max="1000" step="50" value="800" oninput="updateSolarPanel()">
+                        </div>
+                        <div class="control-group">
+                            <label>Temperatura do Painel (°C): <span id="panelTempDisplay">25</span></label>
+                            <input type="range" id="panelTemp" min="15" max="65" step="1" value="25" oninput="updateSolarPanel()">
+                        </div>
+                        <div class="control-group">
+                            <label>Área do Painel (m²): <span id="panelAreaDisplay">2.0</span></label>
+                            <input type="range" id="panelArea" min="0.5" max="5" step="0.1" value="2.0" oninput="updateSolarPanel()">
+                        </div>
+                        <div class="control-group">
+                            <label>Eficiência (%): <span id="panelEffDisplay">18</span></label>
+                            <input type="range" id="panelEff" min="10" max="25" step="1" value="18" oninput="updateSolarPanel()">
+                        </div>
+                    </div>
+                    <div class="result-display" id="solarPanelResult">
+                        Ajuste os parâmetros para ver o resultado.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             7. PISCINA AQUECIDA
+             ========================================== -->
+        <section id="piscina">
+            <h2>Como podemos utilizar a energia solar para aquecer uma piscina?</h2>
+            
+            <div class="card">
+                <h3>Introdução</h3>
+                <p>O aquecimento de piscinas é uma aplicação interessante para estudar a utilização da energia solar, pois permite integrar conceitos de transferência de calor, conversão de energia, eletricidade e automação.</p>
+                <p>Existem diferentes maneiras de aquecer uma piscina. Entre elas, destacam-se os coletores solares térmicos, os aquecedores elétricos e as bombas de calor.</p>
+                <div class="image-placeholder">[Imagem de uma piscina aquecida com painéis solares instalados próximos ou no telhado]</div>
+            </div>
+
+            <div class="card">
+                <h3>Aquecimento solar térmico</h3>
+                <p>O sistema solar térmico utiliza coletores que absorvem a radiação solar e transferem essa energia para a água.</p>
+                <p>Funcionamento:</p>
+                <ol>
+                    <li>A água é retirada da piscina.</li>
+                    <li>A bomba conduz a água até os coletores solares.</li>
+                    <li>Os coletores absorvem a energia da radiação solar.</li>
+                    <li>O calor é transferido para a água que circula pelo sistema.</li>
+                    <li>A água aquecida retorna à piscina.</li>
+                </ol>
+                <div class="image-placeholder">[Imagem de um sistema de aquecimento solar térmico para piscina]</div>
+            </div>
+
+            <div class="card">
+                <h3>Aquecimento fotovoltaico</h3>
+                <p>Diferentemente do sistema térmico, os painéis fotovoltaicos não transferem diretamente calor para a água. Eles produzem energia elétrica a partir da luz solar.</p>
+                <p>Essa eletricidade pode alimentar equipamentos responsáveis pelo aquecimento da piscina, como:</p>
+                <ul>
+                    <li><strong>Bomba de calor:</strong> Utiliza energia elétrica para movimentar calor do ambiente para a água.</li>
+                    <li><strong>Aquecedor elétrico de resistência:</strong> Transforma energia elétrica em energia térmica.</li>
+                    <li><strong>Bomba de circulação:</strong> Movimenta a água pelo sistema.</li>
+                </ul>
+                <div class="image-placeholder">[Imagem de um sistema fotovoltaico alimentando uma bomba de calor conectada a uma piscina]</div>
+            </div>
+
+            <div class="card">
+                <h3>Comparação entre os sistemas</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Solar térmico</th>
+                            <th>Fotovoltaico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Conversão</td><td>Luz em calor</td><td>Luz em eletricidade</td></tr>
+                        <tr><td>Equipamento principal</td><td>Coletor térmico</td><td>Painel fotovoltaico</td></tr>
+                        <tr><td>Aplicação</td><td>Aquecimento direto da água</td><td>Alimentação de equipamentos</td></tr>
+                        <tr><td>Armazenamento</td><td>Reservatório térmico</td><td>Bateria ou rede elétrica</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
                 <h3>Física do Aquecimento</h3>
+                <p>Para calcular a energia necessária para aquecer uma piscina, utilizamos:</p>
                 <div class="formula">Q = m · c · ΔT</div>
-                <p>Onde <strong>Q</strong> é o calor necessário, <strong>m</strong> é a massa da água, <strong>c</strong> é o calor específico da água (4.186 J/kg·°C) e <strong>ΔT</strong> é a variação de temperatura.</p>
+                <p>Onde:</p>
+                <ul>
+                    <li><strong>Q:</strong> Quantidade de calor necessária (Joules)</li>
+                    <li><strong>m:</strong> Massa da água (kg)</li>
+                    <li><strong>c:</strong> Calor específico da água = 4.186 J/(kg·°C)</li>
+                    <li><strong>ΔT:</strong> Variação de temperatura (°C)</li>
+                </ul>
+                <p><strong>Exemplo:</strong> Para uma piscina de 10.000 litros (10.000 kg), aquecendo de 20°C para 28°C:</p>
+                <p>Q = 10.000 × 4.186 × 8 = <strong>334.880.000 J ≈ 93 kWh</strong></p>
             </div>
 
             <div class="simulator-box">
@@ -213,87 +556,514 @@
                     <div>
                         <div class="control-group">
                             <label>Volume da Piscina (Litros):</label>
-                            <input type="number" id="poolVolume" value="10000" style="width: 100%; padding: 0.5rem; background: var(--bg-dark); color: white; border: 1px solid var(--primary); border-radius: 4px;">
+                            <input type="number" id="poolVolume" value="10000">
                         </div>
                         <div class="control-group">
                             <label>Temperatura Inicial (°C):</label>
-                            <input type="number" id="tempInit" value="20" style="width: 100%; padding: 0.5rem; background: var(--bg-dark); color: white; border: 1px solid var(--primary); border-radius: 4px;">
+                            <input type="number" id="tempInit" value="20">
                         </div>
                         <div class="control-group">
                             <label>Temperatura Desejada (°C):</label>
-                            <input type="number" id="tempFinal" value="28" style="width: 100%; padding: 0.5rem; background: var(--bg-dark); color: white; border: 1px solid var(--primary); border-radius: 4px;">
+                            <input type="number" id="tempFinal" value="28">
+                        </div>
+                        <div class="control-group">
+                            <label>Temperatura Ambiente (°C):</label>
+                            <input type="number" id="tempAmbient" value="25">
+                        </div>
+                        <div class="control-group">
+                            <label>Tipo de Aquecimento:</label>
+                            <select id="heatingType">
+                                <option value="thermal">Solar Térmico</option>
+                                <option value="photovoltaic">Fotovoltaico + Bomba de Calor</option>
+                                <option value="resistance">Resistência Elétrica</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>
+                                <input type="checkbox" id="thermalCover" checked> Usar capa térmica?
+                            </label>
                         </div>
                         <button class="btn-primary" onclick="calculatePoolHeat()" style="width: 100%;">Calcular Energia Necessária</button>
                     </div>
-                    <div class="result-display" id="poolResult" style="display: flex; flex-direction: column; justify-content: center;">
+                    <div class="result-display" id="poolResult">
                         Clique em "Calcular" para ver o resultado.
                     </div>
                 </div>
-                <p style="font-size: 0.8rem; margin-top: 1rem; color: #aaa;">*Cálculo ideal. Não considera perdas térmicas por evaporação, convecção e radiação. O uso de capa térmica é altamente recomendado para reduzir essas perdas.</p>
+                <p style="font-size: 0.85rem; margin-top: 1rem; color: #aaa;">*Cálculo ideal. Não considera perdas térmicas completas. O uso de capa térmica é altamente recomendado.</p>
             </div>
-        </section>
 
-        <!-- 8. ROBÓTICA E SENSORES -->
-        <section id="robotica">
-            <h2>Robótica e Sensores</h2>
-            <div class="grid-2">
-                <div class="card">
-                    <h3>Sensores do Projeto</h3>
-                    <ul style="margin-left: 1.5rem; line-height: 2;">
-                        <li><strong>DS18B20:</strong> Sensor de temperatura à prova d'água.</li>
-                        <li><strong>LDR:</strong> Sensor de luminosidade (resistência varia com a luz).</li>
-                        <li><strong>Sensor de Fluxo:</strong> Detecta a circulação da água (segurança).</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>Microcontroladores</h3>
-                    <p><strong>Arduino / ESP32:</strong> O "cérebro" do sistema. Lê os dados dos sensores, processa a lógica (ex: "Se temp < 28°C E fluxo == OK, ligar aquecedor") e atua nos relés.</p>
-                    <div class="image-placeholder">[Imagem: Esquema de ligação do Arduino com sensor DS18B20 e relé]</div>
-                </div>
-            </div>
-            
-            <div class="simulator-box">
-                <h3>💻 Lógica de Automação (Simulação)</h3>
-                <div class="control-group">
-                    <label>Temperatura Atual da Água: <span id="simTemp">24</span>°C</label>
-                    <input type="range" min="15" max="35" value="24" oninput="document.getElementById('simTemp').innerText = this.value; checkAutomation();">
-                </div>
-                <div class="control-group">
-                    <label>
-                        <input type="checkbox" id="simFlow" checked onchange="checkAutomation()"> Fluxo de Água Detectado?
-                    </label>
-                </div>
-                <div class="result-display" id="automationResult" style="text-align: center; font-size: 1.2rem;">
-                    Status do Sistema: <span style="color: var(--accent);">Aguardando dados...</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 9. LABORATÓRIO VIRTUAL -->
-        <section id="laboratorio">
-            <h2>Laboratório Virtual</h2>
             <div class="card">
-                <h3>Experimentos Disponíveis</h3>
-                <div class="grid-3">
-                    <div class="card" style="border: 1px solid var(--primary);">
-                        <h4>1. Sombreamento</h4>
-                        <p>Observe como cobrir uma parte do painel reduz drasticamente a corrente total devido à associação em série das células.</p>
+                <h3>Perdas de calor</h3>
+                <p>Mesmo depois de aquecida, a água continua trocando energia térmica com o ambiente. As principais formas de perda são:</p>
+                <ul>
+                    <li><strong>Evaporação:</strong> Parte da água passa para o estado gasoso, levando energia térmica.</li>
+                    <li><strong>Convecção:</strong> Transferência de calor entre a superfície da água e o ar.</li>
+                    <li><strong>Radiação térmica:</strong> A água emite energia na forma de radiação eletromagnética.</li>
+                    <li><strong>Condução:</strong> Transferência de calor através de materiais em contato com a água.</li>
+                </ul>
+                <p>Uma maneira de reduzir essas perdas é utilizar uma <strong>capa térmica</strong> para piscina. Ela ajuda principalmente a diminuir a evaporação e a perda de calor pela superfície.</p>
+                <div class="image-placeholder">[Imagem ilustrativa de uma piscina mostrando os diferentes mecanismos de perda de calor]</div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             8. ROBÓTICA E SENSORES
+             ========================================== -->
+        <section id="robotica">
+            <h2>Como a tecnologia consegue monitorar uma piscina?</h2>
+            
+            <div class="card">
+                <h3>O que são sensores?</h3>
+                <p>Sensores são dispositivos que identificam ou medem determinadas grandezas físicas e transformam essas informações em sinais que podem ser interpretados por circuitos eletrônicos.</p>
+                <p>Existem sensores para medir temperatura, luminosidade, pressão, umidade, distância, nível de líquidos e muitas outras grandezas.</p>
+            </div>
+
+            <div class="card">
+                <h3>Sensores utilizados no projeto</h3>
+                
+                <h4>1. Sensor de temperatura — DS18B20</h4>
+                <p>O DS18B20 é um sensor digital utilizado para medir temperatura. Ele pode ser encontrado em versões encapsuladas e à prova d'água, adequadas para medição em líquidos.</p>
+                <p>Sua função no projeto seria medir a temperatura da água da piscina e enviar essa informação ao microcontrolador.</p>
+                <div class="image-placeholder">[Imagem de um sensor de temperatura DS18B20 à prova d'água]</div>
+
+                <h4>2. Sensor de luminosidade — LDR</h4>
+                <p>O LDR é um componente cuja resistência elétrica varia conforme a quantidade de luz que recebe. Quando a luminosidade aumenta, sua resistência geralmente diminui.</p>
+                <p>No projeto, ele poderia ser utilizado para acompanhar as condições de iluminação próximas aos painéis solares.</p>
+                <div class="image-placeholder">[Imagem de um sensor LDR]</div>
+
+                <h4>3. Sensor de fluxo de água</h4>
+                <p>O sensor de fluxo é utilizado para identificar se existe circulação de água em uma tubulação e, em determinados modelos, medir a vazão.</p>
+                <p>Ele é especialmente importante para a segurança do sistema, pois permite verificar se a água está circulando antes de autorizar o funcionamento de determinados equipamentos de aquecimento.</p>
+                <div class="image-placeholder">[Imagem de um sensor eletrônico de fluxo de água]</div>
+
+                <h4>4. Sensor de nível</h4>
+                <p>O sensor de nível pode ser utilizado para identificar a quantidade de água presente em um reservatório ou tanque.</p>
+                <p>Em um sistema de piscina, pode ajudar a identificar níveis inadequados de água, contribuindo para a proteção de bombas e outros equipamentos.</p>
+                <div class="image-placeholder">[Imagem de um sensor de nível de água]</div>
+            </div>
+
+            <div class="card">
+                <h3>Placas controladoras</h3>
+                <p>Um <strong>microcontrolador</strong> é um pequeno computador integrado em um circuito eletrônico. Ele pode receber informações de sensores, executar instruções programadas e controlar dispositivos externos.</p>
+                <div class="grid-2">
+                    <div>
+                        <h4>Arduino</h4>
+                        <p>Bastante utilizado em projetos educacionais e protótipos de automação.</p>
+                        <div class="image-placeholder">[Imagem de uma placa Arduino Uno]</div>
                     </div>
-                    <div class="card" style="border: 1px solid var(--primary);">
-                        <h4>2. Inclinação</h4>
-                        <p>Ajuste o ângulo do painel em relação ao "Sol" e veja a curva de potência atingir o máximo no ângulo de incidência perpendicular.</p>
+                    <div>
+                        <h4>ESP32</h4>
+                        <p>Possui recursos de conectividade, como Wi-Fi e Bluetooth.</p>
+                        <div class="image-placeholder">[Imagem de uma placa ESP32]</div>
                     </div>
-                    <div class="card" style="border: 1px solid var(--primary);">
-                        <h4>3. Capa Térmica</h4>
-                        <p>Simule a perda de calor ao longo da noite com e sem a capa térmica, observando a redução da evaporação.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Esquema de automação</h3>
+                <p>O funcionamento pode ser organizado em cinco etapas:</p>
+                <ol>
+                    <li><strong>Leitura:</strong> Os sensores medem a temperatura, a luminosidade e o fluxo de água.</li>
+                    <li><strong>Envio:</strong> As informações são encaminhadas ao microcontrolador.</li>
+                    <li><strong>Processamento:</strong> O programa compara os valores recebidos com os parâmetros definidos.</li>
+                    <li><strong>Decisão:</strong> O sistema determina se o aquecimento deve ser ligado, desligado ou bloqueado.</li>
+                    <li><strong>Ação:</strong> O microcontrolador envia comandos aos dispositivos responsáveis pelo funcionamento do sistema.</li>
+                </ol>
+            </div>
+
+            <div class="simulator-box">
+                <h3>🔬 Simulador: Controle Inteligente da Piscina</h3>
+                <div class="grid-2">
+                    <div>
+                        <div class="control-group">
+                            <label>Temperatura Atual da Água: <span id="simTemp">24</span>°C</label>
+                            <input type="range" min="15" max="35" value="24" oninput="document.getElementById('simTemp').innerText = this.value; checkAutomation();">
+                        </div>
+                        <div class="control-group">
+                            <label>Luminosidade: <span id="simLuminosity">70</span>%</label>
+                            <input type="range" min="0" max="100" value="70" oninput="document.getElementById('simLuminosity').innerText = this.value;">
+                        </div>
+                        <div class="control-group">
+                            <label>
+                                <input type="checkbox" id="simFlow" checked onchange="checkAutomation()"> Fluxo de Água Detectado?
+                            </label>
+                        </div>
+                        <div class="control-group">
+                            <label>Temperatura Desejada: 28°C</label>
+                        </div>
+                    </div>
+                    <div class="result-display" id="automationResult">
+                        Status do Sistema: Aguardando dados...
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Programação</h3>
+                <p>Exemplo de código Arduino para leitura do sensor de temperatura:</p>
+                <pre class="code-block"><code>#include <OneWire.h>
+#include <DallasTemperature.h>
+
+#define PINO_SENSOR 2
+
+OneWire oneWire(PINO_SENSOR);
+DallasTemperature sensors(&oneWire);
+
+float temperaturaAtual;
+float temperaturaDesejada = 28.0;
+
+void setup() {
+  Serial.begin(9600);
+  sensors.begin();
+}
+
+void loop() {
+  sensors.requestTemperatures();
+  temperaturaAtual = sensors.getTempCByIndex(0);
+  
+  Serial.print("Temperatura: ");
+  Serial.println(temperaturaAtual);
+  
+  if (temperaturaAtual < temperaturaDesejada) {
+    Serial.println("Ligar aquecimento");
+  } else {
+    Serial.println("Desligar aquecimento");
+  }
+  
+  delay(2000);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             9. LABORATÓRIO VIRTUAL
+             ========================================== -->
+        <section id="laboratorio">
+            <h2>Agora é sua vez de experimentar!</h2>
+            
+            <div class="card">
+                <h3>Experimento 1: A luz produz eletricidade?</h3>
+                <p>Simulação de uma célula fotovoltaica recebendo luz. Modifique a intensidade luminosa e observe as alterações na corrente e na potência produzidas.</p>
+                <div class="image-placeholder">[Imagem de uma célula fotovoltaica conectada a um circuito elétrico]</div>
+            </div>
+
+            <div class="card">
+                <h3>Experimento 2: O que acontece com o painel na sombra?</h3>
+                <p>Painel solar dividido em diferentes partes. Selecione partes que ficarão sombreadas e observe as alterações na geração elétrica.</p>
+                <div class="image-placeholder">[Imagem de um painel fotovoltaico parcialmente coberto por sombras]</div>
+            </div>
+
+            <div class="card">
+                <h3>Experimento 3: Inclinação do painel</h3>
+                <p>Modifique o ângulo de inclinação do painel em relação à luz solar e observe a alteração na radiação recebida.</p>
+                <div class="image-placeholder">[Imagem de um painel solar com diferentes ângulos de inclinação em relação ao Sol]</div>
+            </div>
+
+            <div class="card">
+                <h3>Experimento 4: Temperatura da piscina</h3>
+                <p>Simulação do aquecimento e resfriamento da água ao longo de um período. Compare:</p>
+                <ul>
+                    <li>Piscina sem capa térmica</li>
+                    <li>Piscina com capa térmica</li>
+                    <li>Piscina com aquecimento solar</li>
+                </ul>
+                <div class="image-placeholder">[Imagem comparativa de uma piscina com e sem capa térmica]</div>
+            </div>
+
+            <div class="card">
+                <h3>Experimento 5: Monte seu próprio sistema</h3>
+                <p>Escolha:</p>
+                <ul>
+                    <li>Quantidade de painéis</li>
+                    <li>Potência dos painéis</li>
+                    <li>Tipo de aquecimento</li>
+                    <li>Quantidade de sensores</li>
+                    <li>Capacidade da piscina</li>
+                </ul>
+                <p>Ao final, o sistema apresenta um esquema visual e explica a função de cada componente.</p>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             10. EXPERIMENTO PRÁTICO
+             ========================================== -->
+        <section id="experimento">
+            <h2>Da teoria para a prática!</h2>
+            
+            <div class="card">
+                <h3>Apresentação do experimento</h3>
+                <p>Documentação da montagem de um pequeno sistema solar, relacionando geração de energia e monitoramento eletrônico.</p>
+            </div>
+
+            <div class="card">
+                <h3>Materiais utilizados</h3>
+                <ul>
+                    <li>Pequeno painel fotovoltaico</li>
+                    <li>Arduino ou ESP32</li>
+                    <li>Sensor de temperatura</li>
+                    <li>Sensor de luminosidade</li>
+                    <li>Multímetro</li>
+                    <li>Pequena bomba de água de baixa tensão</li>
+                    <li>Reservatório</li>
+                    <li>Tubulações</li>
+                    <li>Fios e protoboard</li>
+                </ul>
+                <div class="image-placeholder">[Imagem de uma pequena montagem experimental de painel solar conectado a Arduino e bomba de água]</div>
+            </div>
+
+            <div class="card">
+                <h3>Etapas da montagem</h3>
+                <ol>
+                    <li>Posicionar o painel em um local iluminado.</li>
+                    <li>Medir a tensão e a corrente elétrica.</li>
+                    <li>Observar as mudanças na geração de energia.</li>
+                    <li>Instalar o sensor de temperatura.</li>
+                    <li>Programar a placa controladora.</li>
+                    <li>Realizar testes com a bomba de água.</li>
+                    <li>Registrar os resultados.</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>Registro dos resultados</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Condição</th>
+                            <th>Luminosidade</th>
+                            <th>Tensão</th>
+                            <th>Corrente</th>
+                            <th>Temperatura</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ambiente pouco iluminado</td><td>Baixa</td><td>Registrar</td><td>Registrar</td><td>Registrar</td></tr>
+                        <tr><td>Ambiente iluminado</td><td>Média</td><td>Registrar</td><td>Registrar</td><td>Registrar</td></tr>
+                        <tr><td>Luz solar direta</td><td>Alta</td><td>Registrar</td><td>Registrar</td><td>Registrar</td></tr>
+                        <tr><td>Painel parcialmente sombreado</td><td>Variável</td><td>Registrar</td><td>Registrar</td><td>Registrar</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Diário de laboratório</h3>
+                <p>Linha do tempo com as etapas de desenvolvimento do projeto, desde a pesquisa inicial até os resultados finais.</p>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             11. SUSTENTABILIDADE
+             ========================================== -->
+        <section id="sustentabilidade">
+            <h2>A energia solar pode transformar o futuro?</h2>
+            
+            <div class="card">
+                <h3>Energia renovável</h3>
+                <p>A energia solar é uma fonte renovável, pois utiliza a radiação emitida pelo Sol, que está continuamente disponível em escala humana.</p>
+                <p>A utilização de sistemas solares pode contribuir para diversificar a matriz energética, reduzir o consumo de algumas fontes convencionais e diminuir as emissões de gases de efeito estufa.</p>
+                <div class="image-placeholder">[Imagem de painéis solares em uma paisagem sustentável]</div>
+            </div>
+
+            <div class="card">
+                <h3>Impactos ambientais</h3>
+                <ul>
+                    <li>Redução da dependência de combustíveis fósseis.</li>
+                    <li>Emissões associadas à fabricação dos equipamentos.</li>
+                    <li>Descarte e reciclagem dos painéis.</li>
+                    <li>Uso consciente da água.</li>
+                    <li>Eficiência energética.</li>
+                </ul>
+            </div>
+
+            <div class="simulator-box">
+                <h3>🔬 Calculadora de Economia</h3>
+                <div class="grid-2">
+                    <div>
+                        <div class="control-group">
+                            <label>Consumo Elétrico Mensal (kWh):</label>
+                            <input type="number" id="monthlyConsumption" value="300">
+                        </div>
+                        <div class="control-group">
+                            <label>Tarifa de Energia (R$/kWh):</label>
+                            <input type="number" id="energyTariff" value="0.80" step="0.01">
+                        </div>
+                        <div class="control-group">
+                            <label>% Energia Solar Utilizada:</label>
+                            <input type="number" id="solarPercentage" value="70">
+                        </div>
+                        <button class="btn-primary" onclick="calculateSavings()" style="width: 100%;">Calcular Economia</button>
+                    </div>
+                    <div class="result-display" id="savingsResult">
+                        Clique em "Calcular" para ver o resultado.
+                    </div>
+                </div>
+                <p style="font-size: 0.85rem; margin-top: 1rem; color: #aaa;">*Estimativa simplificada. Não considera custos de instalação, financiamento, regras de compensação e condições específicas do imóvel.</p>
+            </div>
+
+            <div class="card">
+                <h3>Reflexão final</h3>
+                <p><strong>"Como o conhecimento científico pode contribuir para desenvolver tecnologias mais acessíveis, eficientes e sustentáveis?"</strong></p>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             12. VÍDEOS
+             ========================================== -->
+        <section id="videos">
+            <h2>Aprenda também por meio de vídeos!</h2>
+            
+            <div class="card">
+                <h3>Categorias de Vídeos</h3>
+                <div class="grid-2">
+                    <div>
+                        <h4>1. Introdução à Física Quântica</h4>
+                        <p>Aula introdutória sobre a origem da Física Quântica.</p>
+                    </div>
+                    <div>
+                        <h4>2. O que são fótons?</h4>
+                        <p>Explicação visual sobre fótons, frequência e energia.</p>
+                    </div>
+                    <div>
+                        <h4>3. O efeito fotoelétrico</h4>
+                        <p>Demonstração experimental do efeito fotoelétrico.</p>
+                    </div>
+                    <div>
+                        <h4>4. A contribuição de Albert Einstein</h4>
+                        <p>Explicação do efeito fotoelétrico por Einstein em 1905.</p>
+                    </div>
+                    <div>
+                        <h4>5. Como funcionam as células fotovoltaicas?</h4>
+                        <p>Animação científica sobre a produção de corrente elétrica.</p>
+                    </div>
+                    <div>
+                        <h4>6. Como são fabricados os painéis solares?</h4>
+                        <p>Etapas de fabricação de células e módulos fotovoltaicos.</p>
+                    </div>
+                    <div>
+                        <h4>7. Aquecimento solar de piscinas</h4>
+                        <p>Demonstração de um sistema de aquecimento solar térmico.</p>
+                    </div>
+                    <div>
+                        <h4>8. Energia fotovoltaica na prática</h4>
+                        <p>Instalação e funcionamento de um sistema fotovoltaico.</p>
+                    </div>
+                    <div>
+                        <h4>9. Arduino e sensores</h4>
+                        <p>Utilização de sensores conectados a Arduino ou ESP32.</p>
+                    </div>
+                    <div>
+                        <h4>10. Automação de sistemas</h4>
+                        <p>Demonstração de um sistema automatizado com sensores.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Acessibilidade dos vídeos</h3>
+                <p>Todos os vídeos deverão possuir legendas em português. Também deverão ser priorizados conteúdos com interpretação em Libras ou disponibilizados com recursos que permitam sua compreensão por pessoas surdas.</p>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             13. GLOSSÁRIO
+             ========================================== -->
+        <section id="glossario">
+            <h2>Dicionário da ciência</h2>
+            
+            <div class="card">
+                <input type="text" id="glossarySearch" placeholder="Buscar termo..." oninput="searchGlossary()" style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; background: var(--bg-dark); color: var(--text-light); border: 1px solid var(--border); border-radius: 6px;">
+                
+                <div id="glossaryContent">
+                    <div class="glossary-item">
+                        <h4>Band gap (energia de banda proibida)</h4>
+                        <p>Diferença de energia entre a banda de valência e a banda de condução de um semicondutor.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Célula fotovoltaica</h4>
+                        <p>Dispositivo semicondutor que converte parte da energia da luz em energia elétrica.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Comprimento de onda</h4>
+                        <p>Distância entre dois pontos equivalentes consecutivos de uma onda.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Corrente elétrica</h4>
+                        <p>Movimento ordenado de cargas elétricas.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Dualidade onda-partícula</h4>
+                        <p>Característica de fenômenos quânticos que podem apresentar comportamentos associados tanto a ondas quanto a partículas.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Elétron</h4>
+                        <p>Partícula subatômica que possui carga elétrica negativa.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Energia cinética</h4>
+                        <p>Energia associada ao movimento de um corpo ou partícula.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Energia fotovoltaica</h4>
+                        <p>Energia elétrica produzida por dispositivos que convertem a radiação luminosa.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Frequência</h4>
+                        <p>Quantidade de oscilações de uma onda por segundo.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Frequência de corte</h4>
+                        <p>Frequência mínima necessária para que ocorra a emissão de elétrons no efeito fotoelétrico externo.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Fóton</h4>
+                        <p>Quantum de energia associado à radiação eletromagnética.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Função trabalho</h4>
+                        <p>Energia mínima necessária para retirar um elétron da superfície de determinado material.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Junção p-n</h4>
+                        <p>Estrutura formada pela união de regiões semicondutoras do tipo p e do tipo n.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Lacuna</h4>
+                        <p>Ausência de um elétron em um estado que poderia estar ocupado na banda de valência de um semicondutor, comportando-se como um portador de carga positiva.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Luz visível</h4>
+                        <p>Parte do espectro eletromagnético que pode ser percebida pelo olho humano.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Painel solar</h4>
+                        <p>Conjunto de células fotovoltaicas conectadas para produzir energia elétrica.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Radiação eletromagnética</h4>
+                        <p>Forma de propagação de energia por meio de campos elétricos e magnéticos oscilantes.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Semicondutor</h4>
+                        <p>Material cuja capacidade de conduzir eletricidade pode ser controlada por diferentes condições físicas e químicas.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Sensor</h4>
+                        <p>Dispositivo capaz de detectar ou medir uma grandeza física.</p>
+                    </div>
+                    <div class="glossary-item">
+                        <h4>Tensão elétrica</h4>
+                        <p>Diferença de potencial elétrico entre dois pontos de um circuito.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 14. QUIZ -->
+        <!-- ==========================================
+             14. QUIZ
+             ========================================== -->
         <section id="quiz">
-            <h2>Teste seus Conhecimentos!</h2>
+            <h2>Teste seus conhecimentos!</h2>
+            
             <div class="card" id="quizContainer">
                 <h3 id="questionText">Carregando pergunta...</h3>
                 <div id="optionsContainer"></div>
@@ -307,21 +1077,59 @@
             </div>
         </section>
 
-        <!-- 15. ACESSIBILIDADE E 16. REFERÊNCIAS -->
+        <!-- ==========================================
+             16. REFERÊNCIAS
+             ========================================== -->
         <section id="referencias">
-            <h2>Referências Científicas</h2>
+            <h2>De onde vêm essas informações?</h2>
+            
             <div class="card">
-                <ul style="line-height: 2;">
-                    <li><strong>Física:</strong> OpenStax University Physics, Vol 3. (Efeito Fotoelétrico)</li>
-                    <li><strong>Nobel Prize:</strong> The Nobel Prize in Physics 1921 (Albert Einstein)</li>
-                    <li><strong>Energia Solar:</strong> U.S. Department of Energy - Solar Photovoltaic Cell Basics</li>
-                    <li><strong>Robótica:</strong> Documentação Oficial Arduino e Espressif (ESP32)</li>
-                    <li><strong>Acessibilidade:</strong> W3C - WCAG 2.2 e VLibras (Governo Federal)</li>
+                <h3>Física Quântica e efeito fotoelétrico</h3>
+                <ul>
+                    <li><strong>OpenStax — Rice University.</strong> University Physics, Volume 3.</li>
+                    <li><strong>MIT OpenCourseWare.</strong> Materiais educacionais sobre Física.</li>
+                    <li><strong>Nobel Prize.</strong> Physics 1921 - Albert Einstein.</li>
                 </ul>
             </div>
-            <div class="card" style="text-align: center; background: linear-gradient(to right, var(--bg-card), var(--primary));">
-                <h3>Da luz à eletricidade: a ciência por trás da tecnologia.</h3>
-                <p>O conhecimento científico construindo um futuro mais eficiente, acessível e sustentável.</p>
+
+            <div class="card">
+                <h3>Energia solar e células fotovoltaicas</h3>
+                <ul>
+                    <li><strong>U.S. Department of Energy.</strong> Solar Photovoltaic Cell Basics.</li>
+                    <li><strong>National Renewable Energy Laboratory (NREL).</strong> Estudos sobre energia renovável.</li>
+                    <li><strong>Ministério de Minas e Energia.</strong> Informações sobre energia solar no Brasil.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Robótica e sensores</h3>
+                <ul>
+                    <li><strong>Documentação oficial Arduino.</strong></li>
+                    <li><strong>Documentação oficial ESP32/Espressif.</strong></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Aquecimento de água</h3>
+                <ul>
+                    <li><strong>U.S. Department of Energy.</strong> Solar Water Heating.</li>
+                    <li><strong>Materiais técnicos sobre bombas de calor e aquecimento de piscinas.</strong></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Acessibilidade</h3>
+                <ul>
+                    <li><strong>W3C — WCAG 2.2.</strong> Diretrizes internacionais de acessibilidade.</li>
+                    <li><strong>Governo Federal — VLibras.</strong> Tradução para Libras.</li>
+                </ul>
+            </div>
+
+            <div class="card" style="text-align: center; background: linear-gradient(135deg, var(--bg-card), var(--primary));">
+                <h3>Da luz à eletricidade: a ciência por trás da tecnologia</h3>
+                <p>Ao longo deste projeto, conhecemos diferentes maneiras de compreender e aproveitar a energia proveniente do Sol.</p>
+                <p>A integração entre Física, Programação e Robótica demonstra como diferentes áreas do conhecimento podem trabalhar juntas para resolver problemas reais.</p>
+                <p><strong>A energia do futuro depende do conhecimento que construímos hoje.</strong></p>
             </div>
         </section>
 
@@ -339,259 +1147,6 @@
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
 
-    <!-- JAVASCRIPT -->
-    <script>
-        // ==========================================
-        // NAVEGAÇÃO
-        // ==========================================
-        function showSection(sectionId) {
-            // Esconde todas as seções
-            document.querySelectorAll('main section').forEach(sec => {
-                sec.classList.remove('active');
-            });
-            // Mostra a seção alvo
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Atualiza menu ativo
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('active');
-                if(link.getAttribute('onclick').includes(sectionId)) {
-                    link.classList.add('active');
-                }
-            });
-
-            // Fecha menu mobile se estiver aberto
-            document.getElementById('mainNav').classList.remove('show');
-            window.scrollTo(0, 0);
-        }
-
-        function toggleMenu() {
-            document.getElementById('mainNav').classList.toggle('show');
-        }
-
-        // ==========================================
-        // ACESSIBILIDADE
-        // ==========================================
-        function toggleA11yPanel() {
-            document.getElementById('a11yPanel').classList.toggle('open');
-        }
-
-        function toggleClass(className) {
-            document.body.classList.toggle(className);
-            // Atualiza visual do toggle (simplificado)
-            event.target.classList.toggle('active');
-        }
-
-        function toggleAnimation() {
-            document.body.style.setProperty('--transition', 'none');
-            event.target.classList.toggle('active');
-        }
-
-        // ==========================================
-        // INTERATIVIDADE: CURIOSIDADE
-        // ==========================================
-        function checkCuriosity(isWrong) {
-            const resultDiv = document.getElementById('curiosity-result');
-            resultDiv.style.display = 'block';
-            if (isWrong) {
-                resultDiv.innerHTML = "❌ <strong>Incorreto.</strong> Aumentar a intensidade (mantendo a frequência) apenas aumenta a <em>quantidade</em> de fótons, não a energia individual de cada um.";
-                resultDiv.style.borderLeftColor = "#ef4444";
-            } else {
-                resultDiv.innerHTML = "✅ <strong>Correto!</strong> A energia individual do fóton depende apenas da frequência (E = h·f). Mais intensidade significa mais fótons, mas cada um tem a mesma energia.";
-                resultDiv.style.borderLeftColor = "#22c55e";
-            }
-        }
-
-        // ==========================================
-        // SIMULADOR 1: ENERGIA DO FÓTON
-        // ==========================================
-        function updatePhotonEnergy() {
-            const freq = parseFloat(document.getElementById('freqSlider').value);
-            document.getElementById('freqValue').innerText = freq.toFixed(1);
-            
-            // E = h * f
-            // h = 6.626e-34 J.s
-            // f = freq * 1e14 Hz
-            const h = 6.626e-34;
-            const f = freq * 1e14;
-            const energyJ = h * f;
-            const energyEv = energyJ / 1.602e-19; // Convertendo para eV
-
-            document.getElementById('energyResult').innerText = energyJ.toExponential(2);
-            document.getElementById('evResult').innerText = energyEv.toFixed(2);
-        }
-
-        // ==========================================
-        // SIMULADOR 2: EFEITO FOTOELÉTRICO
-        // ==========================================
-        function updatePhotoelectric() {
-            const workFunction = parseFloat(document.getElementById('materialSelect').value);
-            const photonEnergy = parseFloat(document.getElementById('photonEvSlider').value);
-            document.getElementById('photonEvDisplay').innerText = photonEnergy.toFixed(1);
-
-            const resultDiv = document.getElementById('photoelectricResult');
-            
-            if (photonEnergy < workFunction) {
-                resultDiv.innerHTML = `
-                    <span style="color: #ef4444; font-size: 2rem;">⛔</span>
-                    <strong>Sem Emissão de Elétrons</strong>
-                    <p>A energia do fóton (${photonEnergy.toFixed(1)} eV) é menor que a função trabalho do material (${workFunction} eV).</p>
-                `;
-            } else {
-                const kineticEnergy = photonEnergy - workFunction;
-                resultDiv.innerHTML = `
-                    <span style="color: #22c55e; font-size: 2rem;">⚡</span>
-                    <strong>Elétrons Emitidos!</strong>
-                    <p>Energia Cinética Máxima (E<sub>c</sub>): <strong>${kineticEnergy.toFixed(2)} eV</strong></p>
-                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">(E<sub>c</sub> = ${photonEnergy.toFixed(1)} - ${workFunction})</p>
-                `;
-            }
-        }
-
-        // ==========================================
-        // SIMULADOR 3: AQUECIMENTO DA PISCINA
-        // ==========================================
-        function calculatePoolHeat() {
-            const volume = parseFloat(document.getElementById('poolVolume').value);
-            const tInit = parseFloat(document.getElementById('tempInit').value);
-            const tFinal = parseFloat(document.getElementById('tempFinal').value);
-            
-            if (tFinal <= tInit) {
-                document.getElementById('poolResult').innerHTML = "<span style='color: #ef4444;'>A temperatura desejada deve ser maior que a inicial.</span>";
-                return;
-            }
-
-            // m (kg) = volume (L) * 1 kg/L
-            const m = volume;
-            const c = 4186; // J/kg°C
-            const deltaT = tFinal - tInit;
-            
-            const qJoules = m * c * deltaT;
-            const qKwh = qJoules / 3600000; // 1 kWh = 3.6e6 J
-
-            document.getElementById('poolResult').innerHTML = `
-                <strong>Resultados Estimados:</strong>
-                <hr style="border-color: var(--border); margin: 0.5rem 0;">
-                <p>Variação de Temperatura (ΔT): <strong>${deltaT} °C</strong></p>
-                <p>Energia Térmica (Q): <strong>${qJoules.toExponential(2)} J</strong></p>
-                <p style="font-size: 1.3rem; color: var(--accent); margin-top: 0.5rem;">Equivalente a: <strong>${qKwh.toFixed(1)} kWh</strong></p>
-                <p style="font-size: 0.8rem; margin-top: 1rem;">*Valor ideal sem perdas térmicas.</p>
-            `;
-        }
-
-        // ==========================================
-        // SIMULADOR 4: AUTOMAÇÃO (ROBÓTICA)
-        // ==========================================
-        function checkAutomation() {
-            const temp = parseInt(document.getElementById('simTemp').innerText);
-            const hasFlow = document.getElementById('simFlow').checked;
-            const targetTemp = 28;
-            const resultDiv = document.getElementById('automationResult');
-
-            if (!hasFlow) {
-                resultDiv.innerHTML = `<span style="color: #ef4444;">🚫 ALERTA DE SEGURANÇA: Sem fluxo de água! Aquecimento BLOQUEADO para evitar superaquecimento/danos.</span>`;
-            } else if (temp < targetTemp) {
-                resultDiv.innerHTML = `<span style="color: #22c55e;">✅ Sistema ATIVO: Temperatura abaixo do alvo. Bomba de aquecimento LIGADA.</span>`;
-            } else {
-                resultDiv.innerHTML = `<span style="color: var(--accent);">⏸️ Sistema EM ESPERA: Temperatura ideal atingida. Aquecimento DESLIGADO.</span>`;
-            }
-        }
-
-        // ==========================================
-        // QUIZ INTERATIVO
-        // ==========================================
-        const quizData = [
-            {
-                question: "O que determina a energia individual de um fóton?",
-                options: ["A intensidade da luz", "A frequência da radiação", "A velocidade da luz", "A temperatura do ambiente"],
-                correct: 1,
-                feedback: "Correto! Pela equação E = h·f, a energia é diretamente proporcional à frequência."
-            },
-            {
-                question: "No efeito fotoelétrico, o que acontece se a frequência da luz estiver abaixo da frequência de corte?",
-                options: ["Os elétrons são emitidos lentamente", "Nenhum elétron é emitido, não importa a intensidade", "O material esquenta e derrete", "A função trabalho diminui"],
-                correct: 1,
-                feedback: "Exato! Se a energia do fóton (h·f) for menor que a função trabalho (φ), a emissão é impossível."
-            },
-            {
-                question: "Qual é a principal função do inversor em um sistema fotovoltaico?",
-                options: ["Aquecer a água diretamente", "Armazenar energia em baterias", "Converter corrente contínua (CC) em alternada (CA)", "Medir a temperatura do painel"],
-                correct: 2,
-                feedback: "Isso mesmo! A maioria das redes elétricas e aparelhos residenciais opera em corrente alternada."
-            },
-            {
-                question: "Por que a capa térmica é importante para piscinas aquecidas?",
-                options: ["Ela aquece a água ativamente", "Ela reduz drasticamente as perdas de calor por evaporação", "Ela gera eletricidade", "Ela filtra a água"],
-                correct: 1,
-                feedback: "Correto! A evaporação é a maior causa de perda de calor em piscinas, e a capa age como um isolante."
-            }
-        ];
-
-        let currentQuestion = 0;
-        let score = 0;
-
-        function loadQuestion() {
-            const q = quizData[currentQuestion];
-            document.getElementById('questionText').innerText = `Pergunta ${currentQuestion + 1}: ${q.question}`;
-            const optionsDiv = document.getElementById('optionsContainer');
-            optionsDiv.innerHTML = '';
-            document.getElementById('feedbackText').innerText = '';
-            document.getElementById('nextBtn').style.display = 'none';
-
-            q.options.forEach((opt, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'quiz-option';
-                btn.innerText = opt;
-                btn.onclick = () => checkAnswer(index, btn);
-                optionsDiv.appendChild(btn);
-            });
-        }
-
-        function checkAnswer(selectedIndex, btnElement) {
-            const q = quizData[currentQuestion];
-            const options = document.querySelectorAll('.quiz-option');
-            
-            // Desabilita todos os botões
-            options.forEach(opt => opt.disabled = true);
-
-            if (selectedIndex === q.correct) {
-                btnElement.classList.add('correct');
-                document.getElementById('feedbackText').innerHTML = `<span style="color: #22c55e;">✅ ${q.feedback}</span>`;
-                score++;
-            } else {
-                btnElement.classList.add('incorrect');
-                options[q.correct].classList.add('correct');
-                document.getElementById('feedbackText').innerHTML = `<span style="color: #ef4444;">❌ Incorreto. ${q.feedback}</span>`;
-            }
-            document.getElementById('nextBtn').style.display = 'inline-block';
-        }
-
-        function nextQuestion() {
-            currentQuestion++;
-            if (currentQuestion < quizData.length) {
-                loadQuestion();
-            } else {
-                document.getElementById('quizContainer').style.display = 'none';
-                document.getElementById('quizResult').style.display = 'block';
-                document.getElementById('finalScore').innerText = `${score} de ${quizData.length}`;
-            }
-        }
-
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            document.getElementById('quizContainer').style.display = 'block';
-            document.getElementById('quizResult').style.display = 'none';
-            loadQuestion();
-        }
-
-        // Inicialização
-        window.onload = function() {
-            updatePhotonEnergy();
-            updatePhotoelectric();
-            checkAutomation();
-            loadQuestion();
-        };
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
 </body>
 </html>
