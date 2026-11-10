@@ -1,6 +1,6 @@
 /**
  * SOL + ÁGUA - Design Moderno e Dinâmico
- * Estilo editorial com layouts variados
+ * Com animações 3D, imagens zoomáveis e simuladores didáticos
  */
 
 :root {
@@ -18,7 +18,6 @@
     --border: #e5e5e5;
     --gradient-1: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
     --gradient-2: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-3: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
     --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
     --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
@@ -67,7 +66,7 @@ a:hover { color: var(--accent-light); }
 header {
     position: sticky;
     top: 0;
-    background: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
@@ -422,7 +421,6 @@ nav a:hover {
 .section-dark > * { max-width: 1200px; margin-left: auto; margin-right: auto; }
 .section-dark h2, .section-dark h3, .section-dark h4 { color: white; }
 .section-dark .section-subtitle { color: rgba(255,255,255,0.7); }
-.section-dark .section-number { color: rgba(255,255,255,0.2); }
 
 .section-gradient {
     background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
@@ -436,14 +434,21 @@ nav a:hover {
     position: relative;
 }
 
+/* NÚMEROS DAS SEÇÕES - MAIS VISÍVEIS E ESCUROS */
 .section-number {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 6rem;
     font-weight: 800;
-    color: var(--accent-soft);
+    color: rgba(124, 58, 237, 0.6); /* Mais escuro e visível */
     line-height: 1;
     margin-bottom: -1rem;
     letter-spacing: -0.05em;
+    text-shadow: 3px 3px 10px rgba(124, 58, 237, 0.3);
+}
+
+.section-dark .section-number {
+    color: rgba(255, 255, 255, 0.4); /* Branco mais visível */
+    text-shadow: 3px 3px 10px rgba(255, 255, 255, 0.2);
 }
 
 .section-title {
@@ -793,12 +798,14 @@ nav a:hover {
 }
 
 .einstein-photo {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--accent);
+    border: 4px solid var(--accent);
     flex-shrink: 0;
+    filter: grayscale(20%);
+    box-shadow: 0 10px 40px rgba(124, 58, 237, 0.3);
 }
 
 .einstein-text blockquote {
@@ -1053,6 +1060,69 @@ nav a:hover {
     margin-bottom: 1rem;
 }
 
+/* ============ VÍDEOS ============ */
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.video-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-info {
+    padding: 1.5rem;
+}
+
+.video-info h4 {
+    margin-bottom: 0.75rem;
+    color: var(--text);
+}
+
+.video-info p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.video-source {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
 /* ============ REFERENCES ============ */
 .references-grid {
     display: grid;
@@ -1082,6 +1152,7 @@ nav a:hover {
     position: relative;
     color: var(--text-light);
     font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .ref-card li::before {
@@ -1090,6 +1161,16 @@ nav a:hover {
     left: 0;
     color: var(--accent);
     font-weight: 700;
+}
+
+.ref-card a {
+    color: var(--accent);
+    font-size: 0.85rem;
+    word-break: break-all;
+}
+
+.ref-card a:hover {
+    text-decoration: underline;
 }
 
 .conclusion-card {
@@ -1200,6 +1281,27 @@ input[type="range"] {
     accent-color: var(--accent);
     height: 6px;
     cursor: pointer;
+}
+
+.slider-visual {
+    margin-top: 1rem;
+    height: 40px;
+    background: var(--bg-alt);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    position: relative;
+}
+
+.wave-animation {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    opacity: 0.3;
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
 }
 
 input[type="number"],
@@ -1391,6 +1493,147 @@ input:focus, select:focus {
     border: 1px solid var(--border);
 }
 
+/* ============ NOVAS GALERIAS DE IMAGENS ============ */
+.image-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.image-container img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.image-container:hover img {
+    transform: scale(1.1);
+}
+
+.image-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.image-grid img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.5s ease;
+}
+
+.image-grid img:hover {
+    transform: scale(1.05);
+}
+
+.image-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.comparison-item {
+    text-align: center;
+}
+
+.comparison-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 1rem;
+    transition: transform 0.5s ease;
+}
+
+.comparison-item img:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.comparison-item p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.image-showcase {
+    margin: 3rem 0;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.image-showcase img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.image-showcase:hover img {
+    transform: scale(1.02);
+}
+
+/* Imagens zoomáveis */
+.zoomable {
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+}
+
+.zoomable:hover {
+    transform: scale(1.02);
+}
+
+.zoomable.active {
+    cursor: zoom-out;
+    transform: scale(1.5);
+    z-index: 1000;
+    position: relative;
+}
+
+/* PISCINAS DO COLÉGIO ESTADUAL DO PARANÁ */
+.school-pools {
+    background: white;
+    padding: 3rem;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    margin: 3rem 0;
+    border: 2px solid var(--accent-soft);
+}
+
+.school-pools h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
+
 /* ============ FOOTER ============ */
 footer {
     background: var(--bg-dark);
@@ -1505,6 +1748,17 @@ footer {
 .toggle-switch.active { background: var(--accent); }
 .toggle-switch.active::after { left: 23px; }
 
+/* ============ ANIMAÇÕES 3D ============ */
+.card-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.6s;
+}
+
+.card-3d:hover {
+    transform: rotateY(10deg) rotateX(5deg) translateY(-10px);
+}
+
 /* ============ ANIMATIONS ============ */
 .reveal {
     opacity: 0;
@@ -1538,7 +1792,11 @@ footer {
     .split-layout,
     .content-grid,
     .comparison-cards,
-    .simulator-grid {
+    .simulator-grid,
+    .image-gallery,
+    .image-grid,
+    .image-comparison,
+    .videos-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
@@ -1559,6 +1817,17 @@ footer {
     
     .a11y-btn { top: auto; bottom: 20px; }
     .a11y-panel { bottom: 80px; top: auto; width: calc(100% - 40px); }
+    
+    .image-gallery img,
+    .image-grid img,
+    .image-comparison img,
+    .image-container img {
+        height: 250px;
+    }
+    
+    .image-showcase img {
+        height: 300px;
+    }
 }
 
 @media (max-width: 600px) {
