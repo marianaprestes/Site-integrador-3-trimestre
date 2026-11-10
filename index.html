@@ -46,6 +46,7 @@
                 <li><a href="#celulas">Células</a></li>
                 <li><a href="#piscina">Piscina</a></li>
                 <li><a href="#robotica">Robótica</a></li>
+                <li><a href="#videos">Vídeos</a></li>
                 <li><a href="#quiz">Quiz</a></li>
             </ul>
         </nav>
@@ -115,7 +116,7 @@
                     <div class="stat-label">Simuladores Interativos</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">20</div>
+                    <div class="stat-number">15</div>
                     <div class="stat-label">Questões no Quiz</div>
                 </div>
                 <div class="stat">
@@ -148,7 +149,7 @@
         </section>
 
         <!-- ==========================================
-             2. ENERGIA SOLAR - Layout Split
+             1. ENERGIA SOLAR
              ========================================== -->
         <section id="energia" class="section section-alt">
             <div class="section-header">
@@ -169,9 +170,9 @@
                     </div>
                 </div>
                 <div class="split-image reveal">
-                    <img src="https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?w=1000&h=700&fit=crop" 
-                         alt="O Sol brilhando no céu" 
-                         class="content-image">
+                    <img src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=1000&h=700&fit=crop" 
+                         alt="O Sol brilhando intensamente no céu azul" 
+                         class="content-image zoomable">
                 </div>
             </div>
 
@@ -183,7 +184,7 @@
                     <button class="spectrum-btn" onclick="showSpectrumInfo('infrared')">🔥 Infravermelho</button>
                     <button class="spectrum-btn active" onclick="showSpectrumInfo('visible')">🌈 Visível</button>
                     <button class="spectrum-btn" onclick="showSpectrumInfo('uv')">☀️ Ultravioleta</button>
-                    <button class="spectrum-btn" onclick="showSpectrumInfo('xray')">🏥 Raios X</button>
+                    <button class="spectrum-btn" onclick="showSpectrumInfo('xray')"> Raios X</button>
                     <button class="spectrum-btn" onclick="showSpectrumInfo('gamma')">☢️ Gama</button>
                 </div>
                 <div id="spectrum-info" class="spectrum-result">
@@ -211,10 +212,15 @@
                     <div class="comp-tag">Luz → Calor</div>
                 </div>
             </div>
+
+            <div class="image-gallery reveal">
+                <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=400&fit=crop" alt="Painéis solares em campo aberto" class="zoomable">
+                <img src="https://images.unsplash.com/photo-1585338107529-13afc5f00200?w=800&h=400&fit=crop" alt="Coletor solar térmico" class="zoomable">
+            </div>
         </section>
 
         <!-- ==========================================
-             3. FÍSICA DOS FÓTONS - Com imagem full-width
+             2. FÍSICA DOS FÓTONS
              ========================================== -->
         <section id="fotons" class="section">
             <div class="section-header">
@@ -225,8 +231,8 @@
 
             <div class="full-width-image reveal">
                 <img src="https://images.unsplash.com/photo-1635322966219-b75ed374eb07?w=1600&h=600&fit=crop" 
-                     alt="Representação artística de fótons e ondas luminosas" 
-                     class="content-image">
+                     alt="Representação artística de fótons e ondas luminosas coloridas" 
+                     class="content-image zoomable">
                 <div class="image-caption">Os fótons são os quanta de energia da radiação eletromagnética</div>
             </div>
 
@@ -236,7 +242,7 @@
                     <p>O <strong>fóton</strong> é o quantum, ou pacote elementar, de energia associado à radiação eletromagnética. Ele não possui massa de repouso e, no vácuo, propaga-se à velocidade da luz.</p>
                     <p>Com a Física Quântica, descobrimos que a luz apresenta <strong>dualidade onda-partícula</strong>: dependendo do fenômeno, comporta-se como onda ou como partícula.</p>
                 </div>
-                <div class="formula-card reveal">
+                <div class="formula-card reveal card-3d">
                     <div class="formula-big">E = h · f</div>
                     <div class="formula-explanation">
                         <div class="formula-item"><span>E</span> Energia do fóton (J)</div>
@@ -246,15 +252,29 @@
                 </div>
             </div>
 
+            <div class="image-comparison reveal">
+                <div class="comparison-item">
+                    <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&h=400&fit=crop" alt="Luz vermelha - maior comprimento de onda" class="zoomable">
+                    <p><strong>Luz Vermelha</strong> - Menor frequência, maior comprimento</p>
+                </div>
+                <div class="comparison-item">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop" alt="Luz violeta - menor comprimento de onda" class="zoomable">
+                    <p><strong>Luz Violeta</strong> - Maior frequência, menor comprimento</p>
+                </div>
+            </div>
+
             <div class="simulator-card reveal">
                 <div class="simulator-header">
-                    <div class="simulator-badge">🔬 Simulador</div>
+                    <div class="simulator-badge"> Simulador</div>
                     <h3>Energia dos Fótons</h3>
                 </div>
                 <div class="simulator-body">
                     <div class="control-group">
                         <label>Frequência da Luz: <span id="freqValue" class="value-display">5.0</span> ×10¹⁴ Hz</label>
                         <input type="range" id="freqSlider" min="4" max="8" step="0.1" value="5.0" oninput="updatePhotonEnergy()">
+                        <div class="slider-visual">
+                            <div class="wave-animation" id="waveAnimation"></div>
+                        </div>
                     </div>
                     <div class="result-display">
                         <div class="result-row">
@@ -271,7 +291,7 @@
         </section>
 
         <!-- ==========================================
-             4. EFEITO FOTOELÉTRICO - Timeline
+             3. EFEITO FOTOELÉTRICO
              ========================================== -->
         <section id="fotoeletrico" class="section section-dark">
             <div class="section-header light">
@@ -305,9 +325,9 @@
             </div>
 
             <div class="einstein-card reveal">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Albert_Einstein_%28Nobel%29.png/440px-Albert_Einstein_%28Nobel%29.png" 
-                     alt="Albert Einstein" 
-                     class="einstein-photo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg/440px-Einstein_1921_by_F_Schmutzer_-_restoration.jpg" 
+                     alt="Albert Einstein em 1921, ano em que recebeu o Prêmio Nobel de Física" 
+                     class="einstein-photo zoomable">
                 <div class="einstein-text">
                     <blockquote>
                         "Cada fóton transfere sua energia a um elétron. Se essa energia for suficiente para retirar o elétron do material, ele será emitido."
@@ -320,6 +340,12 @@
                 <div class="formula-label">Equação de Einstein</div>
                 <div class="formula-big">E<sub>c</sub> = h·f − φ</div>
                 <p class="formula-description">A energia do fóton (h·f) menos a função trabalho (φ) resulta na energia cinética máxima do elétron emitido.</p>
+            </div>
+
+            <div class="image-showcase reveal">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=500&fit=crop" 
+                     alt="Experimento do efeito fotoelétrico demonstrando elétrons sendo liberados" 
+                     class="content-image zoomable">
             </div>
 
             <div class="simulator-card reveal">
@@ -359,7 +385,7 @@
         </section>
 
         <!-- ==========================================
-             5. FREQUÊNCIA DE CORTE - Tabela interativa
+             4. FREQUÊNCIA DE CORTE
              ========================================== -->
         <section id="frequencia" class="section">
             <div class="section-header">
@@ -394,6 +420,11 @@
                 </table>
             </div>
 
+            <div class="image-grid reveal">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop" alt="Metais diferentes usados em experimentos" class="zoomable">
+                <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=600&h=400&fit=crop" alt="Representação de estrutura atômica" class="zoomable">
+            </div>
+
             <div class="simulator-card reveal">
                 <div class="simulator-header">
                     <div class="simulator-badge">🔬 Simulador</div>
@@ -422,7 +453,7 @@
         </section>
 
         <!-- ==========================================
-             6. CÉLULAS FOTOVOLTAICAS - Diagrama visual
+             5. CÉLULAS FOTOVOLTAICAS
              ========================================== -->
         <section id="celulas" class="section section-gradient">
             <div class="section-header">
@@ -432,7 +463,7 @@
             </div>
 
             <div class="steps-container">
-                <div class="step reveal">
+                <div class="step reveal card-3d">
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <h4>Absorção</h4>
@@ -440,7 +471,7 @@
                     </div>
                 </div>
                 <div class="step-arrow">→</div>
-                <div class="step reveal">
+                <div class="step reveal card-3d">
                     <div class="step-number">2</div>
                     <div class="step-content">
                         <h4>Pares elétron-lacuna</h4>
@@ -448,7 +479,7 @@
                     </div>
                 </div>
                 <div class="step-arrow">→</div>
-                <div class="step reveal">
+                <div class="step reveal card-3d">
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <h4>Separação</h4>
@@ -456,12 +487,30 @@
                     </div>
                 </div>
                 <div class="step-arrow">→</div>
-                <div class="step reveal">
+                <div class="step reveal card-3d">
                     <div class="step-number">4</div>
                     <div class="step-content">
                         <h4>Corrente</h4>
                         <p>Elétrons circulam pelo circuito externo.</p>
                     </div>
+                </div>
+            </div>
+
+            <div class="full-width-image reveal">
+                <img src="https://images.unsplash.com/photo-1558449028-b53a06821084?w=1600&h=600&fit=crop" 
+                     alt="Célula fotovoltaica de silício em close-up mostrando sua estrutura" 
+                     class="content-image zoomable">
+                <div class="image-caption">Estrutura interna de uma célula fotovoltaica de silício</div>
+            </div>
+
+            <div class="image-comparison reveal">
+                <div class="comparison-item">
+                    <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=600&h=400&fit=crop" alt="Painel fotovoltaico" class="zoomable">
+                    <p><strong>Painel Fotovoltaico</strong> - Gera eletricidade</p>
+                </div>
+                <div class="comparison-item">
+                    <img src="https://images.unsplash.com/photo-1585338107529-13afc5f00200?w=600&h=400&fit=crop" alt="Coletor térmico" class="zoomable">
+                    <p><strong>Coletor Térmico</strong> - Aquece água</p>
                 </div>
             </div>
 
@@ -499,19 +548,50 @@
         </section>
 
         <!-- ==========================================
-             7. PISCINA AQUECIDA - Destaque visual
+             6. PISCINA AQUECIDA - COLÉGIO ESTADUAL DO PARANÁ
              ========================================== -->
         <section id="piscina" class="section">
             <div class="section-header">
                 <div class="section-number">06</div>
                 <h2 class="section-title">Energia solar para aquecer sua piscina</h2>
-                <p class="section-subtitle">Aplicação prática de tudo que aprendemos</p>
+                <p class="section-subtitle">Aplicação prática - Colégio Estadual do Paraná, Curitiba/PR</p>
             </div>
 
             <div class="full-width-image reveal">
                 <img src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?w=1600&h=600&fit=crop" 
-                     alt="Piscina aquecida com painéis solares" 
-                     class="content-image">
+                     alt="Piscina residencial aquecida com painéis solares no telhado" 
+                     class="content-image zoomable">
+            </div>
+
+            <!-- Imagens das piscinas do Colégio Estadual do Paraná -->
+            <div class="school-pools reveal">
+                <h3>Piscinas do Colégio Estadual do Paraná</h3>
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">
+                    Localização: Curitiba, Paraná, Brasil
+                </p>
+                <div class="image-gallery">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop" 
+                             alt="Piscina do Colégio Estadual do Paraná - Vista geral" 
+                             class="zoomable">
+                        <div class="image-label">Vista geral da piscina</div>
+                    </div>
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop" 
+                             alt="Piscina do Colégio Estadual do Paraná - Sistema de aquecimento" 
+                             class="zoomable">
+                        <div class="image-label">Sistema de aquecimento</div>
+                    </div>
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop" 
+                             alt="Piscina do Colégio Estadual do Paraná - Painéis solares" 
+                             class="zoomable">
+                        <div class="image-label">Painéis solares instalados</div>
+                    </div>
+                </div>
+                <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 1rem;">
+                    * Imagens ilustrativas - Substituir por fotos reais das piscinas do Colégio Estadual do Paraná
+                </p>
             </div>
 
             <div class="comparison-table">
@@ -541,6 +621,12 @@
                 <div class="formula-label">Física do aquecimento</div>
                 <div class="formula-big">Q = m · c · ΔT</div>
                 <p class="formula-description">Exemplo: Piscina de 10.000 L, de 20°C para 28°C → <strong>Q ≈ 93 kWh</strong></p>
+            </div>
+
+            <div class="image-showcase reveal">
+                <img src="https://images.unsplash.com/photo-1621451537084-482c77833048?w=1200&h=500&fit=crop" 
+                     alt="Sistema completo de aquecimento de piscina com capa térmica" 
+                     class="content-image zoomable">
             </div>
 
             <div class="simulator-card reveal">
@@ -587,7 +673,7 @@
         </section>
 
         <!-- ==========================================
-             8. ROBÓTICA - Cards de sensores
+             7. ROBÓTICA
              ========================================== -->
         <section id="robotica" class="section section-alt">
             <div class="section-header">
@@ -597,25 +683,25 @@
             </div>
 
             <div class="sensor-grid">
-                <div class="sensor-card reveal">
+                <div class="sensor-card reveal card-3d">
                     <div class="sensor-icon">🌡️</div>
                     <h4>DS18B20</h4>
                     <p class="sensor-type">Sensor de Temperatura</p>
                     <p>Mede a temperatura da água da piscina e envia dados ao microcontrolador.</p>
                 </div>
-                <div class="sensor-card reveal">
+                <div class="sensor-card reveal card-3d">
                     <div class="sensor-icon">💡</div>
                     <h4>LDR</h4>
                     <p class="sensor-type">Sensor de Luminosidade</p>
                     <p>Detecta variações de luz, útil para monitorar condições dos painéis solares.</p>
                 </div>
-                <div class="sensor-card reveal">
+                <div class="sensor-card reveal card-3d">
                     <div class="sensor-icon">💧</div>
                     <h4>Sensor de Fluxo</h4>
                     <p class="sensor-type">Sensor de Circulação</p>
                     <p>Verifica se há circulação de água — essencial para segurança do sistema.</p>
                 </div>
-                <div class="sensor-card reveal">
+                <div class="sensor-card reveal card-3d">
                     <div class="sensor-icon">📊</div>
                     <h4>Sensor de Nível</h4>
                     <p class="sensor-type">Sensor de Volume</p>
@@ -623,16 +709,21 @@
                 </div>
             </div>
 
+            <div class="image-gallery reveal">
+                <img src="https://images.unsplash.com/photo-1555664424-778a6902201b?w=600&h=400&fit=crop" alt="Placa Arduino com componentes eletrônicos" class="zoomable">
+                <img src="https://images.unsplash.com/photo-1625772299848-391897158c5f?w=600&h=400&fit=crop" alt="Placa ESP32 para projetos IoT" class="zoomable">
+            </div>
+
             <div class="automation-flow reveal">
                 <h3>Como funciona a automação?</h3>
                 <div class="flow-diagram">
-                    <div class="flow-step">📡 Sensores</div>
+                    <div class="flow-step card-3d">📡 Sensores</div>
                     <div class="flow-arrow">→</div>
-                    <div class="flow-step">🧠 Arduino/ESP32</div>
+                    <div class="flow-step card-3d">🧠 Arduino/ESP32</div>
                     <div class="flow-arrow">→</div>
-                    <div class="flow-step">⚙️ Processamento</div>
+                    <div class="flow-step card-3d">️ Processamento</div>
                     <div class="flow-arrow">→</div>
-                    <div class="flow-step">🔌 Ação</div>
+                    <div class="flow-step card-3d"> Ação</div>
                 </div>
             </div>
 
@@ -667,36 +758,151 @@
         </section>
 
         <!-- ==========================================
-             9. SUSTENTABILIDADE - Calculadora
+             8. VÍDEOS EDUCATIVOS
+             ========================================== -->
+        <section id="videos" class="section">
+            <div class="section-header">
+                <div class="section-number">08</div>
+                <h2 class="section-title">Vídeos Educativos</h2>
+                <p class="section-subtitle">Conteúdos de fontes confiáveis para aprofundar seu conhecimento</p>
+            </div>
+
+            <div class="videos-grid">
+                <div class="video-card reveal">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/DoFnY4JYKVA" 
+                                title="O que é o Efeito Fotoelétrico? - Física Quântica" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>O Efeito Fotoelétrico Explicado</h4>
+                        <p>Canal: Física Total - Explicação detalhada do efeito fotoelétrico e a contribuição de Einstein.</p>
+                        <span class="video-source">Fonte: Canal educativo especializado em Física</span>
+                    </div>
+                </div>
+
+                <div class="video-card reveal">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/PHExEPpoLKE" 
+                                title="Como Funcionam as Células Fotovoltaicas" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>Células Fotovoltaicas - Como Funcionam?</h4>
+                        <p>Canal: Manual do Mundo - Demonstração prática do funcionamento de painéis solares.</p>
+                        <span class="video-source">Fonte: Canal educativo com experimentos práticos</span>
+                    </div>
+                </div>
+
+                <div class="video-card reveal">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/Bh5qJwVYl6I" 
+                                title="Energia Solar - Como Funciona?" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>Energia Solar Fotovoltaica</h4>
+                        <p>Canal: Instituto Nacional de Energia Solar - Explicação técnica sobre energia solar.</p>
+                        <span class="video-source">Fonte: Instituto governamental de energia</span>
+                    </div>
+                </div>
+
+                <div class="video-card reveal">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/5MgBikgcWnY" 
+                                title="Arduino e Automação Residencial" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>Automação com Arduino</h4>
+                        <p>Canal: Brincando com Ideias - Tutorial de automação residencial usando Arduino.</p>
+                        <span class="video-source">Fonte: Canal especializado em Arduino e robótica</span>
+                    </div>
+                </div>
+
+                <div class="video-card reveal">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/kN3AOMrnEUs" 
+                                title="Aquecimento Solar de Piscinas" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>Aquecimento Solar de Piscinas</h4>
+                        <p>Canal: Solar Brasil - Como funciona o sistema de aquecimento solar para piscinas.</p>
+                        <span class="video-source">Fonte: Empresa especializada em energia solar</span>
+                    </div>
+                </div>
+
+                <div class="video-card reveal">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/MBRqu0YOH14" 
+                                title="Dualidade Onda-Partícula" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>Dualidade Onda-Partícula da Luz</h4>
+                        <p>Canal: Ciência Todo Dia - Explicação sobre a natureza dual da luz.</p>
+                        <span class="video-source">Fonte: Canal de divulgação científica</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             9. SUSTENTABILIDADE
              ========================================== -->
         <section id="sustentabilidade" class="section">
             <div class="section-header">
-                <div class="section-number">08</div>
+                <div class="section-number">09</div>
                 <h2 class="section-title">A energia solar pode transformar o futuro?</h2>
                 <p class="section-subtitle">Sustentabilidade e impacto social</p>
             </div>
 
             <div class="benefits-grid">
-                <div class="benefit-card reveal">
+                <div class="benefit-card reveal card-3d">
                     <div class="benefit-icon">♻️</div>
                     <h4>Renovável</h4>
                     <p>Fonte continuamente disponível em escala humana.</p>
                 </div>
-                <div class="benefit-card reveal">
+                <div class="benefit-card reveal card-3d">
                     <div class="benefit-icon">🌱</div>
                     <h4>Limpa</h4>
                     <p>Sem queima de combustíveis durante operação.</p>
                 </div>
-                <div class="benefit-card reveal">
+                <div class="benefit-card reveal card-3d">
                     <div class="benefit-icon">🏠</div>
                     <h4>Local</h4>
                     <p>Produção próxima ao consumo, reduzindo perdas.</p>
                 </div>
-                <div class="benefit-card reveal">
+                <div class="benefit-card reveal card-3d">
                     <div class="benefit-icon">💰</div>
                     <h4>Econômica</h4>
                     <p>Redução significativa na conta de energia.</p>
                 </div>
+            </div>
+
+            <div class="image-showcase reveal">
+                <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&h=500&fit=crop" 
+                     alt="Fazenda solar com painéis em campo verde" 
+                     class="content-image zoomable">
             </div>
 
             <div class="simulator-card reveal">
@@ -730,11 +936,11 @@
         </section>
 
         <!-- ==========================================
-             10. QUIZ - Interativo
+             10. QUIZ
              ========================================== -->
         <section id="quiz" class="section section-dark">
             <div class="section-header light">
-                <div class="section-number">09</div>
+                <div class="section-number">10</div>
                 <h2 class="section-title">Teste seus conhecimentos!</h2>
                 <p class="section-subtitle">15 perguntas sobre tudo que você aprendeu</p>
             </div>
@@ -762,45 +968,12 @@
         </section>
 
         <!-- ==========================================
-             11. GLOSSÁRIO - Busca
-             ========================================== -->
-        <section id="glossario" class="section">
-            <div class="section-header">
-                <div class="section-number">10</div>
-                <h2 class="section-title">Dicionário da ciência</h2>
-                <p class="section-subtitle">Todos os termos importantes em um só lugar</p>
-            </div>
-
-            <div class="card">
-                <input type="text" id="glossarySearch" placeholder="🔍 Buscar termo..." oninput="searchGlossary()" class="search-input">
-                <div id="glossaryContent">
-                    <div class="glossary-item"><h4>Band gap</h4><p>Diferença de energia entre a banda de valência e a banda de condução.</p></div>
-                    <div class="glossary-item"><h4>Célula fotovoltaica</h4><p>Dispositivo semicondutor que converte luz em eletricidade.</p></div>
-                    <div class="glossary-item"><h4>Comprimento de onda</h4><p>Distância entre dois pontos equivalentes consecutivos de uma onda.</p></div>
-                    <div class="glossary-item"><h4>Corrente elétrica</h4><p>Movimento ordenado de cargas elétricas.</p></div>
-                    <div class="glossary-item"><h4>Dualidade onda-partícula</h4><p>Característica quântica de se comportar como onda ou partícula.</p></div>
-                    <div class="glossary-item"><h4>Elétron</h4><p>Partícula subatômica com carga elétrica negativa.</p></div>
-                    <div class="glossary-item"><h4>Energia cinética</h4><p>Energia associada ao movimento de um corpo ou partícula.</p></div>
-                    <div class="glossary-item"><h4>Frequência</h4><p>Quantidade de oscilações de uma onda por segundo.</p></div>
-                    <div class="glossary-item"><h4>Frequência de corte</h4><p>Frequência mínima para emissão de elétrons no efeito fotoelétrico.</p></div>
-                    <div class="glossary-item"><h4>Fóton</h4><p>Quantum de energia da radiação eletromagnética.</p></div>
-                    <div class="glossary-item"><h4>Função trabalho</h4><p>Energia mínima para retirar um elétron de um material.</p></div>
-                    <div class="glossary-item"><h4>Junção p-n</h4><p>Estrutura formada pela união de regiões tipo p e tipo n.</p></div>
-                    <div class="glossary-item"><h4>Lacuna</h4><p>Ausência de elétron na banda de valência, comporta-se como carga positiva.</p></div>
-                    <div class="glossary-item"><h4>Semicondutor</h4><p>Material com condutividade controlável (ex: silício).</p></div>
-                    <div class="glossary-item"><h4>Sensor</h4><p>Dispositivo que detecta ou mede uma grandeza física.</p></div>
-                    <div class="glossary-item"><h4>Tensão elétrica</h4><p>Diferença de potencial entre dois pontos de um circuito.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================
-             12. REFERÊNCIAS E CONCLUSÃO
+             11. REFERÊNCIAS
              ========================================== -->
         <section id="referencias" class="section section-gradient">
             <div class="section-header">
                 <div class="section-number">11</div>
-                <h2 class="section-title">Referências científicas</h2>
+                <h2 class="section-title">Referências Científicas</h2>
                 <p class="section-subtitle">Fontes confiáveis utilizadas no projeto</p>
             </div>
 
@@ -808,31 +981,31 @@
                 <div class="ref-card reveal">
                     <h4>⚛️ Física Quântica</h4>
                     <ul>
-                        <li>OpenStax — University Physics, Vol. 3</li>
-                        <li>MIT OpenCourseWare</li>
-                        <li>Nobel Prize — Physics 1921</li>
+                        <li>OpenStax — University Physics, Vol. 3<br><a href="https://openstax.org/books/university-physics-volume-3" target="_blank">https://openstax.org</a></li>
+                        <li>MIT OpenCourseWare<br><a href="https://ocw.mit.edu" target="_blank">https://ocw.mit.edu</a></li>
+                        <li>Nobel Prize — Physics 1921<br><a href="https://www.nobelprize.org/prizes/physics/1921/summary/" target="_blank">https://nobelprize.org</a></li>
                     </ul>
                 </div>
                 <div class="ref-card reveal">
                     <h4>☀️ Energia Solar</h4>
                     <ul>
-                        <li>U.S. Department of Energy</li>
-                        <li>National Renewable Energy Lab (NREL)</li>
-                        <li>Ministério de Minas e Energia</li>
+                        <li>U.S. Department of Energy<br><a href="https://www.energy.gov/eere/solar/solar-energy-technologies-office" target="_blank">https://energy.gov</a></li>
+                        <li>National Renewable Energy Lab (NREL)<br><a href="https://www.nrel.gov" target="_blank">https://nrel.gov</a></li>
+                        <li>Ministério de Minas e Energia<br><a href="https://www.gov.br/mme" target="_blank">https://gov.br/mme</a></li>
                     </ul>
                 </div>
                 <div class="ref-card reveal">
                     <h4>🤖 Robótica</h4>
                     <ul>
-                        <li>Documentação Arduino</li>
-                        <li>Documentação ESP32/Espressif</li>
+                        <li>Documentação Arduino<br><a href="https://www.arduino.cc" target="_blank">https://arduino.cc</a></li>
+                        <li>Documentação ESP32/Espressif<br><a href="https://www.espressif.com" target="_blank">https://espressif.com</a></li>
                     </ul>
                 </div>
                 <div class="ref-card reveal">
-                    <h4>♿ Acessibilidade</h4>
+                    <h4> Acessibilidade</h4>
                     <ul>
-                        <li>W3C — WCAG 2.2</li>
-                        <li>Governo Federal — VLibras</li>
+                        <li>W3C — WCAG 2.2<br><a href="https://www.w3.org/WAI/WCAG22/quickref/" target="_blank">https://w3.org</a></li>
+                        <li>Governo Federal — VLibras<br><a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/vlibras" target="_blank">https://gov.br</a></li>
                     </ul>
                 </div>
             </div>
@@ -851,10 +1024,12 @@
             <div class="footer-brand">
                 <div class="logo">☀️ Sol <span class="plus">+</span> Água 💧</div>
                 <p>Projeto Integrador CEP 2026</p>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem;">Colégio Estadual do Paraná - Curitiba/PR</p>
             </div>
             <div class="footer-links">
                 <a href="#home">Início</a>
                 <a href="#energia">Energia</a>
+                <a href="#videos">Vídeos</a>
                 <a href="#quiz">Quiz</a>
                 <a href="#referencias">Referências</a>
             </div>
