@@ -1,6 +1,6 @@
 /**
  * SOL + ÁGUA - JavaScript
- * Animações, interatividade e simuladores
+ * Animações 3D, simuladores didáticos, imagens zoomáveis e vídeos
  */
 
 // ============ MENU MOBILE ============
@@ -44,6 +44,38 @@ const observer = new IntersectionObserver((entries) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+});
+
+// ============ IMAGENS ZOOMÁVEIS ============
+document.addEventListener('DOMContentLoaded', () => {
+    const zoomableImages = document.querySelectorAll('.zoomable');
+    
+    zoomableImages.forEach(img => {
+        img.addEventListener('click', function() {
+            this.classList.toggle('active');
+            
+            // Criar overlay quando imagem estiver zoomada
+            if (this.classList.contains('active')) {
+                const overlay = document.createElement('div');
+                overlay.className = 'image-overlay';
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.9);
+                    z-index: 999;
+                    cursor: zoom-out;
+                `;
+                overlay.onclick = () => {
+                    this.classList.remove('active');
+                    overlay.remove();
+                };
+                document.body.appendChild(overlay);
+            }
+        });
+    });
 });
 
 // ============ CURIOSIDADE ============
@@ -91,7 +123,7 @@ function showSpectrumInfo(region) {
     `;
 }
 
-// ============ SIMULADOR: FÓTONS ============
+// ============ SIMULADOR: FÓTONS (Mais Didático) ============
 function updatePhotonEnergy() {
     const freq = parseFloat(document.getElementById('freqSlider').value);
     document.getElementById('freqValue').innerText = freq.toFixed(1);
@@ -103,9 +135,16 @@ function updatePhotonEnergy() {
 
     document.getElementById('energyResult').innerText = energyJ.toExponential(2) + ' J';
     document.getElementById('evResult').innerText = energyEv.toFixed(2) + ' eV';
+    
+    // Atualizar animação da onda
+    const waveAnimation = document.getElementById('waveAnimation');
+    if (waveAnimation) {
+        const wavelength = 300 / freq; // Comprimento de onda inversamente proporcional
+        waveAnimation.style.width = wavelength + '%';
+    }
 }
 
-// ============ SIMULADOR: FOTOELÉTRICO ============
+// ============ SIMULADOR: FOTOELÉTRICO (Mais Didático) ============
 function updatePhotoelectric() {
     const workFunction = parseFloat(document.getElementById('materialSelect').value);
     const photonEnergy = parseFloat(document.getElementById('photonEvSlider').value);
@@ -118,20 +157,34 @@ function updatePhotoelectric() {
     
     if (photonEnergy < workFunction) {
         resultDiv.innerHTML = `
-            <div style="color: #ef4444; font-size: 2rem; margin-bottom: 0.5rem;">⛔</div>
-            <strong>Sem Emissão</strong>
-            <p style="margin-top: 0.5rem;">Energia do fóton (${photonEnergy.toFixed(1)} eV) < Função trabalho (${workFunction} eV).</p>
-            <p style="font-size: 0.85rem; color: #666;">Mesmo aumentando a intensidade, não haverá emissão.</p>
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⛔</div>
+                <strong style="color: #ef4444; font-size: 1.2rem;">Sem Emissão</strong>
+                <div style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 8px;">
+                    <p style="margin: 0.5rem 0;"><strong>Energia do fóton:</strong> ${photonEnergy.toFixed(1)} eV</p>
+                    <p style="margin: 0.5rem 0;"><strong>Função trabalho:</strong> ${workFunction} eV</p>
+                    <p style="margin: 0.5rem 0; color: #ef4444;"><strong>Resultado:</strong> Energia insuficiente!</p>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">Mesmo aumentando a intensidade, não haverá emissão.</p>
+            </div>
         `;
     } else {
         const kineticEnergy = photonEnergy - workFunction;
         const electronCount = Math.floor(intensity / 10);
         resultDiv.innerHTML = `
-            <div style="color: #10b981; font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
-            <strong>Elétrons Emitidos!</strong>
-            <div class="result-row" style="margin-top: 1rem;"><span class="result-label">Energia Cinética</span><span class="result-value">${kineticEnergy.toFixed(2)} eV</span></div>
-            <div class="result-row"><span class="result-label">Elétrons emitidos</span><span class="result-value">~${electronCount}</span></div>
-            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">E<sub>c</sub> = ${photonEnergy.toFixed(1)} - ${workFunction}</p>
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                <strong style="color: #10b981; font-size: 1.2rem;">Elétrons Emitidos!</strong>
+                <div style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                    <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Energia Cinética:</span><span class="result-value">${kineticEnergy.toFixed(2)} eV</span></div>
+                    <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Elétrons emitidos:</span><span class="result-value">~${electronCount}</span></div>
+                    <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Fórmula:</span><span style="font-family: 'Fraunces', serif;">E<sub>c</sub> = ${photonEnergy.toFixed(1)} - ${workFunction}</span></div>
+                </div>
+                <div style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                    <p>✓ Energia do fóton > Função trabalho</p>
+                    <p>✓ Elétrons estão sendo liberados!</p>
+                </div>
+            </div>
         `;
     }
 }
@@ -151,16 +204,29 @@ function updateCutoffSimulator() {
     
     if (photonEnergy < workFunction) {
         resultDiv.innerHTML = `
-            <div style="color: #ef4444; font-size: 1.5rem;">⛔ Energia insuficiente</div>
-            <div class="result-row" style="margin-top: 1rem;"><span class="result-label">Freq. de corte</span><span class="result-value">${cutoffFreq.toExponential(2)} Hz</span></div>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Nenhuma emissão ocorrerá.</p>
+            <div style="text-align: center;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">⛔</div>
+                <strong style="color: #ef4444; font-size: 1.2rem;">Energia insuficiente</strong>
+                <div style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 8px;">
+                    <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Frequência de corte:</span><span class="result-value">${cutoffFreq.toExponential(2)} Hz</span></div>
+                    <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Energia do fóton:</span><span style="color: #ef4444;">${photonEnergy.toFixed(1)} eV</span></div>
+                    <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Função trabalho:</span><span>${workFunction} eV</span></div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">Nenhuma emissão ocorrerá.</p>
+            </div>
         `;
     } else {
         const kineticEnergy = photonEnergy - workFunction;
         resultDiv.innerHTML = `
-            <div style="color: #10b981; font-size: 1.5rem;">⚡ Emissão ocorrendo!</div>
-            <div class="result-row" style="margin-top: 1rem;"><span class="result-label">Freq. de corte</span><span class="result-value">${cutoffFreq.toExponential(2)} Hz</span></div>
-            <div class="result-row"><span class="result-label">Energia cinética</span><span class="result-value">${kineticEnergy.toFixed(2)} eV</span></div>
+            <div style="text-align: center;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚡</div>
+                <strong style="color: #10b981; font-size: 1.2rem;">Emissão ocorrendo!</strong>
+                <div style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                    <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Frequência de corte:</span><span class="result-value">${cutoffFreq.toExponential(2)} Hz</span></div>
+                    <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Energia cinética:</span><span class="result-value">${kineticEnergy.toFixed(2)} eV</span></div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">✓ Energia suficiente para emissão!</p>
+            </div>
         `;
     }
 }
@@ -184,11 +250,17 @@ function updateSolarPanel() {
     const current = electricalPower / voltage;
 
     document.getElementById('solarPanelResult').innerHTML = `
-        <div class="result-row"><span class="result-label">Potência Solar</span><span class="result-value">${solarPower.toFixed(0)} W</span></div>
-        <div class="result-row"><span class="result-label">Fator Temp.</span><span class="result-value">${(tempFactor * 100).toFixed(1)}%</span></div>
-        <div class="result-row"><span class="result-label"><strong>Potência Elétrica</strong></span><span class="result-value"><strong>${electricalPower.toFixed(1)} W</strong></span></div>
-        <div class="result-row"><span class="result-label">Tensão</span><span class="result-value">${voltage.toFixed(1)} V</span></div>
-        <div class="result-row"><span class="result-label">Corrente</span><span class="result-value">${current.toFixed(2)} A</span></div>
+        <div style="text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">☀️</div>
+            <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Potência Solar Recebida:</span><span class="result-value">${solarPower.toFixed(0)} W</span></div>
+            <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Fator de Temperatura:</span><span class="result-value">${(tempFactor * 100).toFixed(1)}%</span></div>
+            <div style="margin: 1rem 0; padding: 1rem; background: var(--accent-soft); border-radius: 8px;">
+                <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label" style="font-size: 1.1rem;"><strong>Potência Elétrica:</strong></span><span class="result-value" style="font-size: 1.3rem;"><strong>${electricalPower.toFixed(1)} W</strong></span></div>
+            </div>
+            <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Tensão:</span><span class="result-value">${voltage.toFixed(1)} V</span></div>
+            <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Corrente:</span><span class="result-value">${current.toFixed(2)} A</span></div>
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: #666;">*Simulação simplificada</p>
+        </div>
     `;
 }
 
@@ -202,7 +274,7 @@ function calculatePoolHeat() {
     const resultDiv = document.getElementById('poolResult');
 
     if (tFinal <= tInit) {
-        resultDiv.innerHTML = "<div style='color: #ef4444;'>⚠️ Temperatura desejada deve ser maior que a inicial.</div>";
+        resultDiv.innerHTML = "<div style='color: #ef4444; text-align: center;'><div style='font-size: 2rem;'>⚠️</div><p>Temperatura desejada deve ser maior que a inicial.</p></div>";
         return;
     }
 
@@ -214,24 +286,36 @@ function calculatePoolHeat() {
     const lossFactor = hasCover ? 1.1 : 1.3;
     const qWithLoss = qKwh * lossFactor;
 
-    let timeEstimate = "", costEstimate = "";
+    let timeEstimate = "", costEstimate = "", icon = "";
     if (heatingType === 'thermal') {
         timeEstimate = "6-8 horas de sol direto";
         costEstimate = "Custo operacional muito baixo";
+        icon = "️";
     } else if (heatingType === 'photovoltaic') {
         timeEstimate = "Depende da potência do sistema";
         costEstimate = `R$ ${(qWithLoss * 0.80).toFixed(2)}`;
+        icon = "⚡";
     } else {
         timeEstimate = "4-6 horas";
         costEstimate = `R$ ${(qWithLoss * 0.80).toFixed(2)}`;
+        icon = "🔥";
     }
 
     resultDiv.innerHTML = `
-        <div class="result-row"><span class="result-label">ΔT</span><span class="result-value">${deltaT} °C</span></div>
-        <div class="result-row"><span class="result-label">Energia Ideal</span><span class="result-value">${qKwh.toFixed(1)} kWh</span></div>
-        <div class="result-row"><span class="result-label">Com Perdas</span><span class="result-value">${qWithLoss.toFixed(1)} kWh</span></div>
-        <div class="result-row"><span class="result-label"><strong>Tempo</strong></span><span class="result-value"><strong>${timeEstimate}</strong></span></div>
-        <div class="result-row"><span class="result-label">Custo estimado</span><span class="result-value">${costEstimate}</span></div>
+        <div style="text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">${icon}</div>
+            <strong style="font-size: 1.2rem;">Resultados do Cálculo</strong>
+            <div style="margin-top: 1rem; padding: 1rem; background: var(--accent-soft); border-radius: 8px;">
+                <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Variação de Temperatura (ΔT):</span><span class="result-value">${deltaT} °C</span></div>
+                <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Energia Ideal (Q):</span><span class="result-value">${qKwh.toFixed(1)} kWh</span></div>
+                <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Com Perdas Térmicas:</span><span class="result-value">${qWithLoss.toFixed(1)} kWh</span></div>
+            </div>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label"><strong>Tempo estimado:</strong></span><span class="result-value"><strong>${timeEstimate}</strong></span></div>
+                <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Custo estimado:</span><span class="result-value">${costEstimate}</span></div>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: #666;">*Estimativa simplificada</p>
+        </div>
     `;
 }
 
@@ -243,11 +327,40 @@ function checkAutomation() {
     const resultDiv = document.getElementById('automationResult');
 
     if (!hasFlow) {
-        resultDiv.innerHTML = `<div style="color: #ef4444;"><strong>🚫 ALERTA</strong><br>Sem fluxo! Aquecimento BLOQUEADO.</div>`;
+        resultDiv.innerHTML = `
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
+                <strong style="color: #ef4444; font-size: 1.2rem;">ALERTA DE SEGURANÇA</strong>
+                <p style="margin-top: 0.5rem;">Sem fluxo de água!</p>
+                <p style="color: #ef4444; font-weight: 600;">Aquecimento BLOQUEADO</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;">Evite danos ao equipamento</p>
+            </div>
+        `;
     } else if (temp < targetTemp) {
-        resultDiv.innerHTML = `<div style="color: #10b981;"><strong>✅ ATIVO</strong><br>Temp. ${temp}°C < ${targetTemp}°C. Aquecimento LIGADO.</div>`;
+        resultDiv.innerHTML = `
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                <strong style="color: #10b981; font-size: 1.2rem;">SISTEMA ATIVO</strong>
+                <div style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                    <p>Temperatura atual: <strong>${temp}°C</strong></p>
+                    <p>Temperatura alvo: <strong>${targetTemp}°C</strong></p>
+                    <p style="color: #10b981; font-weight: 600; margin-top: 0.5rem;">✓ Aquecimento LIGADO</p>
+                </div>
+            </div>
+        `;
     } else {
-        resultDiv.innerHTML = `<div style="color: #7c3aed;"><strong>⏸️ EM ESPERA</strong><br>Temp. ideal atingida (${temp}°C). Aquecimento DESLIGADO.</div>`;
+        resultDiv.innerHTML = `
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⏸️</div>
+                <strong style="color: var(--accent); font-size: 1.2rem;">EM ESPERA</strong>
+                <div style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(124, 58, 237, 0.1); border-radius: 8px;">
+                    <p>Temperatura atual: <strong>${temp}°C</strong></p>
+                    <p>Temperatura alvo: <strong>${targetTemp}°C</strong></p>
+                    <p style="color: var(--accent); font-weight: 600; margin-top: 0.5rem;">✓ Temperatura ideal atingida</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Aquecimento DESLIGADO</p>
+                </div>
+            </div>
+        `;
     }
 }
 
@@ -262,9 +375,17 @@ function calculateSavings() {
     const annualSavings = monthlySavings * 12;
 
     document.getElementById('savingsResult').innerHTML = `
-        <div class="result-row"><span class="result-label">Energia Solar</span><span class="result-value">${solarEnergy.toFixed(0)} kWh/mês</span></div>
-        <div class="result-row"><span class="result-label">Economia Mensal</span><span class="result-value">R$ ${monthlySavings.toFixed(2)}</span></div>
-        <div class="result-row"><span class="result-label"><strong>Economia Anual</strong></span><span class="result-value"><strong>R$ ${annualSavings.toFixed(2)}</strong></span></div>
+        <div style="text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">💰</div>
+            <strong style="font-size: 1.2rem;">Estimativa de Economia</strong>
+            <div style="margin-top: 1rem; padding: 1rem; background: var(--accent-soft); border-radius: 8px;">
+                <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Energia Solar Mensal:</span><span class="result-value">${solarEnergy.toFixed(0)} kWh/mês</span></div>
+                <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label">Economia Mensal:</span><span class="result-value">R$ ${monthlySavings.toFixed(2)}</span></div>
+            </div>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                <div class="result-row" style="margin: 0.5rem 0;"><span class="result-label" style="font-size: 1.1rem;"><strong>Economia Anual:</strong></span><span class="result-value" style="font-size: 1.3rem;"><strong>R$ ${annualSavings.toFixed(2)}</strong></span></div>
+            </div>
+        </div>
     `;
 }
 
