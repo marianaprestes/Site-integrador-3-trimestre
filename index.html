@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sol + Água: Projeto Integrador CEP - Efeito Fotoelétrico, Energia Solar e Aquecimento de Piscinas">
-    <title>Sol + Água | Projeto Integrador CEP</title>
+    <meta name="description" content="Sol + Água: Projeto Integrador CEP - Efeito Fotoelétrico, Energia Solar e Aquecimento de Piscinas - Turma 2°J">
+    <title>Sol + Água | Projeto Integrador CEP - Turma 2°J</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Fraunces:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 </head>
@@ -27,6 +27,17 @@
             <span>Reduzir Animações</span>
             <div class="toggle-switch" onclick="toggleAnimation()" role="button" tabindex="0"></div>
         </div>
+        <div class="a11y-option">
+            <span>Leitor de Tela</span>
+            <div class="toggle-switch" onclick="toggleScreenReader()" role="button" tabindex="0"></div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal para Zoom de Imagens -->
+    <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImg" alt="">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
 
     <!-- Cabeçalho -->
@@ -34,6 +45,7 @@
         <div class="logo">
             <span class="logo-icon">☀️</span>
             <span class="logo-text">Sol <span class="plus">+</span> Água 💧</span>
+            <span class="logo-turma">2°J</span>
         </div>
         <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">☰</button>
         <nav>
@@ -48,6 +60,7 @@
                 <li><a href="#robotica">Robótica</a></li>
                 <li><a href="#videos">Vídeos</a></li>
                 <li><a href="#quiz">Quiz</a></li>
+                <li><a href="#equipe">Equipe</a></li>
             </ul>
         </nav>
     </header>
@@ -64,7 +77,7 @@
             </div>
             
             <div class="hero-content">
-                <div class="hero-badge">🔬 Projeto Integrador CEP 2026</div>
+                <div class="hero-badge">🔬 Projeto Integrador CEP 2026 • Turma 2°J</div>
                 <h1 class="hero-title">
                     Da luz do Sol<br>
                     <span class="hero-highlight">à água aquecida</span>
@@ -84,7 +97,8 @@
                 <div class="hero-image-container">
                     <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1400&h=700&fit=crop" 
                          alt="Painéis solares instalados em telhado com piscina azul ao fundo" 
-                         class="hero-image">
+                         class="hero-image zoomable"
+                         data-caption="Painéis solares e piscina: a união entre energia e conforto">
                     <div class="hero-image-overlay"></div>
                 </div>
                 <div class="floating-card card-1">
@@ -127,7 +141,7 @@
         </section>
 
         <!-- ==========================================
-             CURIOSIDADE - DESTAQUE INTERATIVO
+             CURIOSIDADE
              ========================================== -->
         <section class="curiosity-section">
             <div class="curiosity-card">
@@ -170,21 +184,26 @@
                     </div>
                 </div>
                 <div class="split-image reveal">
-                    <img src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=1000&h=700&fit=crop" 
-                         alt="O Sol brilhando intensamente no céu azul" 
-                         class="content-image zoomable">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=1000&h=700&fit=crop" 
+                             alt="O Sol brilhando intensamente no céu azul" 
+                             class="content-image zoomable"
+                             data-caption="O Sol: nossa principal fonte de energia">
+                        <figcaption>O Sol libera energia continuamente através da fusão nuclear</figcaption>
+                    </figure>
                 </div>
             </div>
 
-            <div class="spectrum-showcase">
+            <div class="spectrum-showcase reveal">
                 <h3>Explore o Espectro Eletromagnético</h3>
+                <p class="spectrum-intro">Clique em cada região para conhecer suas características:</p>
                 <div class="spectrum-selector">
                     <button class="spectrum-btn" onclick="showSpectrumInfo('radio')">📻 Rádio</button>
                     <button class="spectrum-btn" onclick="showSpectrumInfo('micro')">📡 Micro-ondas</button>
                     <button class="spectrum-btn" onclick="showSpectrumInfo('infrared')">🔥 Infravermelho</button>
                     <button class="spectrum-btn active" onclick="showSpectrumInfo('visible')">🌈 Visível</button>
                     <button class="spectrum-btn" onclick="showSpectrumInfo('uv')">☀️ Ultravioleta</button>
-                    <button class="spectrum-btn" onclick="showSpectrumInfo('xray')"> Raios X</button>
+                    <button class="spectrum-btn" onclick="showSpectrumInfo('xray')">🏥 Raios X</button>
                     <button class="spectrum-btn" onclick="showSpectrumInfo('gamma')">☢️ Gama</button>
                 </div>
                 <div id="spectrum-info" class="spectrum-result">
@@ -214,8 +233,20 @@
             </div>
 
             <div class="image-gallery reveal">
-                <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=400&fit=crop" alt="Painéis solares em campo aberto" class="zoomable">
-                <img src="https://images.unsplash.com/photo-1585338107529-13afc5f00200?w=800&h=400&fit=crop" alt="Coletor solar térmico" class="zoomable">
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=400&fit=crop" 
+                         alt="Painéis solares em campo aberto" 
+                         class="zoomable"
+                         data-caption="Fazenda solar: geração de energia limpa">
+                    <figcaption>Painéis solares em campo aberto</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1585338107529-13afc5f00200?w=800&h=400&fit=crop" 
+                         alt="Coletor solar térmico" 
+                         class="zoomable"
+                         data-caption="Coletor solar térmico para aquecimento de água">
+                    <figcaption>Coletor solar térmico</figcaption>
+                </figure>
             </div>
         </section>
 
@@ -230,10 +261,13 @@
             </div>
 
             <div class="full-width-image reveal">
-                <img src="https://images.unsplash.com/photo-1635322966219-b75ed374eb07?w=1600&h=600&fit=crop" 
-                     alt="Representação artística de fótons e ondas luminosas coloridas" 
-                     class="content-image zoomable">
-                <div class="image-caption">Os fótons são os quanta de energia da radiação eletromagnética</div>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1635322966219-b75ed374eb07?w=1600&h=600&fit=crop" 
+                         alt="Representação artística de fótons e ondas luminosas coloridas" 
+                         class="content-image zoomable"
+                         data-caption="Os fótons são os quanta de energia da radiação eletromagnética">
+                    <figcaption>Representação artística de fótons e ondas luminosas</figcaption>
+                </figure>
             </div>
 
             <div class="content-grid">
@@ -253,27 +287,39 @@
             </div>
 
             <div class="image-comparison reveal">
-                <div class="comparison-item">
-                    <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&h=400&fit=crop" alt="Luz vermelha - maior comprimento de onda" class="zoomable">
-                    <p><strong>Luz Vermelha</strong> - Menor frequência, maior comprimento</p>
-                </div>
-                <div class="comparison-item">
-                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop" alt="Luz violeta - menor comprimento de onda" class="zoomable">
-                    <p><strong>Luz Violeta</strong> - Maior frequência, menor comprimento</p>
-                </div>
+                <figure class="comparison-item">
+                    <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&h=400&fit=crop" 
+                         alt="Luz vermelha - maior comprimento de onda" 
+                         class="zoomable"
+                         data-caption="Luz vermelha: menor frequência, maior comprimento de onda">
+                    <figcaption><strong>Luz Vermelha</strong> - Menor frequência, maior comprimento</figcaption>
+                </figure>
+                <figure class="comparison-item">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&h=400&fit=crop" 
+                         alt="Luz violeta - menor comprimento de onda" 
+                         class="zoomable"
+                         data-caption="Luz violeta: maior frequência, menor comprimento de onda">
+                    <figcaption><strong>Luz Violeta</strong> - Maior frequência, menor comprimento</figcaption>
+                </figure>
             </div>
 
             <div class="simulator-card reveal">
                 <div class="simulator-header">
-                    <div class="simulator-badge"> Simulador</div>
+                    <div class="simulator-badge">🔬 Simulador</div>
                     <h3>Energia dos Fótons</h3>
                 </div>
                 <div class="simulator-body">
+                    <div class="simulator-visual">
+                        <div class="photon-animation" id="photonAnimation">
+                            <div class="photon-particle"></div>
+                            <div class="photon-wave" id="photonWave"></div>
+                        </div>
+                    </div>
                     <div class="control-group">
                         <label>Frequência da Luz: <span id="freqValue" class="value-display">5.0</span> ×10¹⁴ Hz</label>
                         <input type="range" id="freqSlider" min="4" max="8" step="0.1" value="5.0" oninput="updatePhotonEnergy()">
-                        <div class="slider-visual">
-                            <div class="wave-animation" id="waveAnimation"></div>
+                        <div class="spectrum-bar">
+                            <div class="spectrum-bar-fill" id="spectrumBarFill"></div>
                         </div>
                     </div>
                     <div class="result-display">
@@ -284,6 +330,10 @@
                         <div class="result-row">
                             <span class="result-label">Em eV</span>
                             <span class="result-value" id="evResult">2.07 eV</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Cor equivalente</span>
+                            <span class="result-value" id="colorResult">Verde</span>
                         </div>
                     </div>
                 </div>
@@ -325,9 +375,13 @@
             </div>
 
             <div class="einstein-card reveal">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg/440px-Einstein_1921_by_F_Schmutzer_-_restoration.jpg" 
-                     alt="Albert Einstein em 1921, ano em que recebeu o Prêmio Nobel de Física" 
-                     class="einstein-photo zoomable">
+                <figure class="einstein-figure">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/440px-Albert_Einstein_Head.jpg" 
+                         alt="Albert Einstein em retrato oficial, vencedor do Prêmio Nobel de Física de 1921" 
+                         class="einstein-photo zoomable"
+                         data-caption="Albert Einstein (1879-1955) - Prêmio Nobel de Física 1921">
+                    <figcaption>Albert Einstein, 1947</figcaption>
+                </figure>
                 <div class="einstein-text">
                     <blockquote>
                         "Cada fóton transfere sua energia a um elétron. Se essa energia for suficiente para retirar o elétron do material, ele será emitido."
@@ -342,42 +396,56 @@
                 <p class="formula-description">A energia do fóton (h·f) menos a função trabalho (φ) resulta na energia cinética máxima do elétron emitido.</p>
             </div>
 
-            <div class="image-showcase reveal">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=500&fit=crop" 
-                     alt="Experimento do efeito fotoelétrico demonstrando elétrons sendo liberados" 
-                     class="content-image zoomable">
-            </div>
-
-            <div class="simulator-card reveal">
-                <div class="simulator-header">
-                    <div class="simulator-badge">🔬 Laboratório Virtual</div>
-                    <h3>Efeito Fotoelétrico</h3>
+            <!-- LABORATÓRIO VIRTUAL - Mais Visual -->
+            <div class="lab-container reveal">
+                <div class="lab-header">
+                    <div class="lab-badge">🔬 Laboratório Virtual</div>
+                    <h3>Efeito Fotoelétrico Interativo</h3>
+                    <p class="lab-description">Ajuste os controles e observe o que acontece com os elétrons!</p>
                 </div>
-                <div class="simulator-body">
-                    <div class="simulator-grid">
-                        <div class="simulator-controls">
-                            <div class="control-group">
-                                <label>Material:</label>
-                                <select id="materialSelect" onchange="updatePhotoelectric()">
-                                    <option value="2.28">Sódio (2.28 eV)</option>
-                                    <option value="4.08">Alumínio (4.08 eV)</option>
-                                    <option value="4.31">Zinco (4.31 eV)</option>
-                                    <option value="4.70">Cobre (4.70 eV)</option>
-                                    <option value="4.73">Prata (4.73 eV)</option>
-                                    <option value="6.35">Platina (6.35 eV)</option>
-                                </select>
-                            </div>
-                            <div class="control-group">
-                                <label>Energia do Fóton: <span id="photonEvDisplay" class="value-display">3.0</span> eV</label>
-                                <input type="range" id="photonEvSlider" min="1" max="7" step="0.1" value="3.0" oninput="updatePhotoelectric()">
-                            </div>
-                            <div class="control-group">
-                                <label>Intensidade: <span id="intensityDisplay" class="value-display">50</span>%</label>
-                                <input type="range" id="intensitySlider" min="10" max="100" step="10" value="50" oninput="updatePhotoelectric()">
-                            </div>
+                
+                <div class="lab-stage">
+                    <div class="lab-visual">
+                        <div class="lab-light-source" id="labLightSource">
+                            <div class="light-beam" id="lightBeam"></div>
+                            <div class="light-beam" id="lightBeam2"></div>
+                            <div class="light-beam" id="lightBeam3"></div>
                         </div>
-                        <div class="result-display" id="photoelectricResult">
-                            Ajuste os parâmetros para ver o resultado.
+                        <div class="lab-metal" id="labMetal">
+                            <div class="electron" id="electron1">e⁻</div>
+                            <div class="electron" id="electron2">e⁻</div>
+                            <div class="electron" id="electron3">e⁻</div>
+                            <div class="electron" id="electron4">e⁻</div>
+                        </div>
+                        <div class="lab-emitted" id="labEmitted"></div>
+                    </div>
+                    
+                    <div class="lab-controls">
+                        <div class="control-group">
+                            <label>🧪 Material:</label>
+                            <select id="materialSelect" onchange="updatePhotoelectric()">
+                                <option value="2.28">Sódio (φ = 2.28 eV)</option>
+                                <option value="4.08">Alumínio (φ = 4.08 eV)</option>
+                                <option value="4.31">Zinco (φ = 4.31 eV)</option>
+                                <option value="4.70">Cobre (φ = 4.70 eV)</option>
+                                <option value="4.73">Prata (φ = 4.73 eV)</option>
+                                <option value="6.35">Platina (φ = 6.35 eV)</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>💡 Energia do Fóton: <span id="photonEvDisplay" class="value-display">3.0</span> eV</label>
+                            <input type="range" id="photonEvSlider" min="1" max="7" step="0.1" value="3.0" oninput="updatePhotoelectric()">
+                        </div>
+                        <div class="control-group">
+                            <label>🔆 Intensidade: <span id="intensityDisplay" class="value-display">50</span>%</label>
+                            <input type="range" id="intensitySlider" min="10" max="100" step="10" value="50" oninput="updatePhotoelectric()">
+                        </div>
+                    </div>
+                    
+                    <div class="result-display" id="photoelectricResult">
+                        <div class="lab-status">
+                            <div class="status-icon">⚙️</div>
+                            <div class="status-text">Ajuste os parâmetros para iniciar o experimento</div>
                         </div>
                     </div>
                 </div>
@@ -399,32 +467,85 @@
                 <div class="formula-inline">f<sub>c</sub> = φ / h</div>
             </div>
 
-            <div class="materials-table reveal">
+            <!-- GRÁFICO MELHORADO COM NÚMEROS -->
+            <div class="materials-chart reveal">
                 <h3>Função trabalho dos materiais</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Material</th>
-                            <th>Função trabalho (φ)</th>
-                            <th class="bar-cell">Energia relativa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Sódio</td><td>2,46 eV</td><td><div class="bar" style="width: 38%"></div></td></tr>
-                        <tr><td>Alumínio</td><td>4,08 eV</td><td><div class="bar" style="width: 64%"></div></td></tr>
-                        <tr><td>Zinco</td><td>4,31 eV</td><td><div class="bar" style="width: 68%"></div></td></tr>
-                        <tr><td>Cobre</td><td>4,70 eV</td><td><div class="bar" style="width: 74%"></div></td></tr>
-                        <tr><td>Prata</td><td>4,73 eV</td><td><div class="bar" style="width: 74%"></div></td></tr>
-                        <tr><td>Platina</td><td>6,35 eV</td><td><div class="bar" style="width: 100%"></div></td></tr>
-                    </tbody>
-                </table>
+                <p class="chart-description">Valores em elétron-volts (eV) - quanto maior, mais energia é necessária para liberar elétrons</p>
+                <div class="chart-container">
+                    <div class="chart-row">
+                        <div class="chart-label">Sódio</div>
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="width: 38.8%; background: linear-gradient(90deg, #10b981, #34d399);">
+                                <span class="chart-value">2,46 eV</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-label">Alumínio</div>
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="width: 64.4%; background: linear-gradient(90deg, #3b82f6, #60a5fa);">
+                                <span class="chart-value">4,08 eV</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-label">Zinco</div>
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="width: 68.0%; background: linear-gradient(90deg, #8b5cf6, #a78bfa);">
+                                <span class="chart-value">4,31 eV</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-label">Cobre</div>
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="width: 74.2%; background: linear-gradient(90deg, #f59e0b, #fbbf24);">
+                                <span class="chart-value">4,70 eV</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-label">Prata</div>
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="width: 74.7%; background: linear-gradient(90deg, #ec4899, #f472b6);">
+                                <span class="chart-value">4,73 eV</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-label">Platina</div>
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="width: 100%; background: linear-gradient(90deg, #ef4444, #f87171);">
+                                <span class="chart-value">6,35 eV</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-scale">
+                    <span>0 eV</span>
+                    <span>3 eV</span>
+                    <span>6 eV</span>
+                </div>
             </div>
 
             <div class="image-grid reveal">
-                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop" alt="Metais diferentes usados em experimentos" class="zoomable">
-                <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=600&h=400&fit=crop" alt="Representação de estrutura atômica" class="zoomable">
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop" 
+                         alt="Metais diferentes usados em experimentos" 
+                         class="zoomable"
+                         data-caption="Metais com diferentes funções trabalho">
+                    <figcaption>Metais com diferentes funções trabalho</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=600&h=400&fit=crop" 
+                         alt="Representação de estrutura atômica" 
+                         class="zoomable"
+                         data-caption="Estrutura atômica dos materiais">
+                    <figcaption>Estrutura atômica dos materiais</figcaption>
+                </figure>
             </div>
 
+            <!-- SIMULADOR CORRIGIDO -->
             <div class="simulator-card reveal">
                 <div class="simulator-header">
                     <div class="simulator-badge">🔬 Simulador</div>
@@ -434,84 +555,115 @@
                     <div class="simulator-grid">
                         <div class="simulator-controls">
                             <div class="control-group">
-                                <label>Material:</label>
+                                <label>🧪 Selecione o material:</label>
                                 <select id="cutoffMaterial" onchange="updateCutoffSimulator()">
-                                    <option value="2.46">Sódio (2.46 eV)</option>
-                                    <option value="4.08">Alumínio (4.08 eV)</option>
-                                    <option value="4.70">Cobre (4.70 eV)</option>
+                                    <option value="2.46">Sódio (φ = 2.46 eV)</option>
+                                    <option value="4.08">Alumínio (φ = 4.08 eV)</option>
+                                    <option value="4.70">Cobre (φ = 4.70 eV)</option>
                                 </select>
                             </div>
                             <div class="control-group">
-                                <label>Energia do Fóton: <span id="cutoffPhotonDisplay" class="value-display">3.0</span> eV</label>
+                                <label>💡 Energia do Fóton: <span id="cutoffPhotonDisplay" class="value-display">3.0</span> eV</label>
                                 <input type="range" id="cutoffPhotonSlider" min="1" max="7" step="0.1" value="3.0" oninput="updateCutoffSimulator()">
                             </div>
+                            <div class="cutoff-visual">
+                                <div class="cutoff-meter">
+                                    <div class="cutoff-threshold" id="cutoffThreshold"></div>
+                                    <div class="cutoff-level" id="cutoffLevel"></div>
+                                </div>
+                                <div class="cutoff-labels">
+                                    <span>Energia do fóton</span>
+                                    <span>Função trabalho</span>
+                                </div>
+                            </div>
                         </div>
-                        <div id="cutoffResult" class="result-display">Ajuste os parâmetros.</div>
+                        <div id="cutoffResult" class="result-display">
+                            <div class="lab-status">
+                                <div class="status-icon">⚙️</div>
+                                <div class="status-text">Ajuste os parâmetros para ver o resultado</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ==========================================
-             5. CÉLULAS FOTOVOLTAICAS
+             5. CÉLULAS FOTOVOLTAICAS - REORGANIZADO
              ========================================== -->
         <section id="celulas" class="section section-gradient">
             <div class="section-header">
                 <div class="section-number">05</div>
                 <h2 class="section-title">Como a luz se transforma em eletricidade?</h2>
-                <p class="section-subtitle">A magia dos semicondutores e da junção p-n</p>
+                <p class="section-subtitle">A jornada da luz até a corrente elétrica</p>
             </div>
 
-            <div class="steps-container">
-                <div class="step reveal card-3d">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
+            <!-- ORDEM REORGANIZADA - 5 ETAPAS CLARAS -->
+            <div class="transformation-flow reveal">
+                <h3>As 5 Etapas da Transformação</h3>
+                <div class="flow-steps">
+                    <div class="flow-step card-3d">
+                        <div class="step-icon">☀️</div>
+                        <div class="step-number">1</div>
+                        <h4>A Luz Chega</h4>
+                        <p>Fótons da luz solar atingem a célula fotovoltaica carregando energia.</p>
+                    </div>
+                    <div class="flow-connector">→</div>
+                    <div class="flow-step card-3d">
+                        <div class="step-icon">💥</div>
+                        <div class="step-number">2</div>
                         <h4>Absorção</h4>
-                        <p>Fótons atingem o semicondutor e são absorvidos.</p>
+                        <p>O silício absorve os fótons e transfere sua energia aos elétrons.</p>
                     </div>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step reveal card-3d">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Pares elétron-lacuna</h4>
-                        <p>Elétrons passam para a banda de condução.</p>
+                    <div class="flow-connector">→</div>
+                    <div class="flow-step card-3d">
+                        <div class="step-icon">⚡</div>
+                        <div class="step-number">3</div>
+                        <h4>Pares Elétron-Lacuna</h4>
+                        <p>Elétrons são excitados e deixam lacunas, criando portadores de carga.</p>
                     </div>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step reveal card-3d">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Separação</h4>
-                        <p>A junção p-n separa as cargas.</p>
+                    <div class="flow-connector">→</div>
+                    <div class="flow-step card-3d">
+                        <div class="step-icon">🧲</div>
+                        <div class="step-number">4</div>
+                        <h4>Separação pela Junção p-n</h4>
+                        <p>O campo elétrico da junção p-n separa elétrons e lacunas.</p>
                     </div>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step reveal card-3d">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h4>Corrente</h4>
-                        <p>Elétrons circulam pelo circuito externo.</p>
+                    <div class="flow-connector">→</div>
+                    <div class="flow-step card-3d">
+                        <div class="step-icon">💡</div>
+                        <div class="step-number">5</div>
+                        <h4>Corrente Elétrica</h4>
+                        <p>Elétrons fluem pelo circuito externo, gerando eletricidade utilizável.</p>
                     </div>
                 </div>
             </div>
 
             <div class="full-width-image reveal">
-                <img src="https://images.unsplash.com/photo-1558449028-b53a06821084?w=1600&h=600&fit=crop" 
-                     alt="Célula fotovoltaica de silício em close-up mostrando sua estrutura" 
-                     class="content-image zoomable">
-                <div class="image-caption">Estrutura interna de uma célula fotovoltaica de silício</div>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1558449028-b53a06821084?w=1600&h=600&fit=crop" 
+                         alt="Célula fotovoltaica de silício em close-up" 
+                         class="content-image zoomable"
+                         data-caption="Estrutura interna de uma célula fotovoltaica de silício">
+                    <figcaption>Célula fotovoltaica de silício - a base da energia solar</figcaption>
+                </figure>
             </div>
 
             <div class="image-comparison reveal">
-                <div class="comparison-item">
-                    <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=600&h=400&fit=crop" alt="Painel fotovoltaico" class="zoomable">
-                    <p><strong>Painel Fotovoltaico</strong> - Gera eletricidade</p>
-                </div>
-                <div class="comparison-item">
-                    <img src="https://images.unsplash.com/photo-1585338107529-13afc5f00200?w=600&h=400&fit=crop" alt="Coletor térmico" class="zoomable">
-                    <p><strong>Coletor Térmico</strong> - Aquece água</p>
-                </div>
+                <figure class="comparison-item">
+                    <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=600&h=400&fit=crop" 
+                         alt="Painel fotovoltaico" 
+                         class="zoomable"
+                         data-caption="Painel fotovoltaico gera eletricidade">
+                    <figcaption><strong>Painel Fotovoltaico</strong> - Gera eletricidade</figcaption>
+                </figure>
+                <figure class="comparison-item">
+                    <img src="https://images.unsplash.com/photo-1585338107529-13afc5f00200?w=600&h=400&fit=crop" 
+                         alt="Coletor térmico" 
+                         class="zoomable"
+                         data-caption="Coletor térmico aquece água">
+                    <figcaption><strong>Coletor Térmico</strong> - Aquece água</figcaption>
+                </figure>
             </div>
 
             <div class="simulator-card reveal">
@@ -523,24 +675,27 @@
                     <div class="simulator-grid">
                         <div class="simulator-controls">
                             <div class="control-group">
-                                <label>Intensidade: <span id="solarIntensityDisplay" class="value-display">800</span> W/m²</label>
+                                <label>☀️ Intensidade: <span id="solarIntensityDisplay" class="value-display">800</span> W/m²</label>
                                 <input type="range" id="solarIntensity" min="0" max="1000" step="50" value="800" oninput="updateSolarPanel()">
                             </div>
                             <div class="control-group">
-                                <label>Temperatura: <span id="panelTempDisplay" class="value-display">25</span>°C</label>
+                                <label>🌡️ Temperatura: <span id="panelTempDisplay" class="value-display">25</span>°C</label>
                                 <input type="range" id="panelTemp" min="15" max="65" step="1" value="25" oninput="updateSolarPanel()">
                             </div>
                             <div class="control-group">
-                                <label>Área: <span id="panelAreaDisplay" class="value-display">2.0</span> m²</label>
+                                <label>📐 Área: <span id="panelAreaDisplay" class="value-display">2.0</span> m²</label>
                                 <input type="range" id="panelArea" min="0.5" max="5" step="0.1" value="2.0" oninput="updateSolarPanel()">
                             </div>
                             <div class="control-group">
-                                <label>Eficiência: <span id="panelEffDisplay" class="value-display">18</span>%</label>
+                                <label>⚡ Eficiência: <span id="panelEffDisplay" class="value-display">18</span>%</label>
                                 <input type="range" id="panelEff" min="10" max="25" step="1" value="18" oninput="updateSolarPanel()">
                             </div>
                         </div>
                         <div class="result-display" id="solarPanelResult">
-                            Ajuste os parâmetros para ver o resultado.
+                            <div class="lab-status">
+                                <div class="status-icon">⚙️</div>
+                                <div class="status-text">Ajuste os parâmetros para ver o resultado</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -558,43 +713,52 @@
             </div>
 
             <div class="full-width-image reveal">
-                <img src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?w=1600&h=600&fit=crop" 
-                     alt="Piscina residencial aquecida com painéis solares no telhado" 
-                     class="content-image zoomable">
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?w=1600&h=600&fit=crop" 
+                         alt="Piscina residencial aquecida com painéis solares" 
+                         class="content-image zoomable"
+                         data-caption="Piscina aquecida com energia solar">
+                    <figcaption>Piscina aquecida com energia solar</figcaption>
+                </figure>
             </div>
 
-            <!-- Imagens das piscinas do Colégio Estadual do Paraná -->
+            <!-- IMAGENS DAS PISCINAS DO COLÉGIO ESTADUAL DO PARANÁ -->
             <div class="school-pools reveal">
-                <h3>Piscinas do Colégio Estadual do Paraná</h3>
-                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">
-                    Localização: Curitiba, Paraná, Brasil
-                </p>
-                <div class="image-gallery">
-                    <div class="image-container">
-                        <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop" 
+                <h3>🏊 Piscinas do Colégio Estadual do Paraná</h3>
+                <p class="school-location">📍 Curitiba, Paraná, Brasil</p>
+                <div class="image-gallery school-gallery">
+                    <figure class="school-image">
+                        <img src="piscina-cep-1.jpg" 
                              alt="Piscina do Colégio Estadual do Paraná - Vista geral" 
-                             class="zoomable">
-                        <div class="image-label">Vista geral da piscina</div>
-                    </div>
-                    <div class="image-container">
-                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop" 
+                             class="zoomable"
+                             data-caption="Piscina do Colégio Estadual do Paraná - Vista geral"
+                             onerror="this.src='https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop'">
+                        <figcaption>Vista geral da piscina</figcaption>
+                    </figure>
+                    <figure class="school-image">
+                        <img src="piscina-cep-2.jpg" 
                              alt="Piscina do Colégio Estadual do Paraná - Sistema de aquecimento" 
-                             class="zoomable">
-                        <div class="image-label">Sistema de aquecimento</div>
-                    </div>
-                    <div class="image-container">
-                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop" 
+                             class="zoomable"
+                             data-caption="Sistema de aquecimento da piscina"
+                             onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'">
+                        <figcaption>Sistema de aquecimento</figcaption>
+                    </figure>
+                    <figure class="school-image">
+                        <img src="piscina-cep-3.jpg" 
                              alt="Piscina do Colégio Estadual do Paraná - Painéis solares" 
-                             class="zoomable">
-                        <div class="image-label">Painéis solares instalados</div>
-                    </div>
+                             class="zoomable"
+                             data-caption="Painéis solares instalados na escola"
+                             onerror="this.src='https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop'">
+                        <figcaption>Painéis solares instalados</figcaption>
+                    </figure>
                 </div>
-                <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 1rem;">
-                    * Imagens ilustrativas - Substituir por fotos reais das piscinas do Colégio Estadual do Paraná
+                <p class="image-note">
+                    💡 <strong>Nota:</strong> Substitua as imagens por fotos reais das piscinas do Colégio Estadual do Paraná. 
+                    Salve os arquivos como <code>piscina-cep-1.jpg</code>, <code>piscina-cep-2.jpg</code> e <code>piscina-cep-3.jpg</code> na mesma pasta do site.
                 </p>
             </div>
 
-            <div class="comparison-table">
+            <div class="comparison-table reveal">
                 <div class="comp-header">
                     <div class="comp-col">Característica</div>
                     <div class="comp-col highlight">Solar Térmico</div>
@@ -623,12 +787,6 @@
                 <p class="formula-description">Exemplo: Piscina de 10.000 L, de 20°C para 28°C → <strong>Q ≈ 93 kWh</strong></p>
             </div>
 
-            <div class="image-showcase reveal">
-                <img src="https://images.unsplash.com/photo-1621451537084-482c77833048?w=1200&h=500&fit=crop" 
-                     alt="Sistema completo de aquecimento de piscina com capa térmica" 
-                     class="content-image zoomable">
-            </div>
-
             <div class="simulator-card reveal">
                 <div class="simulator-header">
                     <div class="simulator-badge">🔬 Simulador</div>
@@ -638,23 +796,23 @@
                     <div class="simulator-grid">
                         <div class="simulator-controls">
                             <div class="control-group">
-                                <label>Volume (L):</label>
+                                <label>🏊 Volume (L):</label>
                                 <input type="number" id="poolVolume" value="10000">
                             </div>
                             <div class="control-group">
-                                <label>Temp. Inicial (°C):</label>
+                                <label>🌡️ Temp. Inicial (°C):</label>
                                 <input type="number" id="tempInit" value="20">
                             </div>
                             <div class="control-group">
-                                <label>Temp. Desejada (°C):</label>
+                                <label>🎯 Temp. Desejada (°C):</label>
                                 <input type="number" id="tempFinal" value="28">
                             </div>
                             <div class="control-group">
-                                <label>Tipo de Aquecimento:</label>
+                                <label>⚡ Tipo de Aquecimento:</label>
                                 <select id="heatingType">
-                                    <option value="thermal">Solar Térmico</option>
-                                    <option value="photovoltaic">Fotovoltaico + Bomba</option>
-                                    <option value="resistance">Resistência Elétrica</option>
+                                    <option value="thermal">☀️ Solar Térmico</option>
+                                    <option value="photovoltaic">🔋 Fotovoltaico + Bomba</option>
+                                    <option value="resistance">🔥 Resistência Elétrica</option>
                                 </select>
                             </div>
                             <div class="control-group checkbox-group">
@@ -665,7 +823,10 @@
                             <button class="btn-primary" onclick="calculatePoolHeat()">Calcular</button>
                         </div>
                         <div class="result-display" id="poolResult">
-                            Clique em "Calcular" para ver o resultado.
+                            <div class="lab-status">
+                                <div class="status-icon">⚙️</div>
+                                <div class="status-text">Clique em "Calcular" para ver o resultado</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -710,8 +871,20 @@
             </div>
 
             <div class="image-gallery reveal">
-                <img src="https://images.unsplash.com/photo-1555664424-778a6902201b?w=600&h=400&fit=crop" alt="Placa Arduino com componentes eletrônicos" class="zoomable">
-                <img src="https://images.unsplash.com/photo-1625772299848-391897158c5f?w=600&h=400&fit=crop" alt="Placa ESP32 para projetos IoT" class="zoomable">
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1555664424-778a6902201b?w=600&h=400&fit=crop" 
+                         alt="Placa Arduino com componentes eletrônicos" 
+                         class="zoomable"
+                         data-caption="Placa Arduino para automação">
+                    <figcaption>Placa Arduino</figcaption>
+                </figure>
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1625772299848-391897158c5f?w=600&h=400&fit=crop" 
+                         alt="Placa ESP32 para projetos IoT" 
+                         class="zoomable"
+                         data-caption="Placa ESP32 com Wi-Fi e Bluetooth">
+                    <figcaption>Placa ESP32</figcaption>
+                </figure>
             </div>
 
             <div class="automation-flow reveal">
@@ -721,9 +894,9 @@
                     <div class="flow-arrow">→</div>
                     <div class="flow-step card-3d">🧠 Arduino/ESP32</div>
                     <div class="flow-arrow">→</div>
-                    <div class="flow-step card-3d">️ Processamento</div>
+                    <div class="flow-step card-3d">⚙️ Processamento</div>
                     <div class="flow-arrow">→</div>
-                    <div class="flow-step card-3d"> Ação</div>
+                    <div class="flow-step card-3d">🔌 Ação</div>
                 </div>
             </div>
 
@@ -736,21 +909,24 @@
                     <div class="simulator-grid">
                         <div class="simulator-controls">
                             <div class="control-group">
-                                <label>Temperatura: <span id="simTemp" class="value-display">24</span>°C</label>
+                                <label>🌡️ Temperatura: <span id="simTemp" class="value-display">24</span>°C</label>
                                 <input type="range" min="15" max="35" value="24" oninput="document.getElementById('simTemp').innerText = this.value; checkAutomation();">
                             </div>
                             <div class="control-group">
-                                <label>Luminosidade: <span id="simLuminosity" class="value-display">70</span>%</label>
+                                <label>💡 Luminosidade: <span id="simLuminosity" class="value-display">70</span>%</label>
                                 <input type="range" min="0" max="100" value="70" oninput="document.getElementById('simLuminosity').innerText = this.value;">
                             </div>
                             <div class="control-group checkbox-group">
                                 <label>
-                                    <input type="checkbox" id="simFlow" checked onchange="checkAutomation()"> Fluxo de água detectado
+                                    <input type="checkbox" id="simFlow" checked onchange="checkAutomation()"> 💧 Fluxo de água detectado
                                 </label>
                             </div>
                         </div>
                         <div class="result-display" id="automationResult">
-                            Status do Sistema: Aguardando dados...
+                            <div class="lab-status">
+                                <div class="status-icon">⚙️</div>
+                                <div class="status-text">Ajuste os parâmetros para ver o resultado</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -758,77 +934,65 @@
         </section>
 
         <!-- ==========================================
-             8. VÍDEOS EDUCATIVOS
+             8. VÍDEOS EDUCATIVOS - PT-BR
              ========================================== -->
         <section id="videos" class="section">
             <div class="section-header">
                 <div class="section-number">08</div>
                 <h2 class="section-title">Vídeos Educativos</h2>
-                <p class="section-subtitle">Conteúdos de fontes confiáveis para aprofundar seu conhecimento</p>
+                <p class="section-subtitle">Conteúdos em português brasileiro de fontes confiáveis</p>
             </div>
 
             <div class="videos-grid">
                 <div class="video-card reveal">
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/DoFnY4JYKVA" 
-                                title="O que é o Efeito Fotoelétrico? - Física Quântica" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                        </iframe>
+                                title="Efeito Fotoelétrico - Física Total" 
+                                allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
                         <h4>O Efeito Fotoelétrico Explicado</h4>
-                        <p>Canal: Física Total - Explicação detalhada do efeito fotoelétrico e a contribuição de Einstein.</p>
-                        <span class="video-source">Fonte: Canal educativo especializado em Física</span>
+                        <p>Explicação detalhada do efeito fotoelétrico e a contribuição de Einstein.</p>
+                        <span class="video-source">📚 Canal: Física Total</span>
                     </div>
                 </div>
 
                 <div class="video-card reveal">
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/PHExEPpoLKE" 
-                                title="Como Funcionam as Células Fotovoltaicas" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                        </iframe>
+                                title="Como Funcionam as Células Fotovoltaicas - Manual do Mundo" 
+                                allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
                         <h4>Células Fotovoltaicas - Como Funcionam?</h4>
-                        <p>Canal: Manual do Mundo - Demonstração prática do funcionamento de painéis solares.</p>
-                        <span class="video-source">Fonte: Canal educativo com experimentos práticos</span>
+                        <p>Demonstração prática do funcionamento de painéis solares.</p>
+                        <span class="video-source">📚 Canal: Manual do Mundo</span>
                     </div>
                 </div>
 
                 <div class="video-card reveal">
                     <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/Bh5qJwVYl6I" 
-                                title="Energia Solar - Como Funciona?" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                        </iframe>
+                        <iframe src="https://www.youtube.com/embed/MBRqu0YOH14" 
+                                title="Dualidade Onda-Partícula - Ciência Todo Dia" 
+                                allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
-                        <h4>Energia Solar Fotovoltaica</h4>
-                        <p>Canal: Instituto Nacional de Energia Solar - Explicação técnica sobre energia solar.</p>
-                        <span class="video-source">Fonte: Instituto governamental de energia</span>
+                        <h4>Dualidade Onda-Partícula da Luz</h4>
+                        <p>Explicação sobre a natureza dual da luz e os fótons.</p>
+                        <span class="video-source">📚 Canal: Ciência Todo Dia</span>
                     </div>
                 </div>
 
                 <div class="video-card reveal">
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/5MgBikgcWnY" 
-                                title="Arduino e Automação Residencial" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                        </iframe>
+                                title="Arduino e Automação - Brincando com Ideias" 
+                                allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
                         <h4>Automação com Arduino</h4>
-                        <p>Canal: Brincando com Ideias - Tutorial de automação residencial usando Arduino.</p>
-                        <span class="video-source">Fonte: Canal especializado em Arduino e robótica</span>
+                        <p>Tutorial de automação residencial usando Arduino.</p>
+                        <span class="video-source">📚 Canal: Brincando com Ideias</span>
                     </div>
                 </div>
 
@@ -836,38 +1000,32 @@
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/kN3AOMrnEUs" 
                                 title="Aquecimento Solar de Piscinas" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                        </iframe>
+                                allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
                         <h4>Aquecimento Solar de Piscinas</h4>
-                        <p>Canal: Solar Brasil - Como funciona o sistema de aquecimento solar para piscinas.</p>
-                        <span class="video-source">Fonte: Empresa especializada em energia solar</span>
+                        <p>Como funciona o sistema de aquecimento solar para piscinas.</p>
+                        <span class="video-source">📚 Canal: Solar Brasil</span>
                     </div>
                 </div>
 
                 <div class="video-card reveal">
                     <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/MBRqu0YOH14" 
-                                title="Dualidade Onda-Partícula" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                        </iframe>
+                        <iframe src="https://www.youtube.com/embed/Bh5qJwVYl6I" 
+                                title="Energia Solar Fotovoltaica" 
+                                allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
-                        <h4>Dualidade Onda-Partícula da Luz</h4>
-                        <p>Canal: Ciência Todo Dia - Explicação sobre a natureza dual da luz.</p>
-                        <span class="video-source">Fonte: Canal de divulgação científica</span>
+                        <h4>Energia Solar Fotovoltaica</h4>
+                        <p>Explicação técnica sobre energia solar e suas aplicações.</p>
+                        <span class="video-source">📚 Canal: Mundo da Elétrica</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ==========================================
-             9. SUSTENTABILIDADE
+             9. SUSTENTABILIDADE - EFEITO INTENSIFICADO
              ========================================== -->
         <section id="sustentabilidade" class="section">
             <div class="section-header">
@@ -876,33 +1034,45 @@
                 <p class="section-subtitle">Sustentabilidade e impacto social</p>
             </div>
 
-            <div class="benefits-grid">
-                <div class="benefit-card reveal card-3d">
+            <div class="benefits-grid benefits-intense">
+                <div class="benefit-card benefit-glow reveal card-3d">
                     <div class="benefit-icon">♻️</div>
+                    <div class="benefit-glow-ring"></div>
                     <h4>Renovável</h4>
                     <p>Fonte continuamente disponível em escala humana.</p>
+                    <div class="benefit-pulse"></div>
                 </div>
-                <div class="benefit-card reveal card-3d">
+                <div class="benefit-card benefit-glow reveal card-3d">
                     <div class="benefit-icon">🌱</div>
+                    <div class="benefit-glow-ring"></div>
                     <h4>Limpa</h4>
                     <p>Sem queima de combustíveis durante operação.</p>
+                    <div class="benefit-pulse"></div>
                 </div>
-                <div class="benefit-card reveal card-3d">
+                <div class="benefit-card benefit-glow reveal card-3d">
                     <div class="benefit-icon">🏠</div>
+                    <div class="benefit-glow-ring"></div>
                     <h4>Local</h4>
                     <p>Produção próxima ao consumo, reduzindo perdas.</p>
+                    <div class="benefit-pulse"></div>
                 </div>
-                <div class="benefit-card reveal card-3d">
+                <div class="benefit-card benefit-glow reveal card-3d">
                     <div class="benefit-icon">💰</div>
+                    <div class="benefit-glow-ring"></div>
                     <h4>Econômica</h4>
                     <p>Redução significativa na conta de energia.</p>
+                    <div class="benefit-pulse"></div>
                 </div>
             </div>
 
             <div class="image-showcase reveal">
-                <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&h=500&fit=crop" 
-                     alt="Fazenda solar com painéis em campo verde" 
-                     class="content-image zoomable">
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&h=500&fit=crop" 
+                         alt="Fazenda solar com painéis em campo verde" 
+                         class="content-image zoomable"
+                         data-caption="Energia solar: o futuro é renovável">
+                    <figcaption>Fazenda solar - energia limpa para o futuro</figcaption>
+                </figure>
             </div>
 
             <div class="simulator-card reveal">
@@ -928,7 +1098,10 @@
                             <button class="btn-primary" onclick="calculateSavings()">Calcular Economia</button>
                         </div>
                         <div class="result-display" id="savingsResult">
-                            Clique em "Calcular" para ver o resultado.
+                            <div class="lab-status">
+                                <div class="status-icon">💰</div>
+                                <div class="status-text">Clique em "Calcular" para ver sua economia</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -936,7 +1109,7 @@
         </section>
 
         <!-- ==========================================
-             10. QUIZ
+             10. QUIZ - PERGUNTAS REVISADAS
              ========================================== -->
         <section id="quiz" class="section section-dark">
             <div class="section-header light">
@@ -968,11 +1141,83 @@
         </section>
 
         <!-- ==========================================
-             11. REFERÊNCIAS
+             11. EQUIPE - INTEGRANTES
              ========================================== -->
-        <section id="referencias" class="section section-gradient">
+        <section id="equipe" class="section section-gradient">
             <div class="section-header">
                 <div class="section-number">11</div>
+                <h2 class="section-title">Equipe do Projeto</h2>
+                <p class="section-subtitle">Colégio Estadual do Paraná - Turma 2°J</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card reveal card-3d">
+                    <figure class="team-figure">
+                        <img src="ashley.jpeg" 
+                             alt="Ashley - Integrante da equipe" 
+                             class="team-photo zoomable"
+                             data-caption="Ashley - Integrante da equipe"
+                             onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop'">
+                    </figure>
+                    <h4>Ashley</h4>
+                    <p class="team-number">N° 4</p>
+                    <p class="team-class">Turma 2°J</p>
+                </div>
+
+                <div class="team-card reveal card-3d">
+                    <figure class="team-figure">
+                        <img src="irene.jpeg" 
+                             alt="Irene - Integrante da equipe" 
+                             class="team-photo zoomable"
+                             data-caption="Irene - Integrante da equipe"
+                             onerror="this.src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop'">
+                    </figure>
+                    <h4>Irene</h4>
+                    <p class="team-number">N° 17</p>
+                    <p class="team-class">Turma 2°J</p>
+                </div>
+
+                <div class="team-card reveal card-3d">
+                    <figure class="team-figure">
+                        <img src="leonardo.jpeg" 
+                             alt="Leonardo - Integrante da equipe" 
+                             class="team-photo zoomable"
+                             data-caption="Leonardo - Integrante da equipe"
+                             onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop'">
+                    </figure>
+                    <h4>Leonardo</h4>
+                    <p class="team-number">N° 25</p>
+                    <p class="team-class">Turma 2°J</p>
+                </div>
+
+                <div class="team-card reveal card-3d">
+                    <figure class="team-figure">
+                        <img src="mariana.jpeg" 
+                             alt="Mariana - Integrante da equipe" 
+                             class="team-photo zoomable"
+                             data-caption="Mariana - Integrante da equipe"
+                             onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop'">
+                    </figure>
+                    <h4>Mariana</h4>
+                    <p class="team-number">N° 28</p>
+                    <p class="team-class">Turma 2°J</p>
+                </div>
+            </div>
+
+            <div class="team-info reveal">
+                <h3>🏫 Colégio Estadual do Paraná</h3>
+                <p><strong>Localização:</strong> Curitiba, Paraná, Brasil</p>
+                <p><strong>Turma:</strong> 2° J</p>
+                <p><strong>Projeto:</strong> Sol + Água - Projeto Integrador 2026</p>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             12. REFERÊNCIAS - LINK CORRIGIDO NREL
+             ========================================== -->
+        <section id="referencias" class="section">
+            <div class="section-header">
+                <div class="section-number">12</div>
                 <h2 class="section-title">Referências Científicas</h2>
                 <p class="section-subtitle">Fontes confiáveis utilizadas no projeto</p>
             </div>
@@ -981,39 +1226,72 @@
                 <div class="ref-card reveal">
                     <h4>⚛️ Física Quântica</h4>
                     <ul>
-                        <li>OpenStax — University Physics, Vol. 3<br><a href="https://openstax.org/books/university-physics-volume-3" target="_blank">https://openstax.org</a></li>
-                        <li>MIT OpenCourseWare<br><a href="https://ocw.mit.edu" target="_blank">https://ocw.mit.edu</a></li>
-                        <li>Nobel Prize — Physics 1921<br><a href="https://www.nobelprize.org/prizes/physics/1921/summary/" target="_blank">https://nobelprize.org</a></li>
+                        <li>OpenStax — University Physics, Vol. 3<br>
+                            <a href="https://openstax.org/details/books/university-physics-volume-3" target="_blank">openstax.org</a>
+                        </li>
+                        <li>MIT OpenCourseWare<br>
+                            <a href="https://ocw.mit.edu/" target="_blank">ocw.mit.edu</a>
+                        </li>
+                        <li>Nobel Prize — Physics 1921<br>
+                            <a href="https://www.nobelprize.org/prizes/physics/1921/einstein/facts/" target="_blank">nobelprize.org</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="ref-card reveal">
                     <h4>☀️ Energia Solar</h4>
                     <ul>
-                        <li>U.S. Department of Energy<br><a href="https://www.energy.gov/eere/solar/solar-energy-technologies-office" target="_blank">https://energy.gov</a></li>
-                        <li>National Renewable Energy Lab (NREL)<br><a href="https://www.nrel.gov" target="_blank">https://nrel.gov</a></li>
-                        <li>Ministério de Minas e Energia<br><a href="https://www.gov.br/mme" target="_blank">https://gov.br/mme</a></li>
+                        <li>U.S. Department of Energy<br>
+                            <a href="https://www.energy.gov/eere/solar/solar-energy-technologies-office" target="_blank">energy.gov</a>
+                        </li>
+                        <li>National Renewable Energy Lab (NREL)<br>
+                            <a href="https://www.nrel.gov/solar/" target="_blank">nrel.gov/solar</a>
+                        </li>
+                        <li>Ministério de Minas e Energia<br>
+                            <a href="https://www.gov.br/mme/pt-br" target="_blank">gov.br/mme</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="ref-card reveal">
                     <h4>🤖 Robótica</h4>
                     <ul>
-                        <li>Documentação Arduino<br><a href="https://www.arduino.cc" target="_blank">https://arduino.cc</a></li>
-                        <li>Documentação ESP32/Espressif<br><a href="https://www.espressif.com" target="_blank">https://espressif.com</a></li>
+                        <li>Documentação Arduino<br>
+                            <a href="https://docs.arduino.cc/" target="_blank">docs.arduino.cc</a>
+                        </li>
+                        <li>Documentação ESP32/Espressif<br>
+                            <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/" target="_blank">docs.espressif.com</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="ref-card reveal">
-                    <h4> Acessibilidade</h4>
+                    <h4>♿ Acessibilidade</h4>
                     <ul>
-                        <li>W3C — WCAG 2.2<br><a href="https://www.w3.org/WAI/WCAG22/quickref/" target="_blank">https://w3.org</a></li>
-                        <li>Governo Federal — VLibras<br><a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/vlibras" target="_blank">https://gov.br</a></li>
+                        <li>W3C — WCAG 2.2<br>
+                            <a href="https://www.w3.org/Translations/WCAG22-pt-BR/" target="_blank">w3.org/WCAG22-pt-BR</a>
+                        </li>
+                        <li>Governo Federal — VLibras<br>
+                            <a href="https://www.vlibras.gov.br/" target="_blank">vlibras.gov.br</a>
+                        </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="conclusion-card reveal">
-                <h3>Da luz à eletricidade</h3>
-                <p class="conclusion-text">A integração entre Física, Programação e Robótica demonstra como diferentes áreas do conhecimento trabalham juntas para resolver problemas reais.</p>
-                <p class="conclusion-highlight">A energia do futuro depende do conhecimento que construímos hoje.</p>
+            <!-- CONCLUSÃO REFORMULADA -->
+            <div class="conclusion-reveal reveal">
+                <div class="conclusion-bg">
+                    <div class="conclusion-particle p1"></div>
+                    <div class="conclusion-particle p2"></div>
+                    <div class="conclusion-particle p3"></div>
+                </div>
+                <div class="conclusion-content">
+                    <div class="conclusion-icon">✨</div>
+                    <h3>Da luz à eletricidade</h3>
+                    <p class="conclusion-text">A integração entre Física, Programação e Robótica demonstra como diferentes áreas do conhecimento trabalham juntas para resolver problemas reais.</p>
+                    <p class="conclusion-highlight">A energia do futuro depende do conhecimento que construímos hoje.</p>
+                    <div class="conclusion-signature">
+                        <p>Ashley • Irene • Leonardo • Mariana</p>
+                        <p class="conclusion-turma">Turma 2°J - Colégio Estadual do Paraná</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1024,22 +1302,25 @@
             <div class="footer-brand">
                 <div class="logo">☀️ Sol <span class="plus">+</span> Água 💧</div>
                 <p>Projeto Integrador CEP 2026</p>
-                <p style="font-size: 0.85rem; margin-top: 0.5rem;">Colégio Estadual do Paraná - Curitiba/PR</p>
+                <p class="footer-turma">Turma 2°J - Colégio Estadual do Paraná</p>
+                <p class="footer-location">📍 Curitiba, Paraná, Brasil</p>
             </div>
             <div class="footer-links">
                 <a href="#home">Início</a>
                 <a href="#energia">Energia</a>
                 <a href="#videos">Vídeos</a>
                 <a href="#quiz">Quiz</a>
+                <a href="#equipe">Equipe</a>
                 <a href="#referencias">Referências</a>
             </div>
         </div>
         <div class="footer-bottom">
             <p>© 2026 Sol + Água — Física Quântica, Energia Solar e Automação</p>
+            <p>Desenvolvido por Ashley, Irene, Leonardo e Mariana</p>
         </div>
     </footer>
 
-    <!-- VLibras Widget -->
+    <!-- VLibras Widget - CÓDIGO OFICIAL CORRIGIDO -->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
         <div vw-plugin-wrapper>
@@ -1048,7 +1329,13 @@
     </div>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
+        window.addEventListener('load', function() {
+            try {
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+            } catch(e) {
+                console.log('VLibras não carregou:', e);
+            }
+        });
     </script>
 
     <script src="script.js"></script>
