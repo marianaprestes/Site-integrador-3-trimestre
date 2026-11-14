@@ -177,7 +177,7 @@ function updatePhotonEnergy() {
     }
 }
 
-// ============ SIMULADOR: EFEITO FOTOELÉTRICO (VISUAL) ============
+// ============ SIMULADOR: EFEITO FOTOELÉTRICO (VISUAL MELHORADO) ============
 function updatePhotoelectric() {
     const workFunction = parseFloat(document.getElementById('materialSelect').value);
     const photonEnergy = parseFloat(document.getElementById('photonEvSlider').value);
@@ -203,16 +203,17 @@ function updatePhotoelectric() {
             e.style.background = '#3b82f6';
         });
         
+        // RESPOSTA MAIS VISÍVEL E DESTACADA
         resultDiv.innerHTML = `
-            <div style="text-align: center; padding: 1rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">⛔</div>
-                <strong style="color: #ef4444; font-size: 1.2rem;">Sem Emissão de Elétrons</strong>
-                <div style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 8px; text-align: left;">
-                    <p style="margin: 0.5rem 0;"><strong>💡 Energia do fóton:</strong> ${photonEnergy.toFixed(1)} eV</p>
-                    <p style="margin: 0.5rem 0;"><strong>🧪 Função trabalho:</strong> ${workFunction} eV</p>
-                    <p style="margin: 0.5rem 0; color: #ef4444;"><strong>❌ Resultado:</strong> Energia insuficiente!</p>
+            <div class="photoelectric-result-highlight failure">
+                <div style="font-size: 3.5rem; margin-bottom: 1rem;">⛔</div>
+                <strong style="color: #ef4444; font-size: 1.6rem; display: block; margin-bottom: 1rem; font-weight: 800;">SEM EMISSÃO DE ELÉTRONS</strong>
+                <div style="margin-top: 1rem; padding: 1.2rem; background: rgba(239, 68, 68, 0.15); border-radius: 12px; text-align: left; border: 2px solid rgba(239, 68, 68, 0.3);">
+                    <p style="margin: 0.6rem 0; font-size: 1.1rem;"><strong>💡 Energia do fóton:</strong> ${photonEnergy.toFixed(1)} eV</p>
+                    <p style="margin: 0.6rem 0; font-size: 1.1rem;"><strong>🧪 Função trabalho:</strong> ${workFunction} eV</p>
+                    <p style="margin: 0.6rem 0; color: #ef4444; font-size: 1.1rem; font-weight: 700;"><strong>❌ Resultado:</strong> Energia insuficiente!</p>
                 </div>
-                <p style="margin-top: 1rem; font-size: 0.9rem; color: rgba(255,255,255,0.7);">Mesmo aumentando a intensidade, não haverá emissão.</p>
+                <p style="margin-top: 1.2rem; font-size: 1rem; color: rgba(255,255,255,0.9); font-weight: 500;">⚠️ Mesmo aumentando a intensidade, não haverá emissão.</p>
             </div>
         `;
     } else {
@@ -230,18 +231,19 @@ function updatePhotoelectric() {
             }
         });
         
+        // RESPOSTA MAIS VISÍVEL E DESTACADA
         resultDiv.innerHTML = `
-            <div style="text-align: center; padding: 1rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
-                <strong style="color: #10b981; font-size: 1.2rem;">Elétrons Emitidos!</strong>
-                <div style="margin-top: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; text-align: left;">
-                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;"><span>⚡ Energia Cinética:</span><strong>${kineticEnergy.toFixed(2)} eV</strong></div>
-                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;"><span>🔢 Elétrons emitidos:</span><strong>~${electronCount}</strong></div>
-                    <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;"><span>📐 Fórmula:</span><strong style="font-family: 'Fraunces', serif;">E<sub>c</sub> = ${photonEnergy.toFixed(1)} - ${workFunction}</strong></div>
+            <div class="photoelectric-result-highlight success">
+                <div style="font-size: 3.5rem; margin-bottom: 1rem;">⚡</div>
+                <strong style="color: #10b981; font-size: 1.6rem; display: block; margin-bottom: 1rem; font-weight: 800;">ELÉTRONS EMITIDOS COM SUCESSO!</strong>
+                <div style="margin-top: 1rem; padding: 1.2rem; background: rgba(16, 185, 129, 0.15); border-radius: 12px; text-align: left; border: 2px solid rgba(16, 185, 129, 0.3);">
+                    <div style="display: flex; justify-content: space-between; margin: 0.6rem 0; font-size: 1.1rem;"><span>⚡ Energia Cinética:</span><strong>${kineticEnergy.toFixed(2)} eV</strong></div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.6rem 0; font-size: 1.1rem;"><span>🔢 Elétrons emitidos:</span><strong>~${electronCount}</strong></div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.6rem 0; font-size: 1.1rem;"><span>📐 Fórmula:</span><strong style="font-family: 'Fraunces', serif;">E<sub>c</sub> = ${photonEnergy.toFixed(1)} - ${workFunction}</strong></div>
                 </div>
-                <div style="margin-top: 1rem; font-size: 0.9rem; color: rgba(255,255,255,0.7);">
-                    <p>✓ Energia do fóton > Função trabalho</p>
-                    <p>✓ Elétrons estão sendo liberados!</p>
+                <div style="margin-top: 1.2rem; font-size: 1rem; color: rgba(255,255,255,0.9); font-weight: 500;">
+                    <p>✅ Energia do fóton > Função trabalho</p>
+                    <p>✅ Elétrons estão sendo liberados!</p>
                 </div>
             </div>
         `;
@@ -255,6 +257,20 @@ style.textContent = `
         0% { transform: translate(0, 0); opacity: 1; }
         50% { transform: translate(30px, -30px); opacity: 0.8; }
         100% { transform: translate(60px, -60px); opacity: 0; }
+    }
+    .photoelectric-result-highlight {
+        text-align: center; 
+        padding: 1.5rem; 
+        border-radius: 16px;
+        animation: fadeIn 0.5s ease-out;
+    }
+    .photoelectric-result-highlight.success {
+        background: rgba(16, 185, 129, 0.1);
+        border: 2px solid #10b981;
+    }
+    .photoelectric-result-highlight.failure {
+        background: rgba(239, 68, 68, 0.1);
+        border: 2px solid #ef4444;
     }
 `;
 document.head.appendChild(style);
