@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modalImg.alt = this.alt;
             caption.textContent = this.getAttribute('data-caption') || this.alt;
             
+            // Audiodescrição automática se modo leitor ativo
             if (document.body.classList.contains('screen-reader-mode')) {
                 speakText(this.getAttribute('data-caption') || this.alt);
             }
@@ -76,16 +77,21 @@ function closeLightbox() {
     document.getElementById('lightboxModal').classList.remove('show');
 }
 
+// Fechar com tecla ESC
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
 });
 
-// ============ SCROLL REVEAL ============
+// ============ SCROLL REVEAL (FADE IN) ============
 const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('active');
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
     });
 }, observerOptions);
 
@@ -151,6 +157,7 @@ function updatePhotonEnergy() {
     document.getElementById('energyResult').innerText = energyJ.toExponential(2) + ' J';
     document.getElementById('evResult').innerText = energyEv.toFixed(2) + ' eV';
     
+    // Cor equivalente
     let colorName = 'Infravermelho';
     if (freq >= 4.0 && freq < 4.8) colorName = 'Vermelho';
     else if (freq >= 4.8 && freq < 5.1) colorName = 'Laranja';
@@ -162,6 +169,7 @@ function updatePhotonEnergy() {
     
     document.getElementById('colorResult').innerText = colorName;
     
+    // Atualizar barra do espectro
     const barFill = document.getElementById('spectrumBarFill');
     if (barFill) {
         const percent = ((freq - 4) / 4) * 100;
@@ -182,63 +190,37 @@ function updatePhotoelectric() {
     const lightSource = document.getElementById('labLightSource');
     const electrons = document.querySelectorAll('.electron');
     
+    // Ajustar intensidade visual da luz
     if (lightSource) {
         const glowIntensity = intensity / 100;
         lightSource.style.boxShadow = `0 0 ${40 + glowIntensity * 40}px rgba(251, 191, 36, ${0.4 + glowIntensity * 0.4})`;
     }
     
     if (photonEnergy < workFunction) {
+        // Sem emissão - elétrons ficam parados
         electrons.forEach(e => {
             e.style.animation = 'none';
             e.style.background = '#3b82f6';
         });
         
+        // RESPOSTA MAIS VISÍVEL E DESTACADA
         resultDiv.innerHTML = `
-            <div class="lab-result-card error">
-                <div class="lab-result-icon">⛔</div>
-                <div class="lab-result-title error">Sem Emissão de Elétrons</div>
-                
-                <div class="lab-result-data error">
-                    <div class="lab-result-row">
-                        <span class="lab-result-label">
-                            <span class="lab-result-label-icon">💡</span>
-                            Energia do fóton
-                        </span>
-                        <span class="lab-result-value error">${photonEnergy.toFixed(1)} eV</span>
-                    </div>
-                    <div class="lab-result-row">
-                        <span class="lab-result-label">
-                            <span class="lab-result-label-icon">🧪</span>
-                            Função trabalho
-                        </span>
-                        <span class="lab-result-value error">${workFunction.toFixed(2)} eV</span>
-                    </div>
-                    <div class="lab-result-row">
-                        <span class="lab-result-label">
-                            <span class="lab-result-label-icon">📊</span>
-                            Diferença
-                        </span>
-                        <span class="lab-result-value error">-${(workFunction - photonEnergy).toFixed(2)} eV</span>
-                    </div>
+            <div class="photoelectric-result-highlight failure">
+                <div style="font-size: 3.5rem; margin-bottom: 1rem;">⛔</div>
+                <strong style="color: #ef4444; font-size: 1.6rem; display: block; margin-bottom: 1rem; font-weight: 800;">SEM EMISSÃO DE ELÉTRONS</strong>
+                <div style="margin-top: 1rem; padding: 1.2rem; background: rgba(239, 68, 68, 0.15); border-radius: 12px; text-align: left; border: 2px solid rgba(239, 68, 68, 0.3);">
+                    <p style="margin: 0.6rem 0; font-size: 1.1rem;"><strong>💡 Energia do fóton:</strong> ${photonEnergy.toFixed(1)} eV</p>
+                    <p style="margin: 0.6rem 0; font-size: 1.1rem;"><strong>🧪 Função trabalho:</strong> ${workFunction} eV</p>
+                    <p style="margin: 0.6rem 0; color: #ef4444; font-size: 1.1rem; font-weight: 700;"><strong>❌ Resultado:</strong> Energia insuficiente!</p>
                 </div>
-                
-                <div class="lab-result-checklist error">
-                    <p>❌ Energia do fóton < Função trabalho</p>
-                    <p>❌ Elétrons permanecem presos ao material</p>
-                    <p>⚠️ Aumentar intensidade NÃO resolverá!</p>
-                </div>
-                
-                <div class="lab-result-formula">
-                    E<sub>c</sub> = <span>${photonEnergy.toFixed(1)}</span> - <span>${workFunction.toFixed(2)}</span> = <span style="color: #ef4444;">Negativo</span>
-                </div>
-                
-                <p class="lab-result-note">💡 Dica: Aumente a energia do fóton ou escolha um material com menor função trabalho</p>
+                <p style="margin-top: 1.2rem; font-size: 1rem; color: rgba(255,255,255,0.9); font-weight: 500;">⚠️ Mesmo aumentando a intensidade, não haverá emissão.</p>
             </div>
         `;
     } else {
         const kineticEnergy = photonEnergy - workFunction;
         const electronCount = Math.floor(intensity / 10);
         
+        // Animação dos elétrons sendo emitidos
         electrons.forEach((e, i) => {
             if (i < electronCount) {
                 e.style.animation = `electronEmit 1s infinite ${i * 0.2}s`;
@@ -249,53 +231,20 @@ function updatePhotoelectric() {
             }
         });
         
+        // RESPOSTA MAIS VISÍVEL E DESTACADA
         resultDiv.innerHTML = `
-            <div class="lab-result-card success">
-                <div class="lab-result-icon">⚡</div>
-                <div class="lab-result-title success">Elétrons Emitidos!</div>
-                
-                <div class="lab-result-data success">
-                    <div class="lab-result-row">
-                        <span class="lab-result-label">
-                            <span class="lab-result-label-icon">💡</span>
-                            Energia do fóton
-                        </span>
-                        <span class="lab-result-value success">${photonEnergy.toFixed(1)} eV</span>
-                    </div>
-                    <div class="lab-result-row">
-                        <span class="lab-result-label">
-                            <span class="lab-result-label-icon">🧪</span>
-                            Função trabalho
-                        </span>
-                        <span class="lab-result-value">${workFunction.toFixed(2)} eV</span>
-                    </div>
-                    <div class="lab-result-row">
-                        <span class="lab-result-label">
-                            <span class="lab-result-label-icon">⚡</span>
-                            Energia cinética
-                        </span>
-                        <span class="lab-result-value highlight">${kineticEnergy.toFixed(2)} eV</span>
-                    </div>
-                    <div class="lab-result-row">
-                        <span class="lab-result-label">
-                            <span class="lab-result-label-icon">🔢</span>
-                            Elétrons emitidos
-                        </span>
-                        <span class="lab-result-value highlight">~${electronCount}</span>
-                    </div>
+            <div class="photoelectric-result-highlight success">
+                <div style="font-size: 3.5rem; margin-bottom: 1rem;">⚡</div>
+                <strong style="color: #10b981; font-size: 1.6rem; display: block; margin-bottom: 1rem; font-weight: 800;">ELÉTRONS EMITIDOS COM SUCESSO!</strong>
+                <div style="margin-top: 1rem; padding: 1.2rem; background: rgba(16, 185, 129, 0.15); border-radius: 12px; text-align: left; border: 2px solid rgba(16, 185, 129, 0.3);">
+                    <div style="display: flex; justify-content: space-between; margin: 0.6rem 0; font-size: 1.1rem;"><span>⚡ Energia Cinética:</span><strong>${kineticEnergy.toFixed(2)} eV</strong></div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.6rem 0; font-size: 1.1rem;"><span>🔢 Elétrons emitidos:</span><strong>~${electronCount}</strong></div>
+                    <div style="display: flex; justify-content: space-between; margin: 0.6rem 0; font-size: 1.1rem;"><span>📐 Fórmula:</span><strong style="font-family: 'Fraunces', serif;">E<sub>c</sub> = ${photonEnergy.toFixed(1)} - ${workFunction}</strong></div>
                 </div>
-                
-                <div class="lab-result-checklist">
+                <div style="margin-top: 1.2rem; font-size: 1rem; color: rgba(255,255,255,0.9); font-weight: 500;">
                     <p>✅ Energia do fóton > Função trabalho</p>
-                    <p>✅ Elétrons sendo liberados do material</p>
-                    <p>✅ Emissão fotoelétrica ocorrendo!</p>
+                    <p>✅ Elétrons estão sendo liberados!</p>
                 </div>
-                
-                <div class="lab-result-formula">
-                    E<sub>c</sub> = <span>${photonEnergy.toFixed(1)}</span> - <span>${workFunction.toFixed(2)}</span> = <span style="color: #10b981;">${kineticEnergy.toFixed(2)} eV</span>
-                </div>
-                
-                <p class="lab-result-note">🎯 Parabéns! Você observou o efeito fotoelétrico!</p>
             </div>
         `;
     }
@@ -309,10 +258,24 @@ style.textContent = `
         50% { transform: translate(30px, -30px); opacity: 0.8; }
         100% { transform: translate(60px, -60px); opacity: 0; }
     }
+    .photoelectric-result-highlight {
+        text-align: center; 
+        padding: 1.5rem; 
+        border-radius: 16px;
+        animation: fadeIn 0.5s ease-out;
+    }
+    .photoelectric-result-highlight.success {
+        background: rgba(16, 185, 129, 0.1);
+        border: 2px solid #10b981;
+    }
+    .photoelectric-result-highlight.failure {
+        background: rgba(239, 68, 68, 0.1);
+        border: 2px solid #ef4444;
+    }
 `;
 document.head.appendChild(style);
 
-// ============ SIMULADOR: FREQUÊNCIA DE CORTE ============
+// ============ SIMULADOR: FREQUÊNCIA DE CORTE (CORRIGIDO) ============
 function updateCutoffSimulator() {
     const workFunction = parseFloat(document.getElementById('cutoffMaterial').value);
     const photonEnergy = parseFloat(document.getElementById('cutoffPhotonSlider').value);
@@ -327,6 +290,7 @@ function updateCutoffSimulator() {
     const threshold = document.getElementById('cutoffThreshold');
     const level = document.getElementById('cutoffLevel');
     
+    // Atualizar visual do medidor
     if (threshold && level) {
         const thresholdPercent = (workFunction / 7) * 100;
         const levelPercent = (photonEnergy / 7) * 100;
@@ -523,7 +487,7 @@ function calculateSavings() {
     `;
 }
 
-// ============ QUIZ ============
+// ============ QUIZ - PERGUNTAS REVISADAS ============
 const quizData = [
     { question: "O que é um fóton?", options: ["Uma partícula com carga negativa", "Um pacote de energia da radiação eletromagnética", "Uma molécula presente na luz solar", "Um tipo de semicondutor"], correct: 1, feedback: "O fóton é o quantum de energia da radiação eletromagnética." },
     { question: "O que determina a energia individual de um fóton?", options: ["Intensidade da luz", "Temperatura", "Frequência", "Massa"], correct: 2, feedback: "E = h·f — energia é proporcional à frequência." },
@@ -616,5 +580,6 @@ document.addEventListener('DOMContentLoaded', () => {
     checkAutomation();
     loadQuestion();
     
+    // Fade in inicial
     document.body.classList.add('fade-in');
 });
