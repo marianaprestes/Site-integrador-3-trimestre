@@ -9,10 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Fraunces:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <!-- Botão de Acessibilidade -->
     <button class="a11y-btn" onclick="toggleA11yPanel()" aria-label="Abrir painel de acessibilidade">♿</button>
-    
     <div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Opções de acessibilidade">
         <h4>Acessibilidade</h4>
         <div class="a11y-option">
@@ -32,14 +30,12 @@
             <div class="toggle-switch" onclick="toggleScreenReader()" role="button" tabindex="0"></div>
         </div>
     </div>
-
     <!-- Lightbox Modal para Zoom de Imagens -->
     <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
         <img class="lightbox-content" id="lightboxImg" alt="">
         <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
-
     <!-- Cabeçalho -->
     <header>
         <div class="logo">
@@ -58,13 +54,13 @@
                 <li><a href="#celulas">Células</a></li>
                 <li><a href="#piscina">Piscina</a></li>
                 <li><a href="#robotica">Robótica</a></li>
+                <li><a href="#sistema">Sistema</a></li>
                 <li><a href="#videos">Vídeos</a></li>
                 <li><a href="#quiz">Quiz</a></li>
                 <li><a href="#equipe">Equipe</a></li>
             </ul>
         </nav>
     </header>
-
     <main>
         <!-- ==========================================
              HERO - PÁGINA INICIAL
@@ -75,7 +71,6 @@
                 <div class="blob blob-2"></div>
                 <div class="blob blob-3"></div>
             </div>
-            
             <div class="hero-content">
                 <div class="hero-badge">🔬 Projeto Integrador CEP 2026 • Turma 2°J</div>
                 <h1 class="hero-title">
@@ -92,7 +87,6 @@
                     <a href="#quiz" class="btn-secondary btn-large">Testar Conhecimentos</a>
                 </div>
             </div>
-
             <div class="hero-image-wrapper">
                 <div class="hero-image-container">
                     <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1400&h=700&fit=crop" 
@@ -123,7 +117,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="hero-stats">
                 <div class="stat">
                     <div class="stat-number">15+</div>
@@ -139,7 +132,6 @@
                 </div>
             </div>
         </section>
-
         <!-- ==========================================
              CURIOSIDADE
              ========================================== -->
@@ -161,7 +153,6 @@
                 <div id="curiosity-result" class="curiosity-result" style="display: none;"></div>
             </div>
         </section>
-
         <!-- ==========================================
              1. ENERGIA SOLAR
              ========================================== -->
@@ -171,13 +162,11 @@
                 <h2 class="section-title">De onde vem a energia que utilizamos?</h2>
                 <p class="section-subtitle">O Sol como fonte inesgotável de energia</p>
             </div>
-
             <div class="split-layout">
                 <div class="split-text reveal">
                     <h3>O Sol como fonte de energia</h3>
                     <p>O Sol libera energia por meio de <strong>fusão nuclear</strong>, emitindo <strong>radiação eletromagnética</strong> que viaja pelo espaço até a Terra.</p>
                     <p>A luz visível é apenas uma pequena parte do espectro eletromagnético. Também fazem parte dele as ondas de rádio, micro-ondas, infravermelho, ultravioleta, raios X e raios gama.</p>
-                    
                     <div class="formula-box">
                         <div class="formula-label">Relação fundamental</div>
                         <div class="formula">c = λ · f</div>
@@ -193,7 +182,6 @@
                     </figure>
                 </div>
             </div>
-
             <div class="spectrum-showcase reveal">
                 <h3>Explore o Espectro Eletromagnético</h3>
                 <p class="spectrum-intro">Clique em cada região para conhecer suas características:</p>
@@ -216,7 +204,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="comparison-cards">
                 <div class="comp-card reveal">
                     <div class="comp-icon">⚡</div>
@@ -231,7 +218,6 @@
                     <div class="comp-tag">Luz → Calor</div>
                 </div>
             </div>
-
             <div class="image-gallery reveal">
                 <figure>
                     <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=400&fit=crop" 
@@ -241,7 +227,7 @@
                     <figcaption>Painéis solares em campo aberto</figcaption>
                 </figure>
                 <figure>
-                    <img src="https://images.unsplash.com/photo-1585338107529-13afc5f00200?w=800&h=400&fit=crop" 
+                    <img src="assets/coletorsolar.jpeg" 
                          alt="Coletor solar térmico" 
                          class="zoomable"
                          data-caption="Coletor solar térmico para aquecimento de água">
@@ -249,7 +235,6 @@
                 </figure>
             </div>
         </section>
-
         <!-- ==========================================
              2. FÍSICA DOS FÓTONS
              ========================================== -->
@@ -259,7 +244,6 @@
                 <h2 class="section-title">A luz é formada por partículas?</h2>
                 <p class="section-subtitle">A dualidade onda-partícula da luz</p>
             </div>
-
             <div class="full-width-image reveal">
                 <figure>
                     <img src="assets/fotonseondas.jpg" 
@@ -269,7 +253,6 @@
                     <figcaption>Representação artística de fótons e ondas luminosas</figcaption>
                 </figure>
             </div>
-
             <div class="content-grid">
                 <div class="text-block reveal">
                     <h3>O que são fótons?</h3>
@@ -285,7 +268,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="image-comparison reveal">
                 <figure class="comparison-item">
                     <img src="assets/frequencia_onda_vermelha.jpg" 
@@ -302,7 +284,6 @@
                     <figcaption><strong>Luz Violeta</strong> - Maior frequência, menor comprimento</figcaption>
                 </figure>
             </div>
-
             <div class="simulator-card reveal">
                 <div class="simulator-header">
                     <div class="simulator-badge">🔬 Simulador</div>
@@ -339,7 +320,6 @@
                 </div>
             </div>
         </section>
-
         <!-- ==========================================
              3. EFEITO FOTOELÉTRICO
              ========================================== -->
@@ -349,7 +329,6 @@
                 <h2 class="section-title">Como a luz libera elétrons?</h2>
                 <p class="section-subtitle">O fenômeno que rendeu o Nobel a Einstein</p>
             </div>
-
             <div class="timeline">
                 <div class="timeline-item reveal">
                     <div class="timeline-marker">1887</div>
@@ -373,7 +352,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="einstein-card reveal">
                 <figure class="einstein-figure">
                     <img src="assets/albert.jpg" 
@@ -389,13 +367,11 @@
                     <cite>— Albert Einstein, 1905</cite>
                 </div>
             </div>
-
             <div class="formula-highlight reveal">
                 <div class="formula-label">Equação de Einstein</div>
                 <div class="formula-big">E<sub>c</sub> = h·f − φ</div>
                 <p class="formula-description">A energia do fóton (h·f) menos a função trabalho (φ) resulta na energia cinética máxima do elétron emitido.</p>
             </div>
-
             <!-- LABORATÓRIO VIRTUAL - Mais Visual -->
             <div class="lab-container reveal">
                 <div class="lab-header">
@@ -403,7 +379,6 @@
                     <h3>Efeito Fotoelétrico Interativo</h3>
                     <p class="lab-description">Ajuste os controles e observe o que acontece com os elétrons!</p>
                 </div>
-                
                 <div class="lab-stage">
                     <div class="lab-visual">
                         <div class="lab-light-source" id="labLightSource">
@@ -419,7 +394,6 @@
                         </div>
                         <div class="lab-emitted" id="labEmitted"></div>
                     </div>
-                    
                     <div class="lab-controls">
                         <div class="control-group">
                             <label>🧪 Material:</label>
@@ -441,7 +415,6 @@
                             <input type="range" id="intensitySlider" min="10" max="100" step="10" value="50" oninput="updatePhotoelectric()">
                         </div>
                     </div>
-                    
                     <div class="result-display" id="photoelectricResult">
                         <div class="lab-status">
                             <div class="status-icon">⚙️</div>
@@ -451,7 +424,6 @@
                 </div>
             </div>
         </section>
-
         <!-- ==========================================
              4. FREQUÊNCIA DE CORTE
              ========================================== -->
@@ -461,12 +433,10 @@
                 <h2 class="section-title">Existe um limite para a energia da luz?</h2>
                 <p class="section-subtitle">A frequência de corte e a função trabalho</p>
             </div>
-
             <div class="intro-text reveal">
                 <p>A <strong>frequência de corte</strong> é a menor frequência que a luz precisa apresentar para provocar a emissão de elétrons. Cada material possui uma função trabalho própria, e por isso cada um tem sua frequência mínima.</p>
                 <div class="formula-inline">f<sub>c</sub> = φ / h</div>
             </div>
-
             <div class="materials-chart reveal">
                 <h3>Função trabalho dos materiais</h3>
                 <p class="chart-description">Valores em elétron-volts (eV) - quanto maior, mais energia é necessária para liberar elétrons</p>
@@ -526,7 +496,6 @@
                     <span>6 eV</span>
                 </div>
             </div>
-
             <div class="image-grid reveal">
                 <figure>
                     <img src="assets/metais.jpg" 
@@ -536,14 +505,13 @@
                     <figcaption>Metais com diferentes funções trabalho</figcaption>
                 </figure>
                 <figure>
-                    <img src="assets/estruturaatomica.jpg" 
+                    <img src="assets/estruturaatomica.jpeg" 
                          alt="Representação de estrutura atômica" 
                          class="zoomable"
                          data-caption="Estrutura atômica dos materiais">
                     <figcaption>Estrutura atômica dos materiais</figcaption>
                 </figure>
             </div>
-
             <div class="simulator-card reveal">
                 <div class="simulator-header">
                     <div class="simulator-badge">🔬 Simulador</div>
@@ -585,7 +553,6 @@
                 </div>
             </div>
         </section>
-
         <!-- ==========================================
              5. CÉLULAS FOTOVOLTAICAS - REORGANIZADO
              ========================================== -->
@@ -595,7 +562,6 @@
                 <h2 class="section-title">Como a luz se transforma em eletricidade?</h2>
                 <p class="section-subtitle">A jornada da luz até a corrente elétrica</p>
             </div>
-
             <div class="transformation-flow reveal">
                 <h3>As 5 Etapas da Transformação</h3>
                 <div class="flow-steps">
@@ -631,9 +597,15 @@
                     </div>
                 </div>
             </div>
-
-            <!-- IMAGEM DA CÉLULA FOTOVOLTAICA REMOVIDA CONFORME SOLICITADO -->
-
+            <div class="full-width-image reveal">
+                <figure>
+                    <img src="assets/silicioemclose.jpeg" 
+                         alt="Célula fotovoltaica de silício em close-up" 
+                         class="content-image zoomable"
+                         data-caption="Estrutura interna de uma célula fotovoltaica de silício">
+                    <figcaption>Célula fotovoltaica de silício - a base da energia solar</figcaption>
+                </figure>
+            </div>
             <div class="image-comparison reveal">
                 <figure class="comparison-item">
                     <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=600&h=400&fit=crop" 
@@ -650,7 +622,6 @@
                     <figcaption><strong>Coletor Térmico</strong> - Aquece água</figcaption>
                 </figure>
             </div>
-
             <div class="simulator-card reveal">
                 <div class="simulator-header">
                     <div class="simulator-badge">🔬 Painel Solar Virtual</div>
@@ -686,7 +657,6 @@
                 </div>
             </div>
         </section>
-
         <!-- ==========================================
              6. PISCINA AQUECIDA - COLÉGIO ESTADUAL DO PARANÁ
              ========================================== -->
@@ -696,7 +666,6 @@
                 <h2 class="section-title">Energia solar para aquecer sua piscina</h2>
                 <p class="section-subtitle">Aplicação prática - Colégio Estadual do Paraná, Curitiba/PR</p>
             </div>
-
             <div class="school-pools reveal">
                 <h3>🏊 Piscinas do Colégio Estadual do Paraná</h3>
                 <p class="school-location">📍 Curitiba, Paraná, Brasil</p>
@@ -724,7 +693,6 @@
                     </figure>
                 </div>
             </div>
-
             <div class="comparison-table reveal">
                 <div class="comp-header">
                     <div class="comp-col">Característica</div>
@@ -747,13 +715,11 @@
                     <div class="comp-col">Alimenta equipamentos</div>
                 </div>
             </div>
-
             <div class="formula-highlight reveal">
                 <div class="formula-label">Física do aquecimento</div>
                 <div class="formula-big">Q = m · c · ΔT</div>
                 <p class="formula-description">Exemplo: Piscina de 10.000 L, de 20°C para 28°C → <strong>Q ≈ 93 kWh</strong></p>
             </div>
-
             <div class="simulator-card reveal">
                 <div class="simulator-header">
                     <div class="simulator-badge">🔬 Simulador</div>
@@ -799,7 +765,6 @@
                 </div>
             </div>
         </section>
-
         <!-- ==========================================
              7. ROBÓTICA
              ========================================== -->
@@ -809,7 +774,6 @@
                 <h2 class="section-title">Robótica e Sensores</h2>
                 <p class="section-subtitle">Monitoramento inteligente da piscina</p>
             </div>
-
             <div class="sensor-grid">
                 <div class="sensor-card reveal card-3d">
                     <div class="sensor-icon">🌡️</div>
@@ -836,7 +800,6 @@
                     <p>Identifica níveis inadequados de água, protegendo bombas e equipamentos.</p>
                 </div>
             </div>
-
             <div class="image-gallery reveal">
                 <figure>
                     <img src="assets/arduino_componentes.jpg" 
@@ -853,7 +816,6 @@
                     <figcaption>Placa ESP32</figcaption>
                 </figure>
             </div>
-
             <div class="automation-flow reveal">
                 <h3>Como funciona a automação?</h3>
                 <div class="flow-diagram">
@@ -866,7 +828,6 @@
                     <div class="flow-step card-3d">🔌 Ação</div>
                 </div>
             </div>
-
             <div class="simulator-card reveal">
                 <div class="simulator-header">
                     <div class="simulator-badge">🔬 Controle Inteligente</div>
@@ -899,17 +860,211 @@
                 </div>
             </div>
         </section>
-
         <!-- ==========================================
-             8. VÍDEOS EDUCATIVOS - ATUALIZADO (4 VÍDEOS)
+             8. SISTEMA DE CAPTAÇÃO DE LUZ - NOVA SEÇÃO
+             ========================================== -->
+        <section id="sistema" class="section system-section">
+            <div class="section-header">
+                <div class="section-number">08</div>
+                <h2 class="section-title">Sistema de Captação de Luz e Acionamento de Bomba</h2>
+                <p class="section-subtitle">Automação inteligente com Arduino e sensor LDR</p>
+            </div>
+
+            <!-- OBJETIVO -->
+            <div class="system-intro reveal">
+                <div class="system-badge">🎯 Objetivo</div>
+                <p class="system-intro-text">Demonstrar como a <strong>luminosidade</strong> pode controlar automaticamente um <strong>motor elétrico</strong> por meio de um Arduino, simulando um sistema solar de acionamento de bomba.</p>
+            </div>
+
+            <!-- IMAGEM DO SISTEMA NO TINKERCAD -->
+            <div class="system-image-wrapper reveal">
+                <figure>
+                    <img src="assets/sistemaarduino.jpeg" 
+                         alt="Sistema de captação de luz com Arduino no Tinkercad" 
+                         class="system-image zoomable"
+                         data-caption="Circuito do sistema de captação de luz simulado no Tinkercad">
+                    <figcaption>🔧 Circuito montado no Tinkercad - Sistema de Captação de Luz</figcaption>
+                </figure>
+            </div>
+
+            <!-- FUNCIONAMENTO -->
+            <div class="system-card reveal">
+                <div class="system-card-header">
+                    <div class="system-card-icon">⚙️</div>
+                    <h3>Como Funciona?</h3>
+                </div>
+                <div class="system-card-body">
+                    <p>O <strong>LDR</strong> identifica a intensidade da luz, enquanto o <strong>Arduino</strong> interpreta os dados. O <strong>potenciômetro</strong> ajusta o limite de luminosidade. Com muita luz, o motor é ligado; com pouca luz, é desligado. O <strong>LED</strong> indica o funcionamento do motor.</p>
+                    <div class="system-flow">
+                        <div class="system-flow-step">
+                            <div class="flow-icon">💡</div>
+                            <div class="flow-label">Luz</div>
+                        </div>
+                        <div class="flow-arrow-small">→</div>
+                        <div class="system-flow-step">
+                            <div class="flow-icon">📡</div>
+                            <div class="flow-label">LDR</div>
+                        </div>
+                        <div class="flow-arrow-small">→</div>
+                        <div class="system-flow-step">
+                            <div class="flow-icon">🧠</div>
+                            <div class="flow-label">Arduino</div>
+                        </div>
+                        <div class="flow-arrow-small">→</div>
+                        <div class="system-flow-step">
+                            <div class="flow-icon">⚡</div>
+                            <div class="flow-label">Motor</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATERIAIS E CIRCUITO -->
+            <div class="system-grid reveal">
+                <div class="system-info-card">
+                    <div class="system-info-header">
+                        <div class="system-info-icon">🧰</div>
+                        <h3>Materiais Utilizados</h3>
+                    </div>
+                    <ul class="materials-list">
+                        <li><span class="material-icon">🔌</span> Arduino Uno</li>
+                        <li><span class="material-icon">📋</span> Protoboard</li>
+                        <li><span class="material-icon">💡</span> LDR (Sensor de Luz)</li>
+                        <li><span class="material-icon">🎚️</span> Potenciômetro</li>
+                        <li><span class="material-icon">⚙️</span> Motor DC</li>
+                        <li><span class="material-icon">🔘</span> Transistor 2N2222</li>
+                        <li><span class="material-icon">➡️</span> Diodo de proteção</li>
+                        <li><span class="material-icon">🔗</span> Resistores</li>
+                        <li><span class="material-icon">💡</span> LED indicador</li>
+                        <li><span class="material-icon">🔌</span> Fios jumper</li>
+                    </ul>
+                </div>
+                <div class="system-info-card">
+                    <div class="system-info-header">
+                        <div class="system-info-icon">🔧</div>
+                        <h3>O Circuito</h3>
+                    </div>
+                    <p class="system-info-text">O <strong>LDR</strong> e o <strong>potenciômetro</strong> enviam informações ao Arduino, que controla o motor pelo <strong>transistor</strong> e acende o <strong>LED</strong> pelo pino <code>D8</code>.</p>
+                    <div class="circuit-diagram">
+                        <div class="circuit-item">
+                            <span class="circuit-pin">A0</span>
+                            <span class="circuit-desc">LDR</span>
+                        </div>
+                        <div class="circuit-item">
+                            <span class="circuit-pin">A1</span>
+                            <span class="circuit-desc">Potenciômetro</span>
+                        </div>
+                        <div class="circuit-item">
+                            <span class="circuit-pin">D9</span>
+                            <span class="circuit-desc">Motor (via transistor)</span>
+                        </div>
+                        <div class="circuit-item">
+                            <span class="circuit-pin">D8</span>
+                            <span class="circuit-desc">LED indicador</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROGRAMAÇÃO -->
+            <div class="system-card reveal">
+                <div class="system-card-header">
+                    <div class="system-card-icon">💻</div>
+                    <h3>Programação</h3>
+                </div>
+                <div class="system-card-body">
+                    <p>O Arduino <strong>compara a luminosidade detectada</strong> com o <strong>limite configurado</strong> pelo potenciômetro e controla automaticamente o motor e o LED.</p>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-dot red"></span>
+                            <span class="code-dot yellow"></span>
+                            <span class="code-dot green"></span>
+                            <span class="code-title">sketch_arduino.ino</span>
+                        </div>
+                        <pre class="code-content"><code><span class="code-comment">// Sistema de Captação de Luz</span>
+<span class="code-keyword">int</span> ldrPin = <span class="code-number">A0</span>;
+<span class="code-keyword">int</span> potPin = <span class="code-number">A1</span>;
+<span class="code-keyword">int</span> motorPin = <span class="code-number">9</span>;
+<span class="code-keyword">int</span> ledPin = <span class="code-number">8</span>;
+
+<span class="code-keyword">void</span> <span class="code-function">setup</span>() {
+  <span class="code-function">pinMode</span>(motorPin, <span class="code-constant">OUTPUT</span>);
+  <span class="code-function">pinMode</span>(ledPin, <span class="code-constant">OUTPUT</span>);
+}
+
+<span class="code-keyword">void</span> <span class="code-function">loop</span>() {
+  <span class="code-keyword">int</span> luz = <span class="code-function">analogRead</span>(ldrPin);
+  <span class="code-keyword">int</span> limite = <span class="code-function">analogRead</span>(potPin);
+  
+  <span class="code-keyword">if</span> (luz > limite) {
+    <span class="code-function">digitalWrite</span>(motorPin, <span class="code-constant">HIGH</span>);
+    <span class="code-function">digitalWrite</span>(ledPin, <span class="code-constant">HIGH</span>);
+  } <span class="code-keyword">else</span> {
+    <span class="code-function">digitalWrite</span>(motorPin, <span class="code-constant">LOW</span>);
+    <span class="code-function">digitalWrite</span>(ledPin, <span class="code-constant">LOW</span>);
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONCEITOS CIENTÍFICOS -->
+            <div class="concepts-section reveal">
+                <h3>🔬 Conceitos Científicos Envolvidos</h3>
+                <div class="concepts-grid">
+                    <div class="concept-card">
+                        <div class="concept-icon">⚡</div>
+                        <h4>Efeito Fotoelétrico</h4>
+                        <p>Relação entre luz e elétrons — a base do funcionamento do LDR.</p>
+                    </div>
+                    <div class="concept-card">
+                        <div class="concept-icon">✨</div>
+                        <h4>Fótons</h4>
+                        <p>Partículas que transportam energia luminosa e ativam o sensor.</p>
+                    </div>
+                    <div class="concept-card">
+                        <div class="concept-icon">🌊</div>
+                        <h4>Frequência</h4>
+                        <p>Influencia a energia dos fótons e a sensibilidade do sensor.</p>
+                    </div>
+                    <div class="concept-card">
+                        <div class="concept-icon">☀️</div>
+                        <h4>Energia Fotovoltaica</h4>
+                        <p>Transformação da luz em eletricidade — princípio do sistema solar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONCLUSÃO -->
+            <div class="system-conclusion reveal">
+                <div class="conclusion-icon-big">🎓</div>
+                <h3>Conclusão do Projeto</h3>
+                <p>O projeto demonstra a <strong>automação de uma bomba elétrica</strong> conforme a luminosidade, simulando um sistema solar. O <strong>LDR detecta a luz</strong>, mas não produz energia elétrica — essa é a diferença fundamental entre sensores e painéis fotovoltaicos.</p>
+                <div class="conclusion-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">✅</span>
+                        <span>Automação inteligente</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">✅</span>
+                        <span>Controle por luminosidade</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">✅</span>
+                        <span>Simulação de sistema solar</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ==========================================
+             9. VÍDEOS EDUCATIVOS
              ========================================== -->
         <section id="videos" class="section">
             <div class="section-header">
-                <div class="section-number">08</div>
+                <div class="section-number">09</div>
                 <h2 class="section-title">Vídeos Educativos</h2>
                 <p class="section-subtitle">Conteúdos selecionados para cada etapa do projeto</p>
             </div>
-
             <div class="videos-grid">
                 <!-- 1. EFEITO FOTOELÉTRICO -->
                 <div class="video-card reveal">
@@ -924,7 +1079,6 @@
                         <span class="video-source">📚 Canal: AnimaCiencia</span>
                     </div>
                 </div>
-
                 <!-- 2. CÉLULAS FOTOVOLTAICAS -->
                 <div class="video-card reveal">
                     <div class="video-container">
@@ -938,7 +1092,6 @@
                         <span class="video-source">📚 Canal: Viana Energia</span>
                     </div>
                 </div>
-
                 <!-- 3. AQUECIMENTO SOLAR DE PISCINA -->
                 <div class="video-card reveal">
                     <div class="video-container">
@@ -952,7 +1105,6 @@
                         <span class="video-source">📚 Canal: Piscinas Miranda Leal</span>
                     </div>
                 </div>
-
                 <!-- 4. ROBÓTICA E AUTOMAÇÃO -->
                 <div class="video-card reveal">
                     <div class="video-container">
@@ -968,17 +1120,15 @@
                 </div>
             </div>
         </section>
-
         <!-- ==========================================
-             9. SUSTENTABILIDADE - EFEITO INTENSIFICADO E "BONITINHO"
+             10. SUSTENTABILIDADE
              ========================================== -->
         <section id="sustentabilidade" class="section">
             <div class="section-header">
-                <div class="section-number">09</div>
+                <div class="section-number">10</div>
                 <h2 class="section-title">A energia solar pode transformar o futuro?</h2>
                 <p class="section-subtitle">Sustentabilidade e impacto social</p>
             </div>
-
             <div class="benefits-grid benefits-intense">
                 <div class="benefit-card benefit-glow reveal card-3d">
                     <div class="benefit-icon">♻️</div>
@@ -1009,7 +1159,6 @@
                     <div class="benefit-pulse"></div>
                 </div>
             </div>
-
             <div class="image-showcase reveal">
                 <figure>
                     <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&h=500&fit=crop" 
@@ -1019,7 +1168,6 @@
                     <figcaption>Fazenda solar - energia limpa para o futuro</figcaption>
                 </figure>
             </div>
-
             <div class="simulator-card reveal">
                 <div class="simulator-header">
                     <div class="simulator-badge">💰 Calculadora</div>
@@ -1052,17 +1200,15 @@
                 </div>
             </div>
         </section>
-
         <!-- ==========================================
-             10. QUIZ - PERGUNTAS REVISADAS
+             11. QUIZ
              ========================================== -->
         <section id="quiz" class="section section-dark">
             <div class="section-header light">
-                <div class="section-number">10</div>
+                <div class="section-number">11</div>
                 <h2 class="section-title">Teste seus conhecimentos!</h2>
                 <p class="section-subtitle">15 perguntas sobre tudo que você aprendeu</p>
             </div>
-
             <div class="quiz-container">
                 <div class="card" id="quizContainer">
                     <div class="quiz-progress">
@@ -1084,17 +1230,15 @@
                 </div>
             </div>
         </section>
-
         <!-- ==========================================
-             11. EQUIPE - INTEGRANTES
+             12. EQUIPE - INTEGRANTES
              ========================================== -->
         <section id="equipe" class="section section-gradient">
             <div class="section-header">
-                <div class="section-number">11</div>
+                <div class="section-number">12</div>
                 <h2 class="section-title">Equipe do Projeto</h2>
                 <p class="section-subtitle">Colégio Estadual do Paraná - Turma 2°J</p>
             </div>
-
             <div class="team-grid">
                 <div class="team-card reveal card-3d">
                     <figure class="team-figure">
@@ -1107,7 +1251,6 @@
                     <p class="team-number">N° 4</p>
                     <p class="team-class">Turma 2°J</p>
                 </div>
-
                 <div class="team-card reveal card-3d">
                     <figure class="team-figure">
                         <img src="assets/irene.jpeg" 
@@ -1119,7 +1262,6 @@
                     <p class="team-number">N° 17</p>
                     <p class="team-class">Turma 2°J</p>
                 </div>
-
                 <div class="team-card reveal card-3d">
                     <figure class="team-figure">
                         <img src="assets/leonardo.jpeg" 
@@ -1131,7 +1273,6 @@
                     <p class="team-number">N° 25</p>
                     <p class="team-class">Turma 2°J</p>
                 </div>
-
                 <div class="team-card reveal card-3d">
                     <figure class="team-figure">
                         <img src="assets/mariana.jpeg" 
@@ -1144,7 +1285,6 @@
                     <p class="team-class">Turma 2°J</p>
                 </div>
             </div>
-
             <div class="team-info reveal">
                 <h3>🏫 Colégio Estadual do Paraná</h3>
                 <p><strong>Localização:</strong> Curitiba, Paraná, Brasil</p>
@@ -1152,17 +1292,15 @@
                 <p><strong>Projeto:</strong> Sol + Água - Projeto Integrador 2026</p>
             </div>
         </section>
-
         <!-- ==========================================
-             12. REFERÊNCIAS
+             13. REFERÊNCIAS
              ========================================== -->
         <section id="referencias" class="section">
             <div class="section-header">
-                <div class="section-number">12</div>
+                <div class="section-number">13</div>
                 <h2 class="section-title">Referências Científicas</h2>
                 <p class="section-subtitle">Fontes confiáveis utilizadas no projeto</p>
             </div>
-
             <div class="references-grid">
                 <div class="ref-card reveal">
                     <h4>⚛️ Física Quântica</h4>
@@ -1215,7 +1353,6 @@
                     </ul>
                 </div>
             </div>
-
             <div class="conclusion-reveal reveal">
                 <div class="conclusion-bg">
                     <div class="conclusion-particle p1"></div>
@@ -1234,9 +1371,7 @@
                 </div>
             </div>
         </section>
-
     </main>
-
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
@@ -1248,6 +1383,7 @@
             <div class="footer-links">
                 <a href="#home">Início</a>
                 <a href="#energia">Energia</a>
+                <a href="#sistema">Sistema</a>
                 <a href="#videos">Vídeos</a>
                 <a href="#quiz">Quiz</a>
                 <a href="#equipe">Equipe</a>
@@ -1259,7 +1395,6 @@
             <p>Desenvolvido por Ashley, Irene, Leonardo e Mariana</p>
         </div>
     </footer>
-
     <!-- VLibras Widget -->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
@@ -1277,7 +1412,6 @@
             }
         });
     </script>
-
     <script src="script.js"></script>
 </body>
 </html>
