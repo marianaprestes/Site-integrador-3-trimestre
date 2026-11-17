@@ -2,12 +2,10 @@
  * SOL + ÁGUA - JavaScript Completo
  * Turma 2°J - Colégio Estadual do Paraná
  */
-
 // ============ MENU MOBILE ============
 function toggleMenu() {
     document.getElementById('mainNav').classList.toggle('show');
 }
-
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', () => {
@@ -15,31 +13,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
 // ============ ACESSIBILIDADE ============
 function toggleA11yPanel() {
     document.getElementById('a11yPanel').classList.toggle('open');
 }
-
 function toggleClass(className) {
     document.body.classList.toggle(className);
     if (event && event.target) event.target.classList.toggle('active');
 }
-
 function toggleAnimation() {
     document.body.classList.toggle('reduce-motion');
     if (event && event.target) event.target.classList.toggle('active');
 }
-
 function toggleScreenReader() {
     document.body.classList.toggle('screen-reader-mode');
     if (event && event.target) event.target.classList.toggle('active');
-    
     if (document.body.classList.contains('screen-reader-mode')) {
         speakText('Modo leitor de tela ativado. Navegue pelo site usando Tab.');
     }
 }
-
 function speakText(text) {
     if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
@@ -48,45 +40,35 @@ function speakText(text) {
         speechSynthesis.speak(utterance);
     }
 }
-
 // ============ LIGHTBOX / ZOOM DE IMAGENS ============
 document.addEventListener('DOMContentLoaded', () => {
     const zoomableImages = document.querySelectorAll('.zoomable');
-    
     zoomableImages.forEach(img => {
         img.addEventListener('click', function(e) {
             e.stopPropagation();
             const modal = document.getElementById('lightboxModal');
             const modalImg = document.getElementById('lightboxImg');
             const caption = document.getElementById('lightboxCaption');
-            
             modal.classList.add('show');
             modalImg.src = this.src;
             modalImg.alt = this.alt;
             caption.textContent = this.getAttribute('data-caption') || this.alt;
-            
-            // Audiodescrição automática se modo leitor ativo
             if (document.body.classList.contains('screen-reader-mode')) {
                 speakText(this.getAttribute('data-caption') || this.alt);
             }
         });
     });
 });
-
 function closeLightbox() {
     document.getElementById('lightboxModal').classList.remove('show');
 }
-
-// Fechar com tecla ESC
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeLightbox();
     }
 });
-
 // ============ SCROLL REVEAL (FADE IN) ============
 const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -94,16 +76,13 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, observerOptions);
-
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
-
 // ============ CURIOSIDADE ============
 function checkCuriosity(isWrong) {
     const resultDiv = document.getElementById('curiosity-result');
     if (!resultDiv) return;
-    
     resultDiv.style.display = 'block';
     if (isWrong) {
         resultDiv.innerHTML = "❌ <strong>Quase!</strong> Aumentar a intensidade (mantendo a frequência) apenas aumenta a <em>quantidade</em> de fótons, não a energia individual de cada um.";
@@ -113,15 +92,12 @@ function checkCuriosity(isWrong) {
         resultDiv.style.borderLeftColor = "#10b981";
     }
 }
-
 // ============ ESPECTRO ============
 function showSpectrumInfo(region) {
     const infoDiv = document.getElementById('spectrum-info');
     if (!infoDiv) return;
-
     document.querySelectorAll('.spectrum-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
-
     const data = {
         radio: { name: "Ondas de Rádio", freq: "3 kHz - 300 GHz", wavelength: "1 mm - 100 km", characteristics: "Baixa frequência, baixa energia", applications: "Rádio AM/FM, TV, satélites" },
         micro: { name: "Micro-ondas", freq: "300 MHz - 300 GHz", wavelength: "1 mm - 1 m", characteristics: "Aquece moléculas de água", applications: "Forno, Wi-Fi, radar, celular" },
@@ -131,7 +107,6 @@ function showSpectrumInfo(region) {
         xray: { name: "Raios X", freq: "30 PHz - 30 EHz", wavelength: "0.01 nm - 10 nm", characteristics: "Alta penetração em materiais", applications: "Radiografia, segurança" },
         gamma: { name: "Raios Gama", freq: "> 30 EHz", wavelength: "< 0.01 nm", characteristics: "Maior energia do espectro", applications: "Tratamento de câncer" }
     };
-
     const info = data[region];
     infoDiv.innerHTML = `
         <div class="spectrum-name">${info.name}</div>
@@ -143,21 +118,16 @@ function showSpectrumInfo(region) {
         </div>
     `;
 }
-
 // ============ SIMULADOR: FÓTONS ============
 function updatePhotonEnergy() {
     const freq = parseFloat(document.getElementById('freqSlider').value);
     document.getElementById('freqValue').innerText = freq.toFixed(1);
-    
     const h = 6.626e-34;
     const f = freq * 1e14;
     const energyJ = h * f;
     const energyEv = energyJ / 1.602e-19;
-
     document.getElementById('energyResult').innerText = energyJ.toExponential(2) + ' J';
     document.getElementById('evResult').innerText = energyEv.toFixed(2) + ' eV';
-    
-    // Cor equivalente
     let colorName = 'Infravermelho';
     if (freq >= 4.0 && freq < 4.8) colorName = 'Vermelho';
     else if (freq >= 4.8 && freq < 5.1) colorName = 'Laranja';
@@ -166,44 +136,32 @@ function updatePhotonEnergy() {
     else if (freq >= 5.9 && freq < 6.5) colorName = 'Azul';
     else if (freq >= 6.5 && freq < 7.0) colorName = 'Violeta';
     else if (freq >= 7.0) colorName = 'Ultravioleta';
-    
     document.getElementById('colorResult').innerText = colorName;
-    
-    // Atualizar barra do espectro
     const barFill = document.getElementById('spectrumBarFill');
     if (barFill) {
         const percent = ((freq - 4) / 4) * 100;
         barFill.style.width = percent + '%';
     }
 }
-
-// ============ SIMULADOR: EFEITO FOTOELÉTRICO (VISUAL MELHORADO) ============
+// ============ SIMULADOR: EFEITO FOTOELÉTRICO ============
 function updatePhotoelectric() {
     const workFunction = parseFloat(document.getElementById('materialSelect').value);
     const photonEnergy = parseFloat(document.getElementById('photonEvSlider').value);
     const intensity = parseInt(document.getElementById('intensitySlider').value);
-    
     document.getElementById('photonEvDisplay').innerText = photonEnergy.toFixed(1);
     document.getElementById('intensityDisplay').innerText = intensity;
-
     const resultDiv = document.getElementById('photoelectricResult');
     const lightSource = document.getElementById('labLightSource');
     const electrons = document.querySelectorAll('.electron');
-    
-    // Ajustar intensidade visual da luz
     if (lightSource) {
         const glowIntensity = intensity / 100;
         lightSource.style.boxShadow = `0 0 ${40 + glowIntensity * 40}px rgba(251, 191, 36, ${0.4 + glowIntensity * 0.4})`;
     }
-    
     if (photonEnergy < workFunction) {
-        // Sem emissão - elétrons ficam parados
         electrons.forEach(e => {
             e.style.animation = 'none';
             e.style.background = '#3b82f6';
         });
-        
-        // RESPOSTA MAIS VISÍVEL E DESTACADA
         resultDiv.innerHTML = `
             <div class="photoelectric-result-highlight failure">
                 <div style="font-size: 3.5rem; margin-bottom: 1rem;">⛔</div>
@@ -219,8 +177,6 @@ function updatePhotoelectric() {
     } else {
         const kineticEnergy = photonEnergy - workFunction;
         const electronCount = Math.floor(intensity / 10);
-        
-        // Animação dos elétrons sendo emitidos
         electrons.forEach((e, i) => {
             if (i < electronCount) {
                 e.style.animation = `electronEmit 1s infinite ${i * 0.2}s`;
@@ -230,8 +186,6 @@ function updatePhotoelectric() {
                 e.style.background = '#3b82f6';
             }
         });
-        
-        // RESPOSTA MAIS VISÍVEL E DESTACADA
         resultDiv.innerHTML = `
             <div class="photoelectric-result-highlight success">
                 <div style="font-size: 3.5rem; margin-bottom: 1rem;">⚡</div>
@@ -249,8 +203,6 @@ function updatePhotoelectric() {
         `;
     }
 }
-
-// Adicionar animação de elétrons emitidos via CSS
 const style = document.createElement('style');
 style.textContent = `
     @keyframes electronEmit {
@@ -274,30 +226,23 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
-
-// ============ SIMULADOR: FREQUÊNCIA DE CORTE (CORRIGIDO) ============
+// ============ SIMULADOR: FREQUÊNCIA DE CORTE ============
 function updateCutoffSimulator() {
     const workFunction = parseFloat(document.getElementById('cutoffMaterial').value);
     const photonEnergy = parseFloat(document.getElementById('cutoffPhotonSlider').value);
-    
     document.getElementById('cutoffPhotonDisplay').innerText = photonEnergy.toFixed(1);
-
     const h = 6.626e-34;
     const phi = workFunction * 1.602e-19;
     const cutoffFreq = phi / h;
-
     const resultDiv = document.getElementById('cutoffResult');
     const threshold = document.getElementById('cutoffThreshold');
     const level = document.getElementById('cutoffLevel');
-    
-    // Atualizar visual do medidor
     if (threshold && level) {
         const thresholdPercent = (workFunction / 7) * 100;
         const levelPercent = (photonEnergy / 7) * 100;
         threshold.style.left = thresholdPercent + '%';
         level.style.left = `calc(${levelPercent}% - 10px)`;
     }
-    
     if (photonEnergy < workFunction) {
         resultDiv.innerHTML = `
             <div style="text-align: center; padding: 1rem;">
@@ -327,25 +272,21 @@ function updateCutoffSimulator() {
         `;
     }
 }
-
 // ============ SIMULADOR: PAINEL SOLAR ============
 function updateSolarPanel() {
     const intensity = parseFloat(document.getElementById('solarIntensity').value);
     const temp = parseFloat(document.getElementById('panelTemp').value);
     const area = parseFloat(document.getElementById('panelArea').value);
     const efficiency = parseFloat(document.getElementById('panelEff').value);
-    
     document.getElementById('solarIntensityDisplay').innerText = intensity;
     document.getElementById('panelTempDisplay').innerText = temp;
     document.getElementById('panelAreaDisplay').innerText = area.toFixed(1);
     document.getElementById('panelEffDisplay').innerText = efficiency;
-
     const solarPower = intensity * area;
     const tempFactor = 1 - (temp - 25) * 0.004;
     const electricalPower = solarPower * (efficiency / 100) * tempFactor;
     const voltage = 30 + (intensity / 1000) * 10;
     const current = electricalPower / voltage;
-
     document.getElementById('solarPanelResult').innerHTML = `
         <div style="text-align: center; padding: 1rem;">
             <div style="font-size: 2.5rem; margin-bottom: 1rem;">☀️</div>
@@ -364,7 +305,6 @@ function updateSolarPanel() {
         </div>
     `;
 }
-
 // ============ SIMULADOR: PISCINA ============
 function calculatePoolHeat() {
     const volume = parseFloat(document.getElementById('poolVolume').value);
@@ -373,12 +313,10 @@ function calculatePoolHeat() {
     const heatingType = document.getElementById('heatingType').value;
     const hasCover = document.getElementById('thermalCover').checked;
     const resultDiv = document.getElementById('poolResult');
-
     if (tFinal <= tInit) {
         resultDiv.innerHTML = "<div style='color: #ef4444; text-align: center;'><div style='font-size: 2rem;'>⚠️</div><p>Temperatura desejada deve ser maior que a inicial.</p></div>";
         return;
     }
-
     const m = volume;
     const c = 4186;
     const deltaT = tFinal - tInit;
@@ -386,7 +324,6 @@ function calculatePoolHeat() {
     const qKwh = qJoules / 3600000;
     const lossFactor = hasCover ? 1.1 : 1.3;
     const qWithLoss = qKwh * lossFactor;
-
     let timeEstimate = "", costEstimate = "", icon = "";
     if (heatingType === 'thermal') {
         timeEstimate = "6-8 horas de sol direto";
@@ -401,7 +338,6 @@ function calculatePoolHeat() {
         costEstimate = `R$ ${(qWithLoss * 0.80).toFixed(2)}`;
         icon = "🔥";
     }
-
     resultDiv.innerHTML = `
         <div style="text-align: center; padding: 1rem;">
             <div style="font-size: 2.5rem; margin-bottom: 1rem;">${icon}</div>
@@ -418,14 +354,12 @@ function calculatePoolHeat() {
         </div>
     `;
 }
-
 // ============ SIMULADOR: AUTOMAÇÃO ============
 function checkAutomation() {
     const temp = parseInt(document.getElementById('simTemp').innerText);
     const hasFlow = document.getElementById('simFlow').checked;
     const targetTemp = 28;
     const resultDiv = document.getElementById('automationResult');
-
     if (!hasFlow) {
         resultDiv.innerHTML = `
             <div style="text-align: center; padding: 1rem;">
@@ -461,17 +395,14 @@ function checkAutomation() {
         `;
     }
 }
-
 // ============ CALCULADORA DE ECONOMIA ============
 function calculateSavings() {
     const consumption = parseFloat(document.getElementById('monthlyConsumption').value);
     const tariff = parseFloat(document.getElementById('energyTariff').value);
     const percentage = parseFloat(document.getElementById('solarPercentage').value);
-
     const solarEnergy = consumption * (percentage / 100);
     const monthlySavings = solarEnergy * tariff;
     const annualSavings = monthlySavings * 12;
-
     document.getElementById('savingsResult').innerHTML = `
         <div style="text-align: center; padding: 1rem;">
             <div style="font-size: 2.5rem; margin-bottom: 1rem;">💰</div>
@@ -486,8 +417,7 @@ function calculateSavings() {
         </div>
     `;
 }
-
-// ============ QUIZ - PERGUNTAS REVISADAS ============
+// ============ QUIZ ============
 const quizData = [
     { question: "O que é um fóton?", options: ["Uma partícula com carga negativa", "Um pacote de energia da radiação eletromagnética", "Uma molécula presente na luz solar", "Um tipo de semicondutor"], correct: 1, feedback: "O fóton é o quantum de energia da radiação eletromagnética." },
     { question: "O que determina a energia individual de um fóton?", options: ["Intensidade da luz", "Temperatura", "Frequência", "Massa"], correct: 2, feedback: "E = h·f — energia é proporcional à frequência." },
@@ -505,23 +435,19 @@ const quizData = [
     { question: "Por que bomba de calor é eficiente?", options: ["Cria energia", "Transforma luz em calor", "Transfere calor do ambiente", "Não tem perdas"], correct: 2, feedback: "Transfere calor, não cria." },
     { question: "Sem fluxo de água no sistema de aquecimento?", options: ["Aumentar potência", "Manter ligado", "Bloquear e alertar", "Desligar sensores"], correct: 2, feedback: "Segurança: bloquear para evitar danos." }
 ];
-
 let currentQuestion = 0;
 let score = 0;
-
 function loadQuestion() {
     const q = quizData[currentQuestion];
     document.getElementById('questionText').innerText = q.question;
     document.getElementById('currentQ').innerText = currentQuestion + 1;
     document.getElementById('totalQ').innerText = quizData.length;
     document.getElementById('progressFill').style.width = ((currentQuestion / quizData.length) * 100) + '%';
-    
     const optionsDiv = document.getElementById('optionsContainer');
     optionsDiv.innerHTML = '';
     document.getElementById('feedbackText').innerText = '';
     document.getElementById('feedbackText').style.background = 'transparent';
     document.getElementById('nextBtn').style.display = 'none';
-
     q.options.forEach((opt, index) => {
         const btn = document.createElement('button');
         btn.className = 'quiz-option';
@@ -530,13 +456,10 @@ function loadQuestion() {
         optionsDiv.appendChild(btn);
     });
 }
-
 function checkAnswer(selectedIndex, btnElement) {
     const q = quizData[currentQuestion];
     const options = document.querySelectorAll('.quiz-option');
-    
     options.forEach(opt => opt.disabled = true);
-
     if (selectedIndex === q.correct) {
         btnElement.classList.add('correct');
         document.getElementById('feedbackText').innerHTML = `✅ ${q.feedback}`;
@@ -548,10 +471,8 @@ function checkAnswer(selectedIndex, btnElement) {
         document.getElementById('feedbackText').innerHTML = `❌ ${q.feedback}`;
         document.getElementById('feedbackText').style.background = 'rgba(239, 68, 68, 0.2)';
     }
-    
     document.getElementById('nextBtn').style.display = 'inline-block';
 }
-
 function nextQuestion() {
     currentQuestion++;
     if (currentQuestion < quizData.length) {
@@ -562,7 +483,6 @@ function nextQuestion() {
         document.getElementById('finalScore').innerText = `${score} de ${quizData.length}`;
     }
 }
-
 function restartQuiz() {
     currentQuestion = 0;
     score = 0;
@@ -570,7 +490,6 @@ function restartQuiz() {
     document.getElementById('quizResult').style.display = 'none';
     loadQuestion();
 }
-
 // ============ INICIALIZAÇÃO ============
 document.addEventListener('DOMContentLoaded', () => {
     updatePhotonEnergy();
@@ -579,7 +498,5 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSolarPanel();
     checkAutomation();
     loadQuestion();
-    
-    // Fade in inicial
     document.body.classList.add('fade-in');
 });
